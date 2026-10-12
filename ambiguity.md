@@ -1,0 +1,19 @@
+# Open decisions — Dagens saga
+
+These are decisions that are not final. Do not pick an option on your own. When a task depends on an open item, stop, summarize the options briefly, give a recommendation, and ask me. When I decide, move the item to "Decided" with the reason.
+
+## Open
+
+1. **Text AI provider and model** — OpenAI GPT-5.2 or the Claude API (maybe both tested). Plan: test 2-3 options in week 1 with the same story prompt (see the story format in scope.md) and compare quality, cost, and suitability for children aged 6-12.
+
+## Decided
+
+- **Navigation in the app: Expo Router.** The app only has a few screens, and Expo Router is the Expo default with good documentation. Created with `npx create-expo-app@latest` (default template).
+- **Repository layout: one repo, separate folders.** `mobile/` (Expo app) and `backend/` (Express + Prisma), and later `web/` (see below), each with its own `package.json`. The Expo folder is not called `app/`, because Expo Router already uses an `app/` folder inside the project. On Vercel, each project uses its own folder as root directory.
+- **Admin page and web version: one web project in `web/`** (React + Vite + TypeScript). It starts with only the admin page under `/admin` (Should, sprint 4), built for desktop so stories are easy to read and edit on a big screen. If there is time, the public pages (story of the day, archive) are added to the same project as the web version (Could). The admin page must never depend on the web version being built. It talks to the same Express API, uses the same login (JWT), and is deployed as its own Vercel project with `web/` as root directory.
+- **Authentication: own JWT in Express** (as in the project plan). Members are accounts in the database (email + hashed password). After login, the backend returns a signed token (JWT) and the app sends it with every request. The README must explain how to set this up: copy `.env.example` to `.env` and generate a random `JWT_SECRET`, for example with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. Passwords are always hashed (bcrypt or argon2). If membership takes too long, Supabase Auth is an alternative to revisit.
+- **Story language, age, and format:** Swedish stories for ages 6-12. About half to one A4 page (roughly 250-500 words), never longer. Lots of magic and fantasy, ideally with a lesson or something useful for children. These become the prompt template variables: theme, length, age, lesson.
+- **Batch generation is triggered manually** (a local script or a protected endpoint), because I have to read and approve every story before it is published. It never runs inside the cron job.
+- **Prisma with Supabase on serverless** (proposed default, since this is new to me): use the pooled connection string for the running backend and the direct connection for migrations (two variables, for example `DATABASE_URL` and `DIRECT_URL`). Verify this against the current Supabase and Prisma documentation and explain it to me in simple terms when setting it up.
+- **Design assets:** the images are stored locally in my OneDrive. They were downloaded during a free Adobe Stock trial and edited with AI to fit mobile and tablet. Copy only the images that are needed (resized for mobile) into `mobile/assets/`. The app shows a note that the images are licensed via Adobe Stock. I keep the original Adobe Stock asset IDs and license documents. See constraints.md for the license check.
+- **Testing** (proposed simple default, since I am new to testing): backend tests with Vitest and Supertest for the scheduling logic (which story is "today" in Europe/Stockholm, including edge cases around midnight and daylight saving time) and the core endpoints. The app is tested manually on a real device with a short checklist, with no automated UI tests. Claude may write the tests, but I must read and understand them.
