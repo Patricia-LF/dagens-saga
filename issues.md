@@ -45,8 +45,8 @@ Each issue below is: title — labels, followed by a short "done when" line.
     Done when: a manual script generates N stories and saves them as drafts with a scheduled date.
 15. **Spending limit and cost note for the AI API** — `must` `ai` `docs`
     Done when: a limit is set at the provider and the approximate cost per story is written down.
-16. **Review and publish routine** — `must` `docs`
-    Done when: the steps for reading a draft and changing its status in the Supabase table view are documented.
+16. **Review, edit and publish routine** — `must` `docs`
+    Done when: the steps for reading a draft, editing its title and text, and changing its status in the Supabase table view are documented.
 17. **Endpoint: GET /stories/today** — `must` `backend`
     Done when: it returns the story scheduled for today's date in Europe/Stockholm.
 18. **Tests for scheduling logic** — `must` `backend`

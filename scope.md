@@ -11,7 +11,7 @@ A child (or parent) opens the app and gets a new story every day, and can go bac
 - **Archive** — list of all published stories, and a reading view for any of them.
 - **Mobile app** — React Native (Expo), running on a real device via Expo Go, connected to the deployed backend.
 
-Until the admin page exists, drafts are reviewed and published by changing their status in the Supabase table view.
+Every AI-generated story must be editable before it is published (title and text, for example to fix spelling or wording). Until the admin page exists, drafts are edited, reviewed and published directly in the Supabase table view. The admin page later makes this easier on desktop.
 
 ## Story format
 
@@ -44,7 +44,8 @@ Until the admin page exists, drafts are reviewed and published by changing their
 
 ## Data model (initial idea)
 
-- Story: id, title, body, scheduled date, status (draft / scheduled / published), source (ai / handwritten), tier (free / premium, prepared but unused), optional image URL
+- Story: id, title, body, scheduled date, status (draft / scheduled / published), source (ai / handwritten), tier (free / premium, prepared but unused), optional image URL, characters (list of characters as name and kind, e.g. "Fnula (dragon)", used later to avoid repeating characters across stories), created at, updated at
+  - Scheduled date is a calendar date (no time) in Europe/Stockholm, unique (at most one story per day), empty for unscheduled drafts. New stories default to status draft.
 - User and Favorite: added only when membership is built
 
 ## Sprint overview (5 weeks)
