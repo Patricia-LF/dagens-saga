@@ -47,4 +47,6 @@ One repo, separate folders, each with its own `package.json`:
 ## Commands
 
 - Run the app (in `mobile/`): `npx expo start`. Press `w` for the browser preview, or scan the QR code with Expo Go on a real device.
-- Still to be filled in once the project is set up: install, run backend, run tests, Prisma migrate. When you set these up, add the exact commands here.
+- Backend (in `backend/`): install with `npm install`. Copy `.env.example` to `.env` and fill in `DATABASE_URL` (transaction pooler, port 6543) and `DIRECT_URL` (session pooler, port 5432).
+- Prisma (in `backend/`): `npm run db:migrate -- --name <name>` (create and apply a migration), `npm run db:generate` (regenerate the client in `src/generated/`, which is not in git), `npm run db:studio` (browse the data).
+- Still to be filled in once set up: run backend, run tests. When you set these up, add the exact commands here.
