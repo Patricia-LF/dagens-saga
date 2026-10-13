@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StoryStatus {
+  draft
+  scheduled
+  published
+}
+
+enum StorySource {
+  ai
+  handwritten
+}
+
+enum StoryTier {
+  free
+  premium
+}
+
+model Story {
+  id            Int         @id @default(autoincrement())
+  title         String
+  body          String
+  
+  // Calendar date in Europe/Stockholm. Null for drafts that are not scheduled yet.
+  scheduledDate DateTime?   @unique @db.Date
+  status        StoryStatus @default(draft)
+  source        StorySource @default(ai)
+  
+  // Prepared but unused.
+  tier          StoryTier   @default(free)
+  imageUrl      String?
+  
+  // Used later to avoid repeating characters across stories.
+  characters    String[]    @default([])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("stories")
+}

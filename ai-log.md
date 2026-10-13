@@ -19,6 +19,7 @@ _E.g. Claude Code use while coding: scaffolding, debugging, rubber-ducking, whic
 
 - Before project start: Claude helped me write `CLAUDE.md`, `scope.md`, `constraints.md` and `ambiguity.md` as guidance files for Claude Code.
 - 2026-10-12: created the repo and set up the project myself (Expo app in `mobile/`). Claude Code has not been used for the setup yet.
+- 2026-10-13: Used Claude Code (Opus for planning, Sonnet for implementation) to set up Prisma 7 with Supabase. I reviewed the plan and added fields (characters) before approving. I asked it to verify whether ?pgbouncer=true is needed with the pg adapter; it checked the docs and adapter source and concluded it is not. Edits were approved manually. Cost: $0.75 (Opus planning $0.51, Sonnet implementation $0.23)
 
 ## Code control, validation, reviews, security
 
