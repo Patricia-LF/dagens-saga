@@ -1,65 +1,70 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
+import { ImageSourcePropType, TextStyle } from "react-native";
 
-import '@/global.css';
+// The three shadow properties React Native uses instead of CSS text-shadow
+type TextGlow = Pick<
+  TextStyle,
+  "textShadowColor" | "textShadowOffset" | "textShadowRadius"
+>;
 
-import { Platform } from 'react-native';
+export type Theme = {
+  colors: {
+    text: string;
+    textMuted: string;
+    background: string;
+    accent: string;
+    surface: string;
+    border: string;
+  };
+  backgroundImage: ImageSourcePropType;
+  textGlow: TextGlow;
+};
 
-export const Colors = {
-  light: {
-    text: '#000000',
-    background: '#ffffff',
-    backgroundElement: '#F0F0F3',
-    backgroundSelected: '#E0E1E6',
-    textSecondary: '#60646C',
+export const fonts = {
+  heading: "IrishGrover_400Regular",
+  body: "Montserrat_400Regular",
+  bodyBold: "Montserrat_600SemiBold",
+};
+
+// Brand styles that look the same in light and dark mode
+export const brand = {
+  color: "#eef3ff",
+  glow: {
+    textShadowColor: "#4991FD",
+    textShadowOffset: { width: 2, height: 2 }, // 0,0 = glow around the text, not a drop shadow
+    textShadowRadius: 20,
+  } satisfies TextStyle,
+};
+
+export const lightTheme: Theme = {
+  colors: {
+    text: "#ee94fa",
+    textMuted: "#5e4b73",
+    background: "#fdf6ec",
+    accent: "#d98c3f",
+    surface: "rgba(255, 243, 177, 0.8)",
+    border: "#E2AF21",
   },
-  dark: {
-    text: '#ffffff',
-    background: '#000000',
-    backgroundElement: '#212225',
-    backgroundSelected: '#2E3135',
-    textSecondary: '#B0B4BA',
+  backgroundImage: require("../../assets/images/backgrounds/day-bg-mob.png"),
+  textGlow: {
+    textShadowColor: "#4991FD",
+    textShadowOffset: { width: 2, height: 2 }, // 0,0 = glow around the text, not a drop shadow
+    textShadowRadius: 12,
   },
-} as const;
+};
 
-export type ThemeColor = keyof typeof Colors.light & keyof typeof Colors.dark;
-
-export const Fonts = Platform.select({
-  ios: {
-    /** iOS `UIFontDescriptorSystemDesignDefault` */
-    sans: 'system-ui',
-    /** iOS `UIFontDescriptorSystemDesignSerif` */
-    serif: 'ui-serif',
-    /** iOS `UIFontDescriptorSystemDesignRounded` */
-    rounded: 'ui-rounded',
-    /** iOS `UIFontDescriptorSystemDesignMonospaced` */
-    mono: 'ui-monospace',
+export const darkTheme: Theme = {
+  colors: {
+    text: "#E9F6FF",
+    textMuted: "#c9bfe0",
+    background: "#141029",
+    accent: "#f2c46d",
+    surface: "rgba(25, 27, 43, 0.8)",
+    border: "#E2AF21",
   },
-  default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+  backgroundImage: require("../../assets/images/backgrounds/night-bg-mob.png"),
+  textGlow: {
+    textShadowColor: "#4991FD",
+    textShadowOffset: { width: 2, height: 2 }, // 0,0 = glow around the text, not a drop shadow
+    textShadowRadius: 12,
   },
-  web: {
-    sans: 'var(--font-display)',
-    serif: 'var(--font-serif)',
-    rounded: 'var(--font-rounded)',
-    mono: 'var(--font-mono)',
-  },
-});
-
-export const Spacing = {
-  half: 2,
-  one: 4,
-  two: 8,
-  three: 16,
-  four: 24,
-  five: 32,
-  six: 64,
-} as const;
-
-export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
-export const MaxContentWidth = 800;
+};
