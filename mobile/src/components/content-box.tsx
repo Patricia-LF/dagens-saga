@@ -19,7 +19,6 @@ export function ContentBox({ title, fill = false, children }: Props) {
         fill && styles.fill,
         {
           backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.border,
         },
       ]}
     >
@@ -35,7 +34,6 @@ export function ContentBox({ title, fill = false, children }: Props) {
 
 const styles = StyleSheet.create({
   box: {
-    borderWidth: 3,
     borderRadius: 24,
     padding: 24,
     marginHorizontal: 40,

@@ -1,7 +1,7 @@
 import { router, usePathname } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { brand, fonts } from "@/constants/theme";
+import { fonts } from "@/constants/theme";
 import { isNavItemActive, navItems } from "@/constants/nav";
 import { useTheme } from "@/hooks/use-theme";
 
@@ -16,7 +16,6 @@ export function BottomNav() {
         styles.bar,
         {
           backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.border,
         },
         { paddingBottom: insets.bottom + 8 },
       ]}
@@ -30,7 +29,7 @@ export function BottomNav() {
             style={styles.item}
           >
             <Text style={styles.icon}>{item.icon}</Text>
-            <Text style={[styles.label, active && brand.glow]}>
+            <Text style={[styles.label, { color: theme.colors.text }]}>
               {item.label}
             </Text>
           </Pressable>
@@ -43,7 +42,7 @@ export function BottomNav() {
 const styles = StyleSheet.create({
   bar: {
     flexDirection: "row",
-    borderTopWidth: 2,
+    /* borderTopWidth: 2, */
     paddingTop: 8,
   },
   item: {
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.heading,
     fontSize: 14,
-    color: brand.color,
     marginTop: 2,
   },
 });

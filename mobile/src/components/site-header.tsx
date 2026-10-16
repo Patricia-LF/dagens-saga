@@ -6,14 +6,16 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
-import { brand, fonts } from "@/constants/theme";
+import { fonts } from "@/constants/theme";
 import { navItems, isNavItemActive } from "@/constants/nav";
+import { useTheme } from "@/hooks/use-theme";
 
 type Props = {
   showNav: boolean; // show the menu under the title (wide screens only)
 };
 
 export function SiteHeader({ showNav }: Props) {
+  const theme = useTheme();
   const pathname = usePathname();
   const { width } = useWindowDimensions();
 
@@ -24,7 +26,10 @@ export function SiteHeader({ showNav }: Props) {
     <View style={styles.header}>
       {/* The title also works as a link back to the start page */}
       <Pressable onPress={() => router.navigate("/")}>
-        <Text style={[styles.title, { fontSize: titleSize }]} numberOfLines={1}>
+        <Text
+          style={[styles.title, { fontSize: titleSize }, theme.title]}
+          numberOfLines={1}
+        >
           Dagens saga
         </Text>
       </Pressable>
@@ -37,16 +42,12 @@ export function SiteHeader({ showNav }: Props) {
               <Pressable
                 key={item.href}
                 onPress={() => router.navigate(item.href)}
+                style={[styles.pill, { backgroundColor: theme.colors.pill }]}
               >
-                {/* Menu items: always the same color, glow only when active */}
                 <Text
-                  style={[
-                    styles.navItem,
-                    active && styles.navItemActive,
-                    active && brand.glow,
-                  ]}
+                  style={[styles.pillText, { color: theme.colors.pillText }]}
                 >
-                  {item.label} {item.icon}
+                  {item.label}
                 </Text>
               </Pressable>
             );
@@ -66,8 +67,6 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: fonts.heading,
     textAlign: "center",
-    color: brand.color,
-    ...brand.glow,
   },
   nav: {
     flexDirection: "row", // menu items side by side
@@ -77,9 +76,17 @@ const styles = StyleSheet.create({
   navItem: {
     fontFamily: fonts.heading,
     fontSize: 20,
-    color: brand.color,
   },
   navItemActive: {
     textDecorationLine: "underline",
+  },
+  pill: {
+    paddingHorizontal: 22,
+    paddingVertical: 10,
+    borderRadius: 999, // fully rounded ends
+  },
+  pillText: {
+    fontFamily: fonts.heading,
+    fontSize: 20,
   },
 });

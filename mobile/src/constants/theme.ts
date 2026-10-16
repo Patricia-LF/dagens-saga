@@ -6,65 +6,60 @@ type TextGlow = Pick<
   "textShadowColor" | "textShadowOffset" | "textShadowRadius"
 >;
 
+export const fonts = {
+  heading: "IrishGrover_400Regular",
+  body: "ComicNeue_400Regular",
+  bodyBold: "ComicNeue_700Bold",
+};
+
 export type Theme = {
   colors: {
     text: string;
-    textMuted: string;
-    background: string;
-    accent: string;
-    surface: string;
-    border: string;
+    surface: string; // the content box
+    panel: string; // the large panel behind everything (wide screens only)
+    pill: string; // menu buttons
+    pillText: string;
+    toggle: string; // day/night button
+    toggleText: string;
   };
+  title: TextStyle; // title color and glow
   backgroundImage: ImageSourcePropType;
-  textGlow: TextGlow;
-};
-
-export const fonts = {
-  heading: "IrishGrover_400Regular",
-  body: "Montserrat_400Regular",
-  bodyBold: "Montserrat_600SemiBold",
-};
-
-// Brand styles that look the same in light and dark mode
-export const brand = {
-  color: "#eef3ff",
-  glow: {
-    textShadowColor: "#4991FD",
-    textShadowOffset: { width: 2, height: 2 }, // 0,0 = glow around the text, not a drop shadow
-    textShadowRadius: 20,
-  } satisfies TextStyle,
 };
 
 export const lightTheme: Theme = {
   colors: {
-    text: "#ee94fa",
-    textMuted: "#5e4b73",
-    background: "#fdf6ec",
-    accent: "#d98c3f",
-    surface: "rgba(255, 243, 177, 0.8)",
-    border: "#E2AF21",
+    text: "#6b21a8",
+    surface: "rgba(254, 243, 199, 0.92)",
+    panel: "rgba(71, 71, 71, 0.31)",
+    pill: "#fdeca8",
+    pillText: "#6b21a8",
+    toggle: "#e9a3f8",
+    toggleText: "#4b0082",
+  },
+  title: {
+    color: "#b691ea",
+    textShadowColor: "rgba(247, 136, 227, 0.8)",
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 16,
   },
   backgroundImage: require("../../assets/images/backgrounds/day-bg-mob.png"),
-  textGlow: {
-    textShadowColor: "#4991FD",
-    textShadowOffset: { width: 2, height: 2 }, // 0,0 = glow around the text, not a drop shadow
-    textShadowRadius: 12,
-  },
 };
 
 export const darkTheme: Theme = {
   colors: {
-    text: "#E9F6FF",
-    textMuted: "#c9bfe0",
-    background: "#141029",
-    accent: "#f2c46d",
-    surface: "rgba(25, 27, 43, 0.8)",
-    border: "#E2AF21",
+    text: "#fef9c3",
+    surface: "rgba(59, 90, 130, 0.45)",
+    panel: "rgba(0, 0, 0, 0.5)",
+    pill: "rgba(61, 111, 155, 0.4)",
+    pillText: "#fef9c3",
+    toggle: "#6a5ef0",
+    toggleText: "#fff8dc",
   },
-  backgroundImage: require("../../assets/images/backgrounds/night-bg-mob.png"),
-  textGlow: {
-    textShadowColor: "#4991FD",
-    textShadowOffset: { width: 2, height: 2 }, // 0,0 = glow around the text, not a drop shadow
+  title: {
+    color: "#88c9ff",
+    textShadowColor: "rgba(144, 202, 249, 0.8)",
+    textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 12,
   },
+  backgroundImage: require("../../assets/images/backgrounds/night-bg-mob.png"),
 };
