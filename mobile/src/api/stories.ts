@@ -10,42 +10,63 @@ const mockStories: Story[] = [
     id: 1,
     title: "Molnet Molli",
     body: `Högt ovanför byn Lillkvist bodde molnet Molli. Hon var luddig, rund och ljusgrå. Men Molli hade ett problem. Hon kunde inte sluta gråta. Tårarna föll genom luften och plaskade på taken. Blommorna nickade under dropparna. Små bäckar rann längs byns stigar.
-– Jag vill sluta gråta! snyftade Molli. 
-– Tänk om alla blir arga på mig? Bredvid henne flög Pipra, en liten fjäril med silvervingar. Hon landade försiktigt på molnets mjuka kant. 
+
+– Jag vill sluta gråta! snyftade Molli. Tänk om alla blir arga på mig? 
+
+Bredvid henne flög Pipra, en liten fjäril med silvervingar. Hon landade försiktigt på molnets mjuka kant. 
 – Varför gråter du så mycket? frågade Pipra. 
-– Jag vet inte, svarade Molli. – Tårarna bara kommer!
+– Jag vet inte, svarade Molli. Tårarna bara kommer!
+
 Pipra flög ner till byns trädgård. Där mötte hon en pytteliten mullvad som hette Knorv. Han grävde bland torra jordklumpar. Hans morotsplantor hängde med bladen mot marken. 
-– Vi behöver vatten, suckade Knorv. 
-– Men solen har varit här så länge! Pipra tittade upp mot Molli. Då fick hon en idé.
-– Molli, vill du följa med och titta? ropade Pipra. Molli svävade långsamt ner över trädgården. Hennes tårar föll på jorden. Plötsligt började marken dofta friskt och gott. De torra jordklumparna blev mjuka. Morotsbladen lyfte sig försiktigt. Under jorden vaknade små frön. Deras gröna skott kikade fram.
-Molli torkade sina kinder mot en vindpust. Men några droppar föll ändå. Nu såg hon något märkligt. Små sniglar kröp fram under bladen. En törstig humla drack ur en vattenpöl. Knorv dansade runt sina pigga morotsplantor. 
-– Titta, Molli! ropade han. – Ditt regn hjälper min trädgård att växa!
-Molli log, och hennes tårar blev till mjukt sommarregn. Pipra dansade mellan dropparna. Knorv bjöd på knapriga morötter när skörden kom. Molli grät fortfarande ibland. Men nu visste hon att dropparna kunde göra nytta. När solen sedan tittade fram, spändes en regnbåge över byn. Molli vinkade glatt med sin fluffiga kant.`,
-    scheduledDate: "2026-10-14",
+– Vi behöver vatten, suckade Knorv. Men solen har varit här så länge! 
+
+Pipra tittade upp mot Molli. 
+Då fick hon en idé.
+– Molli, vill du följa med och titta? ropade Pipra. 
+
+Molli svävade långsamt ner över trädgården. Hennes tårar föll på jorden. Plötsligt började marken dofta friskt och gott. De torra jordklumparna blev mjuka. Morotsbladen lyfte sig försiktigt. Under jorden vaknade små frön. Deras gröna skott kikade fram.
+
+Molli torkade sina kinder mot en vindpust. Men några droppar föll ändå. Nu såg hon något märkligt. Små sniglar kröp fram under bladen. En törstig humla drack ur en vattenpöl. 
+
+Knorv dansade runt sina pigga morotsplantor. 
+– Titta, Molli! ropade han. Ditt regn hjälper min trädgård att växa!
+
+Molli log, och hennes tårar blev till mjukt sommarregn. Pipra dansade mellan dropparna. Knorv bjöd på knapriga morötter när skörden kom. 
+
+Molli grät fortfarande ibland. Men nu visste hon att dropparna kunde göra nytta. 
+
+När solen sedan tittade fram, spändes en regnbåge över byn. Molli vinkade glatt med sin fluffiga kant.`,
+    scheduledDate: "2026-10-16",
   },
   {
     id: 2,
     title: "Draken som gömde sin eld",
     body: `Långt bortom molnens mjuka täcken låg en liten by där husen hade tak av blåskimrande kristaller. I en grotta bakom byn bodde draken Fnula.
 Fnula hade fjäll som glittrade som pärlemor och vingar mjuka som sammet. Men det fanns en sak hon var rädd för: eld.
+
 Varje gång det kittlade varmt i halsen gömde hon nosen under svansen.
 – Tänk om jag råkar bränna något! pep hon.
+
 En morgon kom hennes vän, månskensräven Vipsil, springande.
 – Fnula! Stjärnblommorna i dalen har somnat. De behöver lite värme för att slå ut innan månen går upp!
 Fnula tittade ner på sina tassar.
 – Jag kan inte. Jag vågar inte.
 Vipsil satte sig bredvid henne.
 – Då går vi tillsammans. Du behöver inte göra det ensam.
+
 De vandrade till dalen, där små silverblommor slöt sina kronblad. Fnula tog ett djupt andetag. Det började bubbla i halsen, och en liten gnista flög ut.
 Fnula pep till och gömde sig bakom en sten.
 – Jag klarar det inte!
 – Vi tar det långsamt, sa Vipsil. Jag stannar här hos dig.
-Fnula kikade fram. Vipsil log uppmuntrande. Tillsammans övade de på att blåsa försiktigt. Först kom bara en rökpuff. Sedan en pytteliten låga, varm som ett stearinljus.
+Fnula kikade fram. Vipsil log uppmuntrande. Tillsammans övade de på att blåsa försiktigt. 
+
+Först kom bara en rökpuff. Sedan en pytteliten låga, varm som ett stearinljus.
 Fnula riktade den mot marken bredvid blommorna.
 En efter en vecklade stjärnblommorna ut sina kronblad. Dalen fylldes av gyllene ljus, och små ljusfjärilar dansade mellan blommorna.
 Fnula skrattade förvånat.
 – Jag var rädd hela tiden!
 – Jag vet, sa Vipsil och strök henne över nosen. Men du bad om hjälp ändå.
+
 Den kvällen somnade Fnula under en filt av mjuka moln. Hennes eld var fortfarande liten, och ibland blev hon fortfarande rädd.
 Men nu visste hon att hon kunde ropa på en vän.`,
     scheduledDate: "2026-10-13",
@@ -84,4 +105,19 @@ export async function getArchive(): Promise<Story[]> {
 
 export async function getStory(id: number): Promise<Story | undefined> {
   return mockStories.find((story) => story.id === id);
+}
+
+// Today's date as "YYYY-MM-DD" in Swedish time
+function todayInStockholm(): string {
+  return new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Europe/Stockholm",
+  }).format(new Date());
+}
+
+// Returns the story scheduled for today, or null if there is none
+export async function getTodaysStory(): Promise<Story | null> {
+  return (
+    mockStories.find((story) => story.scheduledDate === todayInStockholm()) ??
+    null
+  );
 }
