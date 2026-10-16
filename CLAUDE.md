@@ -13,7 +13,7 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 - App: React Native (Expo, Expo Go), TypeScript, Expo Router for navigation
 - Backend: Node.js + Express, TypeScript, hosted on Vercel (Vercel Cron for the daily rotation)
 - Database: Supabase (PostgreSQL) accessed through Prisma
-- AI: text generation via API (provider not decided, see ambiguity.md)
+- AI: text generation via the OpenAI API (see ambiguity.md)
 
 ## Repo layout
 
