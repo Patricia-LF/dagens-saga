@@ -12,12 +12,13 @@ export default function StartScreen() {
         <Text
           style={[styles.text, styles.paragraph, { color: theme.colors.text }]}
         >
-          Välkommen till <Text style={styles.bold}>Sagolandet</Text>! Här hittar
-          du en ny saga varje dag - fylld med äventyr, vänskap och magi.
+          🌈 Välkommen till <Text style={styles.bold}>Sagolandet</Text>! Här
+          hittar du en ny saga varje dag - fylld med äventyr, vänskap och magi.
+          🧚
         </Text>
 
         <Text style={[styles.text, { color: theme.colors.text }]}>
-          Tryck på Dagens saga för att läsa dagens, eller besök Biblioteket för
+          Tryck på Dagens för att läsa dagens saga, eller besök Biblioteket för
           att hitta äldre sagor.
         </Text>
       </ContentBox>

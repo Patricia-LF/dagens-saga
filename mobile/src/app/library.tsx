@@ -17,7 +17,7 @@ export default function LibraryScreen() {
 
   return (
     <View style={styles.screen}>
-      <ContentBox>
+      <ContentBox fill>
         <FlatList
           data={stories}
           keyExtractor={(story) => String(story.id)}
@@ -30,7 +30,7 @@ export default function LibraryScreen() {
                 {item.title}
               </Text>
               <Text
-                style={[styles.excerpt, { color: theme.colors.textMuted }]}
+                style={[styles.excerpt, { color: theme.colors.toggleText }]}
                 numberOfLines={2}
               >
                 {item.body}
