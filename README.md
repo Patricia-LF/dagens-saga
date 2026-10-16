@@ -119,9 +119,9 @@ The commands above work the same on macOS, Linux, Windows with WSL, and Windows 
 | Copy `.env.example`   | `cp .env.example .env`                                                 | `cp .env.example .env`                                                                                        | PowerShell: `cp .env.example .env`, CMD: `copy .env.example .env`                   |
 | Expo Go on your phone | Usually works directly if the phone and computer are on the same Wi-Fi | Often blocked by WSL's separate network. Use `npx expo start --tunnel`, or turn on mirrored networking in WSL | Usually works directly on the same Wi-Fi (allow Node through the firewall if asked) |
 
-Simulators are optional. The Android Emulator works on all platforms (requires Android Studio). The iOS Simulator works only on macOS (requires Xcode from the App Store).
-
 You can also copy `.env.example` by duplicating the file in your editor and renaming it to `.env`.
+
+Simulators are optional. The Android Emulator works on all platforms (requires Android Studio). The iOS Simulator works only on macOS (requires Xcode from the App Store).
 
 This project was developed and tested on **Windows 11 with WSL (Ubuntu)**. Other platforms follow the same steps but have not been tested. If something does not work on your system, please open an issue.
 
