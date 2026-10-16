@@ -7,6 +7,7 @@ import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { router } from "expo-router";
 import { Pressable } from "react-native";
+import { StoryText } from "@/components/story-text";
 
 export default function StoryScreen() {
   const theme = useTheme();
@@ -21,7 +22,7 @@ export default function StoryScreen() {
 
   return (
     <View style={styles.screen}>
-      <ContentBox title={story.title}>
+      <ContentBox title={story.title} fill>
         <Pressable
           onPress={() => router.navigate("/library")}
           style={styles.backButton}
@@ -31,9 +32,7 @@ export default function StoryScreen() {
           </Text>
         </Pressable>
         <ScrollView>
-          <Text style={[styles.body, { color: theme.colors.text }]}>
-            {story.body}
-          </Text>
+          <StoryText body={story.body} />
         </ScrollView>
       </ContentBox>
     </View>
