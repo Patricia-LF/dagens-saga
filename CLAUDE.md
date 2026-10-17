@@ -50,4 +50,4 @@ One repo, separate folders, each with its own `package.json`:
 - Backend (in `backend/`): install with `npm install`. Copy `.env.example` to `.env` and fill in `DATABASE_URL` (transaction pooler, port 6543) and `DIRECT_URL` (session pooler, port 5432).
 - Prisma (in `backend/`): `npm run db:migrate -- --name <name>` (create and apply a migration), `npm run db:generate` (regenerate the client in `src/generated/`, which is not in git), `npm run db:studio` (browse the data).
 - Run the backend (in `backend/`): `npm run dev` starts the server with auto-reload on http://localhost:3000 (set `PORT` to change). `npm run build` compiles to `dist/`, then `npm start` runs the compiled build. Check it with `curl http://localhost:3000/health`.
-- Still to be filled in once set up: run tests. When you set this up, add the exact command here.
+- Tests (in `backend/`): `npm test` runs all tests once (Vitest + Supertest, test files in `backend/tests/`, named `*.test.ts`). `npm run test:watch` re-runs them when files change. Tests are outside `src/`, so `npm run build` ignores them.
