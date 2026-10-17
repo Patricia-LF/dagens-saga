@@ -96,6 +96,25 @@ npm run db:migrate
 
 Never commit `.env`. Only `.env.example`, with placeholder values, belongs in the repository.
 
+### Run the backend
+
+```bash
+npm run dev
+```
+
+The server runs on `http://localhost:3000`. Check it with `http://localhost:3000/health`.
+
+### Deploy the backend (Vercel)
+
+The backend is deployed at `https://dagens-saga.vercel.app` (check with [`/health`](https://dagens-saga.vercel.app/health)).
+
+To deploy your own copy:
+
+1. Import the repository in Vercel and set **Root Directory** to `backend`.
+2. Add `DATABASE_URL` and `DIRECT_URL` under **Settings → Environment Variables**. Both are needed, because the build runs `prisma generate`, which reads `prisma.config.ts`.
+3. Under **Settings → Functions**, choose the same region as your Supabase project.
+4. Skip Vercel's suggested **Prisma Postgres** integration. This project uses Supabase.
+
 ### Mobile app
 
 ```bash
