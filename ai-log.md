@@ -21,6 +21,7 @@ _E.g. Claude Code use while coding: scaffolding, debugging, rubber-ducking, whic
 - 2026-10-12: created the repo and set up the project myself (Expo app in `mobile/`). Claude Code has not been used for the setup yet.
 - 2026-10-13: Used Claude Code to set up Prisma 7 with Supabase (Opus for planning, Sonnet for implementation). I reviewed the plan and added the characters field before approving. At my request it verified that ?pgbouncer=true is not needed with the pg adapter. The first migration failed twice: DIRECT_URL used the IPv6-only direct host instead of the session pooler, and the password had special characters that broke the URL. Claude Code diagnosed both without reading the password; I updated .env and reset the password myself. Verified with a test row through the pooled connection.
   Cost: $1.03 (Opus planning $0.51, Sonnet implementation and debugging $0.50)
+- 2026-10-17: Used Claude Code to set up Express + TypeScript (issue 7) with an app/server split and a /health endpoint. Reviewed the plan before implementation and asked it to verify both `npm run dev` and `npm run build && npm start`. Tested /health myself in the browser. No manual code fixes needed. Cost: $0.34 (Opus planning $0.17, Sonnet implementation $0.17).
 
 ## Code control, validation, reviews, security
 
