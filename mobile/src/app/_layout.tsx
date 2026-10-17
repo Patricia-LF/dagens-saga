@@ -7,11 +7,11 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { Slot } from "expo-router";
 import { useEffect } from "react";
-import { Image, StyleSheet, View, useWindowDimensions } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider, useTheme } from "@/hooks/use-theme";
 import { BottomNav } from "@/components/bottom-nav";
-import { WIDE_SCREEN } from "@/constants/nav";
+import { useBackgroundShape, useScreenSize } from "@/hooks/use-screen-size";
 
 // Keep the splash screen visible until the fonts are loaded
 SplashScreen.preventAutoHideAsync();
@@ -26,8 +26,9 @@ export default function RootLayout() {
 
 function AppShell() {
   const theme = useTheme(); // the active theme (light or dark)
-  const { width } = useWindowDimensions();
-  const isWide = width >= WIDE_SCREEN;
+  const screenSize = useScreenSize();
+  const backgroundShape = useBackgroundShape();
+  const isWide = screenSize !== "mobile";
 
   const [fontsLoaded] = useFonts({
     IrishGrover_400Regular,
@@ -45,15 +46,14 @@ function AppShell() {
     <View style={styles.root}>
       {/* Background: direct child of root, so it always fills the whole screen */}
       <Image
-        source={theme.backgroundImage}
+        source={theme.backgroundImages[backgroundShape]}
         style={[StyleSheet.absoluteFill, { width: "100%", height: "100%" }]}
         resizeMode="cover"
       />
 
       <View
         style={[
-          styles.content, // always: fill the height
-          isWide && styles.panel, // wide screens: the panel look
+          isWide ? styles.panel : styles.content, // wide screens: the panel look
           isWide && { backgroundColor: theme.colors.panel },
         ]}
       >
@@ -70,8 +70,9 @@ function AppShell() {
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  content: { flex: 1 },
+  content: { flex: 1 }, // mobile: fill the space above the bottom nav
   panel: {
+    flexShrink: 1, // as tall as its content, but never taller than the screen
     width: "100%",
     maxWidth: 800,
     alignSelf: "center",
@@ -79,5 +80,5 @@ const styles = StyleSheet.create({
     marginVertical: 32,
     padding: 32,
   },
-  page: { flex: 1 },
+  page: { flexGrow: 1, flexShrink: 1 },
 });

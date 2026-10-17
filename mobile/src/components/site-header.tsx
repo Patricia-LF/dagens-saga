@@ -9,6 +9,7 @@ import {
 import { fonts } from "@/constants/theme";
 import { navItems, isNavItemActive } from "@/constants/nav";
 import { useTheme } from "@/hooks/use-theme";
+import { useRem } from "@/hooks/use-screen-size";
 
 type Props = {
   showNav: boolean; // show the menu under the title (wide screens only)
@@ -16,11 +17,12 @@ type Props = {
 
 export function SiteHeader({ showNav }: Props) {
   const theme = useTheme();
+  const rem = useRem();
   const pathname = usePathname();
   const { width } = useWindowDimensions();
 
   // Scale the title with the screen width, but never above 84
-  const titleSize = Math.min(84, width / 8.5);
+  const titleSize = Math.min(rem(3.5), width / 8.5);
 
   return (
     <View style={styles.header}>
@@ -45,7 +47,10 @@ export function SiteHeader({ showNav }: Props) {
                 style={[styles.pill, { backgroundColor: theme.colors.pill }]}
               >
                 <Text
-                  style={[styles.pillText, { color: theme.colors.pillText }]}
+                  style={[
+                    styles.pillText,
+                    { color: theme.colors.pillText, fontSize: rem(1.125) },
+                  ]}
                 >
                   {item.label}
                 </Text>
@@ -75,7 +80,7 @@ const styles = StyleSheet.create({
   },
   navItem: {
     fontFamily: fonts.heading,
-    fontSize: 20,
+    /* fontSize: 20, */
   },
   navItemActive: {
     textDecorationLine: "underline",
@@ -87,6 +92,6 @@ const styles = StyleSheet.create({
   },
   pillText: {
     fontFamily: fonts.heading,
-    fontSize: 20,
+    /* fontSize: 20, */
   },
 });

@@ -4,9 +4,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fonts } from "@/constants/theme";
 import { isNavItemActive, navItems } from "@/constants/nav";
 import { useTheme } from "@/hooks/use-theme";
+import { useRem } from "@/hooks/use-screen-size";
 
 export function BottomNav() {
   const theme = useTheme();
+  const rem = useRem();
   const pathname = usePathname();
   const insets = useSafeAreaInsets(); // space for the home indicator on newer phones
 
@@ -28,8 +30,15 @@ export function BottomNav() {
             onPress={() => router.navigate(item.href)}
             style={styles.item}
           >
-            <Text style={styles.icon}>{item.icon}</Text>
-            <Text style={[styles.label, { color: theme.colors.text }]}>
+            <Text style={[styles.icon, { fontSize: rem(1.5) }]}>
+              {item.icon}
+            </Text>
+            <Text
+              style={[
+                styles.label,
+                { color: theme.colors.text, fontSize: rem(1) },
+              ]}
+            >
               {item.label}
             </Text>
           </Pressable>
@@ -50,7 +59,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   icon: {
-    fontSize: 24,
+    /*  fontSize: 24, */
   },
   label: {
     fontFamily: fonts.heading,

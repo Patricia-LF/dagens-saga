@@ -8,9 +8,11 @@ import { useTheme } from "@/hooks/use-theme";
 import { router } from "expo-router";
 import { Pressable } from "react-native";
 import { StoryText } from "@/components/story-text";
+import { useRem } from "@/hooks/use-screen-size";
 
 export default function StoryScreen() {
   const theme = useTheme();
+  const rem = useRem();
   const { id } = useLocalSearchParams<{ id: string }>();
   const [story, setStory] = useState<Story>();
 
@@ -27,7 +29,12 @@ export default function StoryScreen() {
           onPress={() => router.navigate("/library")}
           style={styles.backButton}
         >
-          <Text style={[styles.backText, { color: theme.colors.text }]}>
+          <Text
+            style={[
+              styles.backText,
+              { color: theme.colors.text, fontSize: rem(1) },
+            ]}
+          >
             ← Tillbaka till biblioteket
           </Text>
         </Pressable>
@@ -40,7 +47,7 @@ export default function StoryScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, paddingBottom: 40 },
+  screen: { flexGrow: 1, flexShrink: 1, paddingBottom: 40 },
   title: { fontFamily: fonts.heading, fontSize: 28, marginBottom: 12 },
   body: { fontFamily: fonts.body, fontSize: 18, lineHeight: 28 },
   backButton: {
@@ -50,6 +57,6 @@ const styles = StyleSheet.create({
   },
   backText: {
     fontFamily: fonts.bodyBold,
-    fontSize: 16,
+    /* fontSize: 16, */
   },
 });

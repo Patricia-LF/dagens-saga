@@ -5,9 +5,11 @@ import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { getTodaysStory, Story } from "@/api/stories";
 import { StoryText } from "@/components/story-text";
+import { useRem } from "@/hooks/use-screen-size";
 
 export default function TodayScreen() {
   const theme = useTheme();
+  const rem = useRem();
 
   // undefined = still loading, null = no story today, Story = today's story
   const [story, setStory] = useState<Story | null | undefined>(undefined);
@@ -24,7 +26,16 @@ export default function TodayScreen() {
     return (
       <View style={styles.centered}>
         <ContentBox>
-          <Text style={[styles.message, { color: theme.colors.text }]}>
+          <Text
+            style={[
+              styles.message,
+              {
+                color: theme.colors.text,
+                fontSize: rem(1.125),
+                lineHeight: rem(1.75),
+              },
+            ]}
+          >
             Ingen saga publicerad idag ännu. Kika gärna i biblioteket!
           </Text>
         </ContentBox>
@@ -45,17 +56,19 @@ export default function TodayScreen() {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     paddingBottom: 8,
   },
   centered: {
-    flex: 1,
-    justifyContent: "center",
+    flexGrow: 1,
+    flexShrink: 1,
+    /* justifyContent: "center", */
     paddingBottom: 40,
   },
   message: {
     fontFamily: fonts.body,
-    fontSize: 18,
+    /*  fontSize: 18, */
     textAlign: "center",
   },
 });
