@@ -22,6 +22,7 @@ _E.g. Claude Code use while coding: scaffolding, debugging, rubber-ducking, whic
 - 2026-10-13: Used Claude Code to set up Prisma 7 with Supabase (Opus for planning, Sonnet for implementation). I reviewed the plan and added the characters field before approving. At my request it verified that ?pgbouncer=true is not needed with the pg adapter. The first migration failed twice: DIRECT_URL used the IPv6-only direct host instead of the session pooler, and the password had special characters that broke the URL. Claude Code diagnosed both without reading the password; I updated .env and reset the password myself. Verified with a test row through the pooled connection.
   Cost: $1.03 (Opus planning $0.51, Sonnet implementation and debugging $0.50)
 - 2026-10-17: Used Claude Code to set up Express + TypeScript (issue 7) with an app/server split and a /health endpoint. Reviewed the plan before implementation and asked it to verify both `npm run dev` and `npm run build && npm start`. Tested /health myself in the browser. No manual code fixes needed. Cost: $0.34 (Opus planning $0.17, Sonnet implementation $0.17).
+- 2026-10-17: Used Claude Code to set up Vitest + Supertest (issue 12) and write the first /health test. Chose to keep tests in backend/tests/ so the build is unaffected. Verified that the test fails when the endpoint changes. npm install reported 4 high-severity vulnerabilities; npm audit showed they come from the Prisma CLI (deepmerge-ts and mysql2), not from the new test packages, and only affect local CLI use. Cost: $0.27 (Opus planning $0.14, Sonnet implementation $0.13).
 
 ## Code control, validation, reviews, security
 
@@ -29,6 +30,7 @@ _E.g. how AI suggestions were reviewed before going into the code, security revi
 
 - 2026-10-12: removed the MIT `LICENSE` from the Expo template in `mobile/`, so that only the license in the repo root applies.
 - 2026-10-12: installing `@expo/ngrok` produced 30 vulnerability warnings (mostly older dependencies in a development tool). I did not run `npm audit fix --force`, because it can break the project. To be reviewed again before submission.
+- 2026-10-17: Updated prisma, @prisma/client and @prisma/adapter-pg together to 7.10.1 instead of running npm audit fix, which would only have updated the CLI.
 
 ## Other necessary or interesting information
 
