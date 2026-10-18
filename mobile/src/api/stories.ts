@@ -69,7 +69,7 @@ Fnula skrattade förvånat.
 
 Den kvällen somnade Fnula under en filt av mjuka moln. Hennes eld var fortfarande liten, och ibland blev hon fortfarande rädd.
 Men nu visste hon att hon kunde ropa på en vän.`,
-    scheduledDate: "2026-10-13",
+    scheduledDate: "2026-10-18",
   },
   {
     id: 3,

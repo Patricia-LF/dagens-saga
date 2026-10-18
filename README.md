@@ -133,16 +133,38 @@ The background images are licensed via Adobe Stock and are not included in the r
 
 The commands above work the same on macOS, Linux, Windows with WSL, and Windows PowerShell. The few differences:
 
-|                       | macOS / Linux                                                          | Windows (WSL)                                                                                                 | Windows (PowerShell / CMD)                                                          |
-| --------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Copy `.env.example`   | `cp .env.example .env`                                                 | `cp .env.example .env`                                                                                        | PowerShell: `cp .env.example .env`, CMD: `copy .env.example .env`                   |
-| Expo Go on your phone | Usually works directly if the phone and computer are on the same Wi-Fi | Often blocked by WSL's separate network. Use `npx expo start --tunnel`, or turn on mirrored networking in WSL | Usually works directly on the same Wi-Fi (allow Node through the firewall if asked) |
+|                       | macOS / Linux                                                          | Windows (WSL)                                                                 | Windows (PowerShell / CMD)                                                          |
+| --------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Copy `.env.example`   | `cp .env.example .env`                                                 | `cp .env.example .env`                                                        | PowerShell: `cp .env.example .env`, CMD: `copy .env.example .env`                   |
+| Expo Go on your phone | Usually works directly if the phone and computer are on the same Wi-Fi | Often blocked by WSL's separate network. Needs mirrored networking, see below | Usually works directly on the same Wi-Fi (allow Node through the firewall if asked) |
 
 You can also copy `.env.example` by duplicating the file in your editor and renaming it to `.env`.
 
 Simulators are optional. The Android Emulator works on all platforms (requires Android Studio). The iOS Simulator works only on macOS (requires Xcode from the App Store).
 
 This project was developed and tested on **Windows 11 with WSL (Ubuntu)**. Other platforms follow the same steps but have not been tested. If something does not work on your system, please open an issue.
+
+#### Expo Go on a phone with WSL
+
+WSL has its own network by default, so the phone cannot reach the Expo server. Turn on mirrored networking (Windows 11 22H2 or later):
+
+1. Create `C:\Users\<your-name>\.wslconfig` with:
+
+```ini
+   [wsl2]
+   networkingMode=mirrored
+```
+
+2. In PowerShell, run `wsl --shutdown`, then reopen WSL.
+3. In PowerShell **as administrator**, allow Expo's port (8081) through the Hyper-V firewall:
+
+```powershell
+   New-NetFirewallHyperVRule -Name "ExpoMetro" -DisplayName "Expo Metro" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 8081
+```
+
+4. Run `npx expo start` in WSL. The address under the QR code should start with `192.168.` or `10.`, not `172.`.
+
+The phone and computer must be on the same Wi-Fi, and the Windows network must be set to **Private**.
 
 ## License
 
