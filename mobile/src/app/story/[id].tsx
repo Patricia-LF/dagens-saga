@@ -47,7 +47,7 @@ export default function StoryScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: { flexGrow: 1, flexShrink: 1, paddingBottom: 40 },
+  screen: { flexGrow: 1, flexShrink: 1, paddingBottom: 10 },
   title: { fontFamily: fonts.heading, fontSize: 28, marginBottom: 12 },
   body: { fontFamily: fonts.body, fontSize: 18, lineHeight: 28 },
   backButton: {

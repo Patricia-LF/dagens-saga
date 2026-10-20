@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
   box: {
     borderRadius: 24,
     padding: 24,
-    marginHorizontal: 40,
-    marginTop: 20,
+    marginHorizontal: 20,
+    marginVertical: 20,
     justifyContent: "center",
   },
   fill: {
@@ -61,4 +61,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 16,
   },
+  /*  surface: {
+    marginHorizontal: 40,
+  }, */
 });
