@@ -12,6 +12,7 @@
     "db:generate": "prisma generate",
     "db:studio": "prisma studio",
     "ai:compare": "tsx scripts/compare-models.ts",
+    "generate": "tsx scripts/generate-stories.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
