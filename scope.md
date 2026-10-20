@@ -28,6 +28,7 @@ Every AI-generated story must be editable before it is published (title and text
 4. Light/dark mode (styling is already mostly done)
 5. Animations (React Native Reanimated)
 6. Illustrations — an image per story (stock images already licensed, my own paintings, or AI-generated). The data model has an optional image field from the start.
+7. Book-like reading view — a cover page (title, illustration and author: AI or me), page turning with swipe and arrows instead of scrolling, and an animated cover (title letters flying in, floating illustration)
 
 ## Could
 
