@@ -46,9 +46,9 @@ export const lightTheme: Theme = {
     textShadowRadius: 10,
   },
   backgroundImages: {
-    portrait: require("@/assets/images/backgrounds/day-bg-mob.png"),
-    landscape: require("@/assets/images/backgrounds/light-Tablet.png"),
-    wide: require("@/assets/images/backgrounds/day-bg-web.jpeg"),
+    portrait: require("@/assets/images/backgrounds/light-mobile.jpg"),
+    landscape: require("@/assets/images/backgrounds/light-tablet.jpg"),
+    wide: require("@/assets/images/backgrounds/light-web.jpg"),
   },
 };
 
@@ -70,8 +70,8 @@ export const darkTheme: Theme = {
     textShadowRadius: 10,
   },
   backgroundImages: {
-    portrait: require("@/assets/images/backgrounds/night-bg-mob.png"),
-    landscape: require("@/assets/images/backgrounds/dark-Tablet.png"),
-    wide: require("@/assets/images/backgrounds/night-bg-web.jpeg"),
+    portrait: require("@/assets/images/backgrounds/dark-mobile.jpg"),
+    landscape: require("@/assets/images/backgrounds/dark-tablet.jpg"),
+    wide: require("@/assets/images/backgrounds/dark-web.jpg"),
   },
 };
