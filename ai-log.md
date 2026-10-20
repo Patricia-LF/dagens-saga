@@ -36,6 +36,7 @@ _E.g. how AI suggestions were reviewed before going into the code, security revi
 - 2026-10-12: installing `@expo/ngrok` produced 30 vulnerability warnings (mostly older dependencies in a development tool). I did not run `npm audit fix --force`, because it can break the project. To be reviewed again before submission.
 - 2026-10-17: Updated prisma, @prisma/client and @prisma/adapter-pg together to 7.10.1 instead of running npm audit fix, which would only have updated the CLI.
 - 2026-10-20: Iterated on the prompt during the comparison. gpt-5.5 put every sentence in its own paragraph, which would look fragmented in the app. A first fix ("short paragraphs, 2–4 sentences") did not work. I noticed that "a blank line between every paragraph" was probably read as "after every sentence", and made the rule explicit, which fixed it in all following runs. Also noticed that both models reused the same names (Rillo, Mira, Snäckis), which confirms that the list of characters to avoid is needed.
+- 2026-10-21: Supabase warned that the stories table was publicly accessible (RLS disabled). The Data API turned out to be on, although I believed it was off. Turned it off, checked that the data was intact and that the project URL was never in git, and enabled RLS on all tables with a Prisma migration. Added a rule to constraints.md that every new table gets RLS.
 
 ## Other necessary or interesting information
 
