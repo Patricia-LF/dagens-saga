@@ -102,8 +102,8 @@ Make sure a bug or a mistake can never run up a large bill, and know roughly wha
 
 **Scope**
 
-- A monthly spending limit set in the OpenAI dashboard.
-- The approximate cost per story, measured from a real batch, written down.
+- A monthly spending limit set in the OpenAI dashboard. Spending limit: $5 in prepaid credits with auto-recharge turned off, so the API can never cost more than that.
+- The approximate cost per story, measured from a real batch, written down. Cost per story: to be measured after the first batch (issue 14).
 
 **Acceptance criteria**
 
