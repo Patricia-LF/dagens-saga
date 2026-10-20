@@ -39,6 +39,8 @@ One repo, separate folders, each with its own `package.json`:
 - All code, file names, variable and function names, commit messages, and code comments are in English.
 - TypeScript in strict mode. No `any` without a comment explaining why.
 - Keep the user-facing app text in Swedish.
+- Use kebab-case file names to match the rest of the repo: story-prompt.ts, parse-story-response
+  ts, and the same for the test files.
 
 ## Documentation
 
