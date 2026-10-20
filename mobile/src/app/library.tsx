@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   screen: {
     flexGrow: 1,
     flexShrink: 1,
-    paddingBottom: 40,
+    paddingBottom: 10,
   },
   item: {
     paddingVertical: 12,

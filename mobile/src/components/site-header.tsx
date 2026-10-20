@@ -66,7 +66,7 @@ export function SiteHeader({ showNav }: Props) {
 const styles = StyleSheet.create({
   header: {
     alignItems: "center",
-    paddingTop: 48,
+    paddingTop: 58,
     paddingBottom: 16,
   },
   title: {
