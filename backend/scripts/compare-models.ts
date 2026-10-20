@@ -6,12 +6,13 @@ import { parseStoryResponse } from "../src/ai/parse-story-response.js";
 // Local script: generates one story per model with the same prompt, so we can compare them.
 // Nothing is saved to the database. Run: npm run ai:compare (or: npm run ai:compare -- --list-models)
 
-const MODELS = ["gpt-4.1-mini", "gpt-5.4-mini", "gpt-5.5"];
+const MODELS = ["gpt-5.4-mini", "gpt-5.5"];
 
 // Price in USD per 1 million tokens. Check https://openai.com/api/pricing before trusting the cost.
 // Models that are missing here are printed with "price unknown".
+// gpt-5.5 was chosen for story generation (see ambiguity.md).
+// gpt-4.1-mini was removed after the first comparison run.
 const PRICES: Record<string, { input: number; output: number }> = {
-  "gpt-4.1-mini": { input: 0.4, output: 1.6 },
   "gpt-5.4-mini": { input: 0.75, output: 4.5 },
   "gpt-5.5": { input: 5.0, output: 30.0 },
 };
@@ -110,11 +111,11 @@ async function main(): Promise<void> {
   }
 
   const prompt = buildStoryPrompt({
-    theme: "en räv som samlar på ljud",
+    theme: "en groda som inte kunde hoppa",
     age: 6,
     minWords: 250,
     maxWords: 350,
-    lesson: "att lyssna på andra",
+    lesson: "att alla är speciella på sitt eget sätt",
     avoidCharacters: [],
   });
 

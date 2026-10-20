@@ -21,7 +21,7 @@ Språk och stil:
 - Skriv enkelt så ett barn i den åldern kan läsa och förstå sagan själv.
 - Korta meningar, helst högst 12 ord. Använd vanliga, vardagliga ord. Förklara svåra ord med enkla ord i stället.
 - Undvik långa och krångliga liknelser. En och annan enkel jämförelse går bra, till exempel "mjuk som en kudde".
-- Korta stycken, högst 3–4 meningar. Lägg en helt tom rad mellan varje stycke.
+- Varje stycke ska ha minst 2 och högst 4 meningar. Skriv aldrig ett stycke med bara en mening, utom ibland för en kort replik. Lägg en helt tom rad mellan varje stycke, alltså efter var 2–4 meningar, inte efter varje mening.
 - Använd tankstreck (–) för dialog. Varje replik börjar på en ny rad. Om samma figur fortsätter prata efter "sa hon" eller liknande, skriv det på samma rad utan nytt tankstreck.
 - FÖRBJUDNA ORD: Börja INTE sagan med "Det var en gång". Använd inte orden "magisk", "mystisk", "äventyr", "hemlighetsfull" eller "förtrollad" mer än högst en enstaka gång. Visa magin genom handling istället för att bara skriva ut orden.
 
