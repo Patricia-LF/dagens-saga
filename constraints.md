@@ -40,7 +40,7 @@ These are fixed. If a task seems to require breaking one of them, stop and ask.
 - Validate all input on the backend.
 - Any admin endpoints require authentication.
 - Secrets (including the JWT secret) live in `.env`. Commit an `.env.example` with placeholder values only. Passwords are always hashed (bcrypt or argon2), never stored in plain text.
-- RLS is enabled on every table with no policies, on purpose. "RLS Enabled No Policy" in Supabase's Security Advisor is expected and should not be "fixed" by adding policies. All access goes through the Express backend.
+- RLS is enabled on every table with no policies, on purpose. "RLS Enabled No Policy" in Supabase's Security Advisor is expected and should not be "fixed" by adding policies. All access goes through the Express backend. Do not add GRANTs to the anon or authenticated roles. The Data API is not used, and new tables should stay unreachable through it.
 
 ## Code and language
 
