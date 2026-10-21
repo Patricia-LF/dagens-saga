@@ -1,5 +1,5 @@
 import { router, usePathname } from "expo-router";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { fonts } from "@/constants/theme";
 import { isNavItemActive, navItems } from "@/constants/nav";
@@ -12,12 +12,14 @@ export function BottomNav() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets(); // space for the home indicator on newer phones
 
+  const iconSize = rem(1.75);
+
   return (
     <View
       style={[
         styles.bar,
         {
-          backgroundColor: theme.colors.surface,
+          backgroundColor: theme.colors.surfaceStrong,
         },
         { paddingBottom: insets.bottom + 8 },
       ]}
@@ -29,14 +31,21 @@ export function BottomNav() {
             key={item.href}
             onPress={() => router.navigate(item.href)}
             style={styles.item}
+            accessibilityRole="link"
+            accessibilityState={{ selected: active }}
           >
-            <Text style={[styles.icon, { fontSize: rem(1.5) }]}>
-              {item.icon}
-            </Text>
+            <Image
+              source={theme.navIcons[item.icon]}
+              style={[
+                { width: iconSize, height: iconSize },
+                !active && styles.inactive, // dim the tabs that are not selected
+              ]}
+            />
             <Text
               style={[
                 styles.label,
                 { color: theme.colors.text, fontSize: rem(1) },
+                !active && styles.inactive,
               ]}
             >
               {item.label}
@@ -51,19 +60,17 @@ export function BottomNav() {
 const styles = StyleSheet.create({
   bar: {
     flexDirection: "row",
-    /* borderTopWidth: 2, */
     paddingTop: 8,
   },
   item: {
     flex: 1, // all tabs share the width equally
     alignItems: "center",
   },
-  icon: {
-    /*  fontSize: 24, */
+  inactive: {
+    opacity: 0.6,
   },
   label: {
     fontFamily: fonts.heading,
-    fontSize: 14,
     marginTop: 2,
   },
 });
