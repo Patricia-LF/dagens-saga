@@ -16,8 +16,8 @@ export const THEMES: StoryTheme[] = [
     lesson: "att modet växer när man delar sin rädsla",
   },
   {
-    theme: "ett moln som ville bli en stjärna",
-    lesson: "att vara nöjd med den man är",
+    theme: "en pojke som ville ha en hund",
+    lesson: "att man måste ta ansvar för, och vara snäll mot ett husdjur",
   },
   {
     theme: "en liten tomte som tappade bort sin mössa",

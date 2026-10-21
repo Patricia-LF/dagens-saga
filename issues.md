@@ -31,7 +31,7 @@ Issue numbers are kept stable. New issues are added at the end (43 and up) inste
 
 ## Sprint 2: AI pipeline and story of the day
 
-### 13. Prompt template
+### 13. Prompt template ✅
 
 `must` `ai`
 
@@ -58,7 +58,7 @@ A fixed prompt template in code that turns a few variables into a complete story
 
 ---
 
-### 14. Batch generation script
+### 14. Batch generation script ✅
 
 `must` `ai` `backend`
 
@@ -93,7 +93,7 @@ A script I run manually that generates several stories at once and saves them as
 
 ---
 
-### 15. Spending limit and cost note for the AI API
+### 15. Spending limit and cost note for the AI API ✅
 
 `must` `ai` `docs`
 

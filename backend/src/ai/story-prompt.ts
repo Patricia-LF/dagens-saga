@@ -30,7 +30,8 @@ Innehåll:
 - Visa lärdomen genom det som händer. Skriv inte ut den som en moral i slutet.
 - En tydlig början, mitt och slut, med ett varmt och tryggt slut.
 - Nya figurer med egna unika namn. Använd INTE någon av dessa figurer eller liknande: {avoidCharacters}.
-- Undvik klassiska hjälpare som den kloka ugglan, och variera vilken typ av figur som hjälper.
+- Högst 3 figurer i sagan.
+- Undvik klassiska hjälpare som den kloka ugglan. Variera vilken sorts figur och varelse som förekommer.
 
 Trygghet:
 - Inget som är skrämmande, våldsamt eller sorgligt utan tröst.
