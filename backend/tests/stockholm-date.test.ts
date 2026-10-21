@@ -33,6 +33,27 @@ describe("todayInStockholm", () => {
     // 23:30 UTC is 00:30 on the 27th in Stockholm.
     expect(formatDate(todayInStockholm(new Date("2026-10-26T23:30:00Z")))).toBe("2026-10-27");
   });
+
+  it("handles the day the clocks go back (25 October 2026, a 25-hour day)", () => {
+    // 22:00 UTC on the 24th is 00:00 on the 25th (still UTC+2).
+    expect(formatDate(todayInStockholm(new Date("2026-10-24T22:00:00Z")))).toBe("2026-10-25");
+    // 01:30 UTC is 02:30 after the clocks went back (UTC+1).
+    expect(formatDate(todayInStockholm(new Date("2026-10-25T01:30:00Z")))).toBe("2026-10-25");
+    // 22:59 UTC is 23:59 on the 25th, 23:00 UTC is 00:00 on the 26th.
+    expect(formatDate(todayInStockholm(new Date("2026-10-25T22:59:00Z")))).toBe("2026-10-25");
+    expect(formatDate(todayInStockholm(new Date("2026-10-25T23:00:00Z")))).toBe("2026-10-26");
+  });
+
+  it("handles the day the clocks go forward (28 March 2027, a 23-hour day)", () => {
+    // 22:59 UTC on the 27th is 23:59 on the 27th (UTC+1), 23:00 UTC is 00:00 on the 28th.
+    expect(formatDate(todayInStockholm(new Date("2027-03-27T22:59:00Z")))).toBe("2027-03-27");
+    expect(formatDate(todayInStockholm(new Date("2027-03-27T23:00:00Z")))).toBe("2027-03-28");
+    // 01:30 UTC is 03:30 after the clocks jumped forward (UTC+2).
+    expect(formatDate(todayInStockholm(new Date("2027-03-28T01:30:00Z")))).toBe("2027-03-28");
+    // 21:59 UTC is 23:59 on the 28th, 22:00 UTC is 00:00 on the 29th.
+    expect(formatDate(todayInStockholm(new Date("2027-03-28T21:59:00Z")))).toBe("2027-03-28");
+    expect(formatDate(todayInStockholm(new Date("2027-03-28T22:00:00Z")))).toBe("2027-03-29");
+  });
 });
 
 describe("addDays", () => {

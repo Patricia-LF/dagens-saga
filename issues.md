@@ -112,7 +112,7 @@ Make sure a bug or a mistake can never run up a large bill, and know roughly wha
 
 ---
 
-### 16. Review, edit and publish routine
+### 16. Review, edit and publish routine ✅
 
 `must` `docs`
 
@@ -131,7 +131,7 @@ A written routine for how a draft becomes a published story, so the review step 
 
 ---
 
-### 17. Endpoint: GET /stories/today
+### 17. Endpoint: GET /stories/today ✅
 
 `must` `backend`
 
@@ -159,7 +159,7 @@ The endpoint the app calls to get today's story. "Today" is always the date in S
 
 ---
 
-### 18. Tests for scheduling logic
+### 18. Tests for scheduling logic ✅
 
 `must` `backend`
 
