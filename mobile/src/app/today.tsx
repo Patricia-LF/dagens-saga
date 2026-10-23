@@ -15,7 +15,12 @@ export default function TodayScreen() {
   const [story, setStory] = useState<Story | null | undefined>(undefined);
 
   useEffect(() => {
-    getTodaysStory().then(setStory);
+    getTodaysStory()
+      .then(setStory)
+      .catch((error) => {
+        console.error(error);
+        setStory(null); // show the "no story" state for now; issue 22 adds a real error state
+      });
   }, []);
 
   // Still loading

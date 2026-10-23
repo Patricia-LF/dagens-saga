@@ -43,6 +43,7 @@ describe("GET /stories/today", () => {
     const res = await request(app).get("/stories/today");
 
     expect(res.status).toBe(200);
+    expect(res.headers["access-control-allow-origin"]).toBe("*");
     expect(res.body).toEqual({ ...story, scheduledDate: "2026-10-21" });
   });
 
@@ -58,7 +59,9 @@ describe("GET /stories/today", () => {
   it("returns 500 with a generic message and does not leak the real error", async () => {
     findFirst.mockRejectedValue(new Error("connection refused: secret-host"));
     // The error handler logs the error; silence it so the test output stays clean.
-    const consoleError = vi.spyOn(console, "error").mockImplementation(() => {});
+    const consoleError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
 
     const res = await request(app).get("/stories/today");
 

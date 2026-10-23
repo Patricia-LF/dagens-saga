@@ -1,8 +1,12 @@
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
+
 export type Story = {
   id: number;
   title: string;
   body: string;
   scheduledDate: string; // "YYYY-MM-DD"
+  source: "ai" | "handwritten";
+  imageUrl: string | null;
 };
 
 const mockStories: Story[] = [
@@ -37,6 +41,8 @@ Molli grät fortfarande ibland. Men nu visste hon att dropparna kunde göra nytt
 
 När solen sedan tittade fram, spändes en regnbåge över byn. Molli vinkade glatt med sin fluffiga kant.`,
     scheduledDate: "2026-10-16",
+    source: "ai",
+    imageUrl: null,
   },
   {
     id: 2,
@@ -70,6 +76,8 @@ Fnula skrattade förvånat.
 Den kvällen somnade Fnula under en filt av mjuka moln. Hennes eld var fortfarande liten, och ibland blev hon fortfarande rädd.
 Men nu visste hon att hon kunde ropa på en vän.`,
     scheduledDate: "2026-10-18",
+    source: "ai",
+    imageUrl: null,
   },
   {
     id: 3,
@@ -95,6 +103,8 @@ När morgonen närmade sig flög nattfjärilen upp på Glimras spets.
 – Ja! ropade Glimra.
 Och den kvällen lyste hon starkare än någonsin, inte för att hon liknade någon annan, utan för att hon äntligen vågade vara Glimra.`,
     scheduledDate: "2026-10-12",
+    source: "ai",
+    imageUrl: null,
   },
 ];
 
@@ -107,17 +117,21 @@ export async function getStory(id: number): Promise<Story | undefined> {
   return mockStories.find((story) => story.id === id);
 }
 
-// Today's date as "YYYY-MM-DD" in Swedish time
-function todayInStockholm(): string {
-  return new Intl.DateTimeFormat("sv-SE", {
-    timeZone: "Europe/Stockholm",
-  }).format(new Date());
-}
-
-// Returns the story scheduled for today, or null if there is none
+// Returns today's story from the backend, or null if there is none
 export async function getTodaysStory(): Promise<Story | null> {
-  return (
-    mockStories.find((story) => story.scheduledDate === todayInStockholm()) ??
-    null
-  );
+  if (!API_URL) {
+    throw new Error("EXPO_PUBLIC_API_URL is not set. Add it to mobile/.env.");
+  }
+
+  const response = await fetch(`${API_URL}/stories/today`);
+
+  // 404 means "no story today", which the screen already handles
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    throw new Error(
+      `Could not fetch today's story (status ${response.status})`,
+    );
+  }
+
+  return response.json();
 }

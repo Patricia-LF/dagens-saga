@@ -5,6 +5,13 @@ const app = express();
 
 app.use(express.json());
 
+// Allow the app's web version (another origin) to read the public endpoints.
+// The data is public, so any origin is allowed. Revisit when admin endpoints with login are added.
+app.use((_req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 // Does not touch the database, so it can be used as a simple liveness check.
 app.get("/health", (_req, res) => {
   res.status(200).json({ status: "ok" });
