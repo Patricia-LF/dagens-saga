@@ -771,3 +771,26 @@ When a story opens, the cover comes to life: the title's letters fly into place 
 - [ ] With "reduce motion" turned on, there is no animation.
 - [ ] The animation runs smoothly in Expo Go on a real phone, not just in the browser.
 - [ ] A screen reader reads the title as one word or phrase, not letter by letter.
+
+### 46. Rotating background images
+
+`could` `mobile`
+
+**Description**
+A different background image each day, in a fixed order, so the app feels new every day like the story does.
+
+**Scope**
+
+- 2–3 backgrounds to start with, each in three shapes (portrait, landscape, wide) and two themes (6 files per background).
+- Today's date (Europe/Stockholm) picks the background, so it is the same all day on every screen.
+
+**Out of scope**
+
+- Animated cross-fades between images.
+
+**Acceptance criteria**
+
+- [ ] The background changes from one day to the next and stays the same during the day.
+- [ ] Text is easy to read on every background, in both themes.
+- [ ] The images are compressed, and the app is not noticeably slower to load.
+- [ ] Decide first whether this is still wanted once stories have their own cover illustrations (issues 34 and 43).
