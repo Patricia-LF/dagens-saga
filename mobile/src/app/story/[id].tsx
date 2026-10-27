@@ -14,13 +14,45 @@ export default function StoryScreen() {
   const theme = useTheme();
   const rem = useRem();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [story, setStory] = useState<Story>();
+  const [story, setStory] = useState<Story | null | undefined>(undefined);
 
   useEffect(() => {
     getStory(Number(id)).then(setStory);
   }, [id]);
 
-  if (!story) return null;
+  // Still loading
+  if (story === undefined) return null;
+
+  // Not found (or an error, until issue 22)
+  if (story === null) {
+    return (
+      <View style={styles.centered}>
+        <ContentBox>
+          <Text
+            style={[
+              styles.message,
+              { color: theme.colors.text, fontSize: rem(1.125) },
+            ]}
+          >
+            Den här sagan finns inte.
+          </Text>
+          <Pressable
+            onPress={() => router.navigate("/library")}
+            style={styles.backButton}
+          >
+            <Text
+              style={[
+                styles.backText,
+                { color: theme.colors.text, fontSize: rem(1) },
+              ]}
+            >
+              ← Tillbaka till biblioteket
+            </Text>
+          </Pressable>
+        </ContentBox>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>
@@ -58,5 +90,15 @@ const styles = StyleSheet.create({
   backText: {
     fontFamily: fonts.bodyBold,
     /* fontSize: 16, */
+  },
+  centered: {
+    flexGrow: 1,
+    flexShrink: 1,
+    justifyContent: "center",
+    paddingBottom: 40,
+  },
+  message: {
+    fontFamily: fonts.body,
+    textAlign: "center",
   },
 });
