@@ -794,3 +794,41 @@ A different background image each day, in a fixed order, so the app feels new ev
 - [ ] Text is easy to read on every background, in both themes.
 - [ ] The images are compressed, and the app is not noticeably slower to load.
 - [ ] Decide first whether this is still wanted once stories have their own cover illustrations (issues 34 and 43).
+
+### 47. Short story summary for the archive
+
+`should` `ai` `backend` `mobile` · Sprint 4 (or right after the Must checkpoint, issue 25)
+
+**Description**
+Each story gets a short summary of one sentence, like the blurb on the back of a book, for example "En liten snigel som är långsammast i hela trädgården upptäcker något som ingen annan har." It is shown in the archive instead of only the date, which makes the list more inviting to browse. It can also be used on the cover page (issue 43) and when sharing a story (issue 42).
+
+**Scope**
+
+- A new optional field `summary` (`String?`) on the Story model, added with a Prisma migration.
+- The prompt asks for one more line in the answer: `Beskrivning:` followed by one sentence of at most 20 words, placed before the `Figurer:` line. It must not reveal the ending.
+- The parser reads the `Beskrivning:` line. If it is missing, `summary` is `null` instead of the parse failing.
+- The batch script saves `summary`.
+- `GET /stories` includes `summary` in each list item.
+- The app shows the summary in the archive list. Stories without one show the date, as now.
+- The review checklist in `docs/review-routine.md` gets a line for checking the summary.
+
+**Out of scope**
+
+- Writing summaries for existing stories. Do that by hand in Supabase where wanted.
+- Showing the summary on the cover page (part of issue 43).
+
+**Technical notes**
+
+- The new migration must not affect existing rows: the field is optional, so old stories simply get `null`.
+- Follow the same pattern as the `Figurer:` line in `parse-story-response.ts`, including tolerating `**` around the label.
+- Keep the order in the prompt's format rule clear: title, blank line, story, blank line, `Beskrivning:`, `Figurer:`. Test once with `--count 1` that the model follows it and that the summary line doesn't end up in the story body.
+- Update the tests: parser (with and without the summary line), and the list endpoint's `select`.
+
+**Acceptance criteria**
+
+- [ ] New AI stories are saved with a summary, and the story body does not contain the summary line.
+- [ ] A response without a `Beskrivning:` line still parses, with `summary: null`.
+- [ ] The archive shows the summary where there is one, and the date otherwise.
+- [ ] Existing stories are unaffected by the migration.
+- [ ] Tests for the parser and the list endpoint are updated, and `npm test` passes.
+- [ ] The review checklist includes the summary.
