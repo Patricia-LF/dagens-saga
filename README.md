@@ -26,7 +26,8 @@ One repo, separate folders, each with its own `package.json`:
 
 - Node.js (LTS)
 - A Supabase project (free tier is enough)
-- Expo Go on your phone, or use the browser preview
+- Expo Go for SDK 57 on your phone (see "Expo Go version" below), or use the browser preview
+- An OpenAI API key, only if you want to generate new stories
 
 ### Backend
 
@@ -42,7 +43,7 @@ cp .env.example .env
 2. Choose a region close to you (for example **Stockholm** or **Frankfurt**). Use the same region for the backend on Vercel later, so the database calls stay fast.
 3. Set a **database password** with **only letters and digits** (20+ characters). Special characters such as `@ # / ? :` break the connection URL. Save the password in a password manager, since Supabase will not show it again.
 4. Wait until the project is ready (a minute or two).
-5. Recommended: turn off the Data API under **Project Settings → API**. All database access goes through the Express backend, so the public Supabase API is not needed.
+5. Turn off the Data API under **Project Settings → Data API** (it is on by default). All database access goes through the Express backend, so the public Supabase API is not needed. The migrations also enable Row-Level Security on every table as an extra safeguard. "RLS Enabled No Policy" in Supabase's Security Advisor is expected.
 
 ### Find `DATABASE_URL` and `DIRECT_URL`
 
@@ -106,6 +107,28 @@ npm run dev
 
 The server runs on `http://localhost:3000`. Check it with `http://localhost:3000/health`.
 
+### Run the tests
+
+```bash
+npm test
+```
+
+After a fresh clone, run `npm run db:generate` once first. The tests import the generated Prisma client, but never connect to the database.
+
+### Generate stories
+
+Stories are generated locally and saved as drafts. Nothing is published automatically.
+
+1. Add `OPENAI_API_KEY` to `backend/.env`. It is only used by this script, so it is not needed on Vercel.
+2. Add themes and lessons to `backend/src/ai/themes.ts`.
+3. Run:
+
+   ```bash
+   npm run generate -- --count 7
+   ```
+
+4. Review, edit and approve the drafts in Supabase, following [docs/review-routine.md](docs/review-routine.md).
+
 ### Deploy the backend (Vercel)
 
 The backend is deployed at `https://dagens-saga.vercel.app` (check with [`/health`](https://dagens-saga.vercel.app/health)).
@@ -122,8 +145,11 @@ To deploy your own copy:
 ```bash
 cd mobile
 npm install
+cp .env.example .env
 npx expo start
 ```
+
+`EXPO_PUBLIC_API_URL` in `mobile/.env` is the backend the app talks to. It is set to the deployed backend in `.env.example`. To use a backend running on your own computer instead, change it to `http://localhost:3000` (browser preview only, since a phone can't reach localhost).
 
 Press `w` to open the app in the browser, or scan the QR code with Expo Go.
 
@@ -152,21 +178,28 @@ WSL has its own network by default, so the phone cannot reach the Expo server. T
 
 1. Create `C:\Users\<your-name>\.wslconfig` with:
 
-```ini
+   ```ini
    [wsl2]
    networkingMode=mirrored
-```
+   ```
 
 2. In PowerShell, run `wsl --shutdown`, then reopen WSL.
 3. In PowerShell **as administrator**, allow Expo's port (8081) through the Hyper-V firewall:
 
-```powershell
+   ```powershell
    New-NetFirewallHyperVRule -Name "ExpoMetro" -DisplayName "Expo Metro" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts 8081
-```
+   ```
 
 4. Run `npx expo start` in WSL. The address under the QR code should start with `192.168.` or `10.`, not `172.`.
 
 The phone and computer must be on the same Wi-Fi, and the Windows network must be set to **Private**.
+
+#### Expo Go version
+
+The project uses **Expo SDK 57**. The Expo Go app only opens projects made with the SDK version it supports, and the version in the app stores is always the newest one. If Expo Go says the project uses an older SDK:
+
+- **Android:** uninstall Expo Go, then install Expo Go for SDK 57 from [expo.dev/go](https://expo.dev/go). To keep it, turn off automatic updates for Expo Go in the Play Store.
+- **iPhone:** only the newest Expo Go is available, so the project would need to be upgraded to the newer SDK. Use the browser preview (`w`) instead.
 
 ## License
 
