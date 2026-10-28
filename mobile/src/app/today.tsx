@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { ContentBox } from "@/components/content-box";
 import { fonts } from "@/constants/theme";
@@ -6,45 +6,49 @@ import { useTheme } from "@/hooks/use-theme";
 import { getTodaysStory, Story } from "@/api/stories";
 import { StoryText } from "@/components/story-text";
 import { useRem } from "@/hooks/use-screen-size";
+import { LoadingIndicator } from "@/components/loading-indicator";
+import { MessageBox } from "@/components/message-box";
 
 export default function TodayScreen() {
   const theme = useTheme();
   const rem = useRem();
 
-  // undefined = still loading, null = no story today, Story = today's story
+  // undefined = loading, null = no story today, Story = today's story
   const [story, setStory] = useState<Story | null | undefined>(undefined);
+  const [failed, setFailed] = useState(false);
 
-  useEffect(() => {
+  const load = useCallback(() => {
+    setFailed(false);
+    setStory(undefined); // show the loading state again when retrying
     getTodaysStory()
       .then(setStory)
       .catch((error) => {
         console.error(error);
-        setStory(null); // show the "no story" state for now; issue 22 adds a real error state
+        setFailed(true);
       });
   }, []);
 
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  if (failed) {
+    return (
+      <MessageBox
+        message="Sagorna gick inte att hämta just nu. Kolla att du är uppkopplad och försök igen."
+        actionLabel="Försök igen"
+        onAction={load}
+      />
+    );
+  }
+
   // Still loading
-  if (story === undefined) return null;
+  if (story === undefined) return <LoadingIndicator />;
 
   // No story scheduled for today
   if (story === null) {
     return (
-      <View style={styles.centered}>
-        <ContentBox>
-          <Text
-            style={[
-              styles.message,
-              {
-                color: theme.colors.text,
-                fontSize: rem(1.125),
-                lineHeight: rem(1.75),
-              },
-            ]}
-          >
-            Ingen saga publicerad idag ännu. Kika gärna i biblioteket!
-          </Text>
-        </ContentBox>
-      </View>
+      <MessageBox message="Ingen saga publicerad idag ännu. Kika gärna i biblioteket!" />
     );
   }
 

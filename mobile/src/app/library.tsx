@@ -1,5 +1,5 @@
 // src/app/library.tsx
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import { getArchive, type StorySummary } from "@/api/stories";
@@ -8,21 +8,50 @@ import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
 import { formatStoryDate, todayInStockholm } from "@/utils/dates";
+import { LoadingIndicator } from "@/components/loading-indicator";
+import { MessageBox } from "@/components/message-box";
 
 export default function LibraryScreen() {
   const theme = useTheme();
   const rem = useRem();
-  const [stories, setStories] = useState<StorySummary[]>([]);
   const today = todayInStockholm();
 
-  useEffect(() => {
+  // undefined = loading, [] = no stories yet, otherwise the list
+  const [stories, setStories] = useState<StorySummary[] | undefined>(undefined);
+  const [failed, setFailed] = useState(false);
+
+  const load = useCallback(() => {
+    setFailed(false);
+    setStories(undefined);
     getArchive()
       .then(setStories)
       .catch((error) => {
         console.error(error);
-        setStories([]); // issue 22 adds a real error state
+        setFailed(true);
       });
   }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  if (failed) {
+    return (
+      <MessageBox
+        message="Biblioteket gick inte att hämta just nu. Kolla att du är uppkopplad och försök igen."
+        actionLabel="Försök igen"
+        onAction={load}
+      />
+    );
+  }
+
+  if (stories === undefined) return <LoadingIndicator />;
+
+  if (stories.length === 0) {
+    return (
+      <MessageBox message="Det finns inga sagor i biblioteket än. Snart kommer den första!" />
+    );
+  }
 
   return (
     <View style={styles.screen}>

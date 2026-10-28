@@ -1,66 +1,67 @@
-import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { getStory, Story } from "@/api/stories";
+import { useCallback, useEffect, useState } from "react";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { router, useLocalSearchParams } from "expo-router";
+import { getStory, type Story } from "@/api/stories";
 import { ContentBox } from "@/components/content-box";
+import { LoadingIndicator } from "@/components/loading-indicator";
+import { MessageBox } from "@/components/message-box";
+import { StoryText } from "@/components/story-text";
 import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import { router } from "expo-router";
-import { Pressable } from "react-native";
-import { StoryText } from "@/components/story-text";
 import { useRem } from "@/hooks/use-screen-size";
 
 export default function StoryScreen() {
   const theme = useTheme();
   const rem = useRem();
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [story, setStory] = useState<Story | null | undefined>(undefined);
 
-  useEffect(() => {
-    getStory(Number(id)).then(setStory);
+  // undefined = loading, null = not found, Story = the story
+  const [story, setStory] = useState<Story | null | undefined>(undefined);
+  const [failed, setFailed] = useState(false);
+
+  const load = useCallback(() => {
+    setFailed(false);
+    setStory(undefined); // show the loading state again when retrying
+    getStory(Number(id))
+      .then(setStory)
+      .catch((error) => {
+        console.error(error);
+        setFailed(true);
+      });
   }, [id]);
 
-  // Still loading
-  if (story === undefined) return null;
+  useEffect(() => {
+    load();
+  }, [load]);
 
-  // Not found (or an error, until issue 22)
+  const goToLibrary = () => router.navigate("/library");
+
+  if (failed) {
+    return (
+      <MessageBox
+        message="Sagan gick inte att hämta just nu. Kolla att du är uppkopplad och försök igen."
+        actionLabel="Försök igen"
+        onAction={load}
+      />
+    );
+  }
+
+  if (story === undefined) return <LoadingIndicator />;
+
   if (story === null) {
     return (
-      <View style={styles.centered}>
-        <ContentBox>
-          <Text
-            style={[
-              styles.message,
-              { color: theme.colors.text, fontSize: rem(1.125) },
-            ]}
-          >
-            Den här sagan finns inte.
-          </Text>
-          <Pressable
-            onPress={() => router.navigate("/library")}
-            style={styles.backButton}
-          >
-            <Text
-              style={[
-                styles.backText,
-                { color: theme.colors.text, fontSize: rem(1) },
-              ]}
-            >
-              ← Tillbaka till biblioteket
-            </Text>
-          </Pressable>
-        </ContentBox>
-      </View>
+      <MessageBox
+        message="Den här sagan finns inte."
+        actionLabel="Till biblioteket"
+        onAction={goToLibrary}
+      />
     );
   }
 
   return (
     <View style={styles.screen}>
       <ContentBox title={story.title} fill>
-        <Pressable
-          onPress={() => router.navigate("/library")}
-          style={styles.backButton}
-        >
+        <Pressable onPress={goToLibrary} style={styles.backButton}>
           <Text
             style={[
               styles.backText,
@@ -80,8 +81,6 @@ export default function StoryScreen() {
 
 const styles = StyleSheet.create({
   screen: { flexGrow: 1, flexShrink: 1, paddingBottom: 10 },
-  title: { fontFamily: fonts.heading, fontSize: 28, marginBottom: 12 },
-  body: { fontFamily: fonts.body, fontSize: 18, lineHeight: 28 },
   backButton: {
     alignSelf: "flex-start", // only as wide as the text, aligned to the left
     paddingVertical: 8, // larger tap area for small fingers
@@ -89,16 +88,5 @@ const styles = StyleSheet.create({
   },
   backText: {
     fontFamily: fonts.bodyBold,
-    /* fontSize: 16, */
-  },
-  centered: {
-    flexGrow: 1,
-    flexShrink: 1,
-    justifyContent: "center",
-    paddingBottom: 40,
-  },
-  message: {
-    fontFamily: fonts.body,
-    textAlign: "center",
   },
 });
