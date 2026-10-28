@@ -30,8 +30,13 @@ Innehåll:
 - Visa lärdomen genom det som händer. Skriv inte ut den som en moral i slutet.
 - En tydlig början, mitt och slut, med ett varmt och tryggt slut.
 - Nya figurer med egna unika namn. Använd INTE någon av dessa figurer eller liknande: {avoidCharacters}.
-- Högst 3 figurer i sagan.
-- Undvik klassiska hjälpare som den kloka ugglan. Variera vilken sorts figur och varelse som förekommer.
+- Högst 3 figurer. Färre går bra. Varje figur ska ha en tydlig roll i handlingen, så lägg inte till figurer som bara syns i förbigående.
+- Presentera varje figur med både sort och namn första gången den nämns, till exempel "fjärilen …" eller "humlan …" följt av figurens namn.
+- Undvik klassiska hjälpare som den kloka ugglan. Variera bland djur och sagofigurer som barn känner igen, och hitta inte på nya sorters varelser.
+- Mat som äts i sagan ska inte vara levande eller ha egen vilja.
+- Magin ska följa tydliga regler. Allt magiskt som händer ska ha en orsak som barnet förstår.
+- Använd djur som barn tycker om. Undvik skadedjur och djur som många tycker är äckliga.
+- Undvik att låta saker sjunga, spela eller tona som ett sätt att visa magi.
 
 Trygghet:
 - Inget som är skrämmande, våldsamt eller sorgligt utan tröst.

@@ -832,3 +832,38 @@ Each story gets a short summary of one sentence, like the blurb on the back of a
 - [ ] Existing stories are unaffected by the migration.
 - [ ] Tests for the parser and the list endpoint are updated, and `npm test` passes.
 - [ ] The review checklist includes the summary.
+
+### 48. Save each story's theme and skip themes that are already used
+
+`should` `ai` `backend` · Sprint 3 (after the Must issues) or Sprint 4
+
+**Description**
+The batch script picks themes at random from `src/ai/themes.ts`, but it only avoids repeats within one run. It does not know which themes earlier runs have already used, so the same theme can come back as a new story (this happened with the bear and the mermaid). Saving the theme on each story lets the script skip themes that already have a story. The saved theme can later also be used for categories and filtering in the archive (issue 41).
+
+**Scope**
+
+- A new optional field `theme` (`String?`) on the Story model, added with a Prisma migration (with RLS kept on, see constraints.md).
+- The batch script saves the theme with each story.
+- Before picking, the script loads the themes already in the database and only picks from the ones that are not used.
+- If a story is deleted (for example a draft I reject), its theme becomes available again, so it can be tried once more.
+- If there are fewer unused themes than `--count`, the script stops before any API call with a clear message, for example "Only 2 unused themes left. Add more to src/ai/themes.ts."
+
+**Out of scope**
+
+- Showing or filtering by theme in the app (issue 41).
+- Filling in the theme for existing stories. Do that by hand in Supabase where wanted. Handwritten stories can have an empty theme.
+
+**Technical notes**
+
+- Compare themes exactly as written in `themes.ts`. If a theme's wording is changed there, it counts as a new theme.
+- Keep the selection as a small pure function (all themes, used themes, count → picked themes), so it can be unit tested without the database or the API.
+- The existing check that `--count` is not larger than the theme list should now compare against the number of _unused_ themes.
+
+**Acceptance criteria**
+
+- [ ] New stories are saved with their theme.
+- [ ] A theme that already has a story is never picked again.
+- [ ] Deleting a story makes its theme available again.
+- [ ] Too few unused themes stops the script with a clear message, before any API call.
+- [ ] Existing stories are unaffected by the migration.
+- [ ] Unit tests for the theme selection, and `npm test` passes.

@@ -7,24 +7,24 @@ export interface StoryTheme {
 // These are examples and will be replaced. A batch never uses the same theme twice,
 // so the list must have at least as many entries as the largest batch.
 export const THEMES: StoryTheme[] = [
-  {
-    theme: "en groda som inte kunde hoppa",
-    lesson: "att alla är speciella på sitt eget sätt",
+  /*  {
+    theme: "en björn som inte ville äta sina grönsaker",
+    lesson: "vikten av att äta en blandad, nyttig kost",
   },
   {
-    theme: "en drake som är rädd för eld",
-    lesson: "att modet växer när man delar sin rädsla",
+    theme: "en fjäril som precis lärt sig flyga",
+    lesson: "att man inte kan kontrollera vädret",
   },
   {
-    theme: "en pojke som ville ha en hund",
-    lesson: "att man måste ta ansvar för, och vara snäll mot ett husdjur",
+    theme: "en spindel som inte ville skrämmas",
+    lesson: "att man inte ska ha förutfattade meningar",
   },
   {
-    theme: "en liten tomte som tappade bort sin mössa",
-    lesson: "att det är okej att be om hjälp",
-  },
+    theme: "en sjöjungfru som hittade ett magiskt diadem",
+    lesson: "att se upp med vad man önskar sig, och vara glad över det man har",
+  }, */
   {
-    theme: "en trädgård där blommorna kunde prata",
-    lesson: "att lyssna på andra",
+    theme: "en liten flicka som fick en lillebror",
+    lesson: "att dela med sig",
   },
 ];
