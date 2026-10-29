@@ -139,6 +139,9 @@ To deploy your own copy:
 2. Add `DATABASE_URL` and `DIRECT_URL` under **Settings → Environment Variables**. Both are needed, because the build runs `prisma generate`, which reads `prisma.config.ts`.
 3. Under **Settings → Functions**, choose the same region as your Supabase project.
 4. Skip Vercel's suggested **Prisma Postgres** integration. This project uses Supabase.
+5. Generate a `CRON_SECRET` (`node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`) and add it under **Settings → Environment Variables** (Production), then redeploy. Vercel Cron sends it as `Authorization: Bearer <secret>` to `/cron/publish`, which changes `scheduled` stories whose date has come to `published`. Without the secret the endpoint returns 401.
+
+The cron job in `backend/vercel.json` runs at `0 23 * * *` (UTC), which is after midnight in Stockholm in both winter (00:00) and summer (01:00). On Vercel's free Hobby plan a job can only run once a day, and it can fire any time within that hour. The app does not depend on it: it shows `scheduled` stories on their date anyway.
 
 ### Mobile app
 

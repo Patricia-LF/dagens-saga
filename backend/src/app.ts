@@ -1,7 +1,9 @@
 import express, { type ErrorRequestHandler } from "express";
+import cronRouter from "./routes/cron.js";
 import storiesRouter from "./routes/stories.js";
 
 const app = express();
+app.disable("x-powered-by"); // don't reveal which framework the server uses
 
 app.use(express.json());
 
@@ -18,6 +20,9 @@ app.get("/health", (_req, res) => {
 });
 
 app.use("/stories", storiesRouter);
+
+// Called by Vercel Cron (see vercel.json). Protected by CRON_SECRET.
+app.use("/cron", cronRouter);
 
 // Must be registered last. Express treats a middleware with 4 parameters as an error handler.
 // The real error is logged on the server only; the client gets a generic message.
