@@ -18,6 +18,7 @@ beforeEach(() => {
   updateMany.mockReset();
   updateMany.mockResolvedValue({ count: 2 });
   vi.stubEnv("CRON_SECRET", SECRET);
+  vi.spyOn(console, "log").mockImplementation(() => {}); // keep the test output clean
 });
 
 afterEach(() => {
@@ -44,7 +45,9 @@ describe("GET /cron/publish authentication", () => {
   });
 
   it("returns 401 when the secret is sent without the Bearer prefix", async () => {
-    const res = await request(app).get("/cron/publish").set("Authorization", SECRET);
+    const res = await request(app)
+      .get("/cron/publish")
+      .set("Authorization", SECRET);
 
     expect(res.status).toBe(401);
     expect(updateMany).not.toHaveBeenCalled();
@@ -55,7 +58,9 @@ describe("GET /cron/publish authentication", () => {
 
     // "Bearer " and "Bearer undefined" are what a naive comparison would let through.
     for (const header of ["Bearer ", "Bearer undefined", "Bearer"]) {
-      const res = await request(app).get("/cron/publish").set("Authorization", header);
+      const res = await request(app)
+        .get("/cron/publish")
+        .set("Authorization", header);
       expect(res.status).toBe(401);
     }
     const withoutHeader = await request(app).get("/cron/publish");
@@ -66,7 +71,9 @@ describe("GET /cron/publish authentication", () => {
 
 describe("GET /cron/publish", () => {
   function callWithSecret() {
-    return request(app).get("/cron/publish").set("Authorization", `Bearer ${SECRET}`);
+    return request(app)
+      .get("/cron/publish")
+      .set("Authorization", `Bearer ${SECRET}`);
   }
 
   it("returns 200 and the number of published stories with the right secret", async () => {

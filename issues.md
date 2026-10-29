@@ -184,7 +184,7 @@ The date logic is the easiest part to get subtly wrong, and wrong at exactly the
 
 ---
 
-### 19. Connect the app to /stories/today
+### 19. Connect the app to /stories/today ✅
 
 `must` `mobile`
 
@@ -217,7 +217,7 @@ Replace the mock for today's story with a real call to the deployed backend. The
 
 ## Sprint 3: Archive and daily rotation (Must complete)
 
-### 20. Endpoints: GET /stories and GET /stories/:id
+### 20. Endpoints: GET /stories and GET /stories/:id ✅
 
 `must` `backend`
 
@@ -243,7 +243,7 @@ The archive needs a list of all published stories, and the reading view needs a 
 
 ---
 
-### 21. Connect the archive and reading view to the API
+### 21. Connect the archive and reading view to the API ✅
 
 `must` `mobile`
 
@@ -263,7 +263,7 @@ Replace the remaining mock data, so the whole app runs on real data.
 
 ---
 
-### 22. Loading, error and empty states
+### 22. Loading, error and empty states ✅
 
 `must` `mobile`
 
@@ -289,7 +289,7 @@ The app must never crash or show a blank screen, whatever happens with the netwo
 
 ---
 
-### 23. Vercel Cron for the daily rotation
+### 23. Vercel Cron for the daily rotation ✅
 
 `must` `backend`
 

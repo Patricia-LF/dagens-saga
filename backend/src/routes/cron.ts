@@ -30,6 +30,11 @@ router.get("/publish", async (_req, res) => {
     data: { status: "published" },
   });
 
+  // Shows up in Vercel's runtime logs, so each night's run can be checked afterwards
+  console.log(
+    `Cron publish: ${result.count} stories changed from scheduled to published`,
+  );
+
   res.json({ published: result.count });
 });
 
