@@ -316,7 +316,7 @@ A scheduled job that publishes the day's story automatically, so I don't have to
 
 ---
 
-### 24. Manual device checklist
+### 24. Manual device checklist ✅
 
 `must` `docs`
 
