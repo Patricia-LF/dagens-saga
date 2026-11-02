@@ -22,6 +22,7 @@ The app shows stories with status `scheduled` or `published` and a date up to to
 6. If you rename a character, update `characters` too, since it is used to avoid repeats.
 7. Check `scheduledDate`. Each date can only have one story.
 8. Change `status` to `scheduled` and save.
+9. Optional: make an image for the story, upload it to the `story-images` bucket in Supabase Storage, and paste its public URL into `imageUrl`.
 
 **If a story is not good enough:** delete the row. Its date becomes free and is used by the next batch.
 

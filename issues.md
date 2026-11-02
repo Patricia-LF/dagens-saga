@@ -334,7 +334,7 @@ A short checklist I run on a real phone before each sprint ends, since the app h
 
 ---
 
-### 25. Must checkpoint
+### 25. Must checkpoint ✅
 
 `must`
 
@@ -531,7 +531,7 @@ Logged-in members can star stories and find them again in their own list.
 `should` `mobile`
 
 **Description**
-Each story can have its own illustration, shown on the cover.
+Each story can have its own illustration, shown on the cover and as a miniature in the library.
 
 **Scope**
 
@@ -832,6 +832,8 @@ Each story gets a short summary of one sentence, like the blurb on the back of a
 - [ ] Existing stories are unaffected by the migration.
 - [ ] Tests for the parser and the list endpoint are updated, and `npm test` passes.
 - [ ] The review checklist includes the summary.
+
+Closed: decided against summaries. A picture says more to young readers than a sentence of text, so the archive will show each story’s cover image instead (issues 34 and 43). The title and date are enough as text.
 
 ### 48. Save each story's theme and skip themes that are already used
 
