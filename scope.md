@@ -20,15 +20,15 @@ Every AI-generated story must be editable before it is published (title and text
 - Lots of magic and fantasy, ideally with a lesson or something useful for children
 - Prompt template variables: theme, length, age, lesson
 
-## Should (in rough priority order)
+## Should (in priority order, updated 2026-10-30)
 
-1. Admin page — in the `web/` project (React + Vite), under `/admin`, built for desktop, to create/edit/schedule stories and mark source (AI-generated or handwritten)
-2. Membership — registration and login
-3. Favorites — star stories, saved per logged-in user
-4. Light/dark mode (styling is already mostly done)
-5. Animations (React Native Reanimated)
-6. Illustrations — an image per story (stock images already licensed, my own paintings, or AI-generated). The data model has an optional image field from the start.
-7. Book-like reading view — a cover page (title, illustration and author: AI or me), page turning with swipe and arrows instead of scrolling, and an animated cover (title letters flying in, floating illustration)
+1. Book-like reading view — cover page with title, illustration and author (AI or me), page turning with swipe and arrows, and a short summary in the archive
+2. Animations (React Native Reanimated) — animated cover, page turns, small details
+3. Light/dark mode toggle (styling is already done)
+4. Membership and favorites — registration, login and starred stories per user. Fallback if time runs short: favorites saved on the device, without login
+5. Web version of the app in the browser — the same Expo app, polished for desktop
+6. Illustrations — an image per story
+7. Admin page — only if there is time left, since stories can already be reviewed and edited in Supabase
 
 ## Could
 

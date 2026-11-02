@@ -204,6 +204,13 @@ The project uses **Expo SDK 57**. The Expo Go app only opens projects made with 
 - **Android:** uninstall Expo Go, then install Expo Go for SDK 57 from [expo.dev/go](https://expo.dev/go). To keep it, turn off automatic updates for Expo Go in the Play Store.
 - **iPhone:** only the newest Expo Go is available, so the project would need to be upgraded to the newer SDK. Use the browser preview (`w`) instead.
 
+## Known issues
+
+- The project needs Expo Go for SDK 57. The version in the app stores is newer (see "Expo Go version").
+- The app is locked to portrait on phones (`orientation` in `mobile/app.json`).
+- The batch script can repeat a theme that an earlier run already used (issue 48). Until then, remove used themes from `themes.ts` by hand.
+- The decision on background images is still open (Adobe Stock or my own images), see ambiguity.md.
+
 ## License
 
 Copyright (c) 2026 Patricia Frykberg. All rights reserved.
