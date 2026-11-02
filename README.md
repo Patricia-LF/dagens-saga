@@ -129,6 +129,8 @@ Stories are generated locally and saved as drafts. Nothing is published automati
 
 4. Review, edit and approve the drafts in Supabase, following [docs/review-routine.md](docs/review-routine.md).
 
+Each story saves its theme. The script only picks themes that no story in the database has yet, and stops before any API call if there are fewer unused themes than `--count`. Deleting a story makes its theme available again.
+
 ### Deploy the backend (Vercel)
 
 The backend is deployed at `https://dagens-saga.vercel.app` (check with [`/health`](https://dagens-saga.vercel.app/health)).
@@ -208,7 +210,6 @@ The project uses **Expo SDK 57**. The Expo Go app only opens projects made with 
 
 - The project needs Expo Go for SDK 57. The version in the app stores is newer (see "Expo Go version").
 - The app is locked to portrait on phones (`orientation` in `mobile/app.json`).
-- The batch script can repeat a theme that an earlier run already used (issue 48). Until then, remove used themes from `themes.ts` by hand.
 - The decision on background images is still open (Adobe Stock or my own images), see ambiguity.md.
 
 ## License

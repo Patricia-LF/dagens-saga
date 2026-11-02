@@ -4,8 +4,9 @@ export interface StoryTheme {
 }
 
 // Themes and lessons for batch generation (Swedish, because the stories are in Swedish).
-// These are examples and will be replaced. A batch never uses the same theme twice,
-// so the list must have at least as many entries as the largest batch.
+// These are examples and will be replaced. The batch script skips every theme that already
+// has a story in the database (deleting the story frees the theme again), so the list needs
+// at least as many unused entries as --count.
 export const THEMES: StoryTheme[] = [
   /*  {
     theme: "en björn som inte ville äta sina grönsaker",

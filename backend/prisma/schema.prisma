@@ -39,7 +39,11 @@ model Story {
   
   // Used later to avoid repeating characters across stories.
   characters    String[]    @default([])
-  createdAt     DateTime    @default(now())
+
+  // Theme from src/ai/themes.ts, so the batch script can skip themes already used.
+  // Null for handwritten stories and stories made before this field existed.
+  theme         String?
+  createdAt    DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
 
   @@map("stories")

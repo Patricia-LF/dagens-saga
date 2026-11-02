@@ -12,7 +12,8 @@ import {
   estimateCost,
   generateStoryText,
 } from "../src/ai/openai-story.js";
-import { THEMES, type StoryTheme } from "../src/ai/themes.js";
+import { THEMES } from "../src/ai/themes.js";
+import { pickThemes } from "../src/ai/pick-themes.js";
 import { addDays, firstFreeDate, formatDate } from "../src/stockholm-date.js";
 
 // Local script: generates a batch of stories and saves them as drafts with planned dates.
@@ -76,25 +77,16 @@ function readOptions(): Options {
   if (options.minWords > options.maxWords) {
     fail("--min-words cannot be larger than --max-words.");
   }
-  if (options.count > THEMES.length) {
-    fail(
-      `--count is ${options.count}, but there are only ${THEMES.length} themes in src/ai/themes.ts. ` +
-        "A batch never repeats a theme.",
-    );
-  }
   return options;
 }
 
-// Shuffles a copy of the list (Fisher-Yates) and takes the first `count` entries,
-// so no theme is used twice in one batch.
-function pickThemes(count: number): StoryTheme[] {
-  const shuffled = [...THEMES];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    // i and j are always valid indexes, so the "!" (not undefined) is safe here.
-    [shuffled[i], shuffled[j]] = [shuffled[j]!, shuffled[i]!];
-  }
-  return shuffled.slice(0, count);
+// Themes that already have a story. Deleting a story removes it from here, so its theme is free again.
+async function loadUsedThemes(): Promise<string[]> {
+  const stories = await prisma.story.findMany({
+    where: { theme: { not: null } },
+    select: { theme: true },
+  });
+  return stories.flatMap((story) => (story.theme === null ? [] : [story.theme]));
 }
 
 async function loadRecentCharacters(): Promise<string[]> {
@@ -129,7 +121,13 @@ async function main(): Promise<void> {
   }
   const client = new OpenAI({ apiKey });
 
-  const themes = pickThemes(options.count);
+  // Stops here with a clear message if there are too few unused themes, before any API call.
+  let themes;
+  try {
+    themes = pickThemes(THEMES, await loadUsedThemes(), options.count);
+  } catch (error) {
+    fail(errorMessage(error));
+  }
   const avoidCharacters = await loadRecentCharacters();
   let nextDate = firstFreeDate(await loadLatestScheduledDate());
 
@@ -176,6 +174,7 @@ async function main(): Promise<void> {
           title: story.title,
           body: story.body,
           characters: story.characters,
+          theme,
           scheduledDate: nextDate,
           status: "draft",
           source: "ai",
