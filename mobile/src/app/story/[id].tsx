@@ -9,6 +9,7 @@ import { StoryText } from "@/components/story-text";
 import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
+import { StoryCover } from "@/components/story-cover";
 
 export default function StoryScreen() {
   const theme = useTheme();
@@ -60,7 +61,7 @@ export default function StoryScreen() {
 
   return (
     <View style={styles.screen}>
-      <ContentBox title={story.title} fill>
+      <ContentBox /* title={story.title} */ fill>
         <Pressable onPress={goToLibrary} style={styles.backButton}>
           <Text
             style={[
@@ -72,6 +73,11 @@ export default function StoryScreen() {
           </Text>
         </Pressable>
         <ScrollView>
+          <StoryCover
+            title={story.title}
+            source={story.source}
+            imageUrl={story.imageUrl}
+          />
           <StoryText body={story.body} />
         </ScrollView>
       </ContentBox>

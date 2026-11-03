@@ -625,6 +625,8 @@ A short, rehearsed demo that shows the MVP and the most important choices.
 **Description**
 Story of the day and the archive as public pages in the `web/` project, for people without the app.
 
+- The cover page (issue 43) does not look right on wide web screens yet. Check its size and layout when styling the web version.
+
 **Acceptance criteria**
 
 - [ ] Story of the day and the archive work in the browser and use the same API.
@@ -664,7 +666,7 @@ Share a link to a story, for example to a grandparent.
 
 ## New issues (book-like reading view, Sprint 4)
 
-### 43. Reading view: cover page with title, illustration and author
+### 43. Reading view: cover page with title, illustration and author ✅
 
 `should` `mobile` · Sprint 4
 
@@ -835,9 +837,9 @@ Each story gets a short summary of one sentence, like the blurb on the back of a
 
 Closed: decided against summaries. A picture says more to young readers than a sentence of text, so the archive will show each story’s cover image instead (issues 34 and 43). The title and date are enough as text.
 
-### 48. Save each story's theme and skip themes that are already used
+### 48. Save each story's theme and skip themes that are already used ✅
 
-`should` `ai` `backend` · Sprint 3 (after the Must issues) or Sprint 4
+`should` `ai` `backend` · Sprint 4 (after the Must issues)
 
 **Description**
 The batch script picks themes at random from `src/ai/themes.ts`, but it only avoids repeats within one run. It does not know which themes earlier runs have already used, so the same theme can come back as a new story (this happened with the bear and the mermaid). Saving the theme on each story lets the script skip themes that already have a story. The saved theme can later also be used for categories and filtering in the archive (issue 41).
@@ -869,3 +871,37 @@ The batch script picks themes at random from `src/ai/themes.ts`, but it only avo
 - [ ] Too few unused themes stops the script with a clear message, before any API call.
 - [ ] Existing stories are unaffected by the migration.
 - [ ] Unit tests for the theme selection, and `npm test` passes.
+
+### 49. Demo setup that works without Expo Go
+
+`must` `docs` · Sprint 5 · Timebox: half a day
+
+**Description**
+Expo Go needs the phone and the computer on the same network, which doesn't work on the school's public Wi-Fi. For the presentation, the app must run on its own: a standalone Android app on my phone, with the phone's screen shown on the projector, and a screen recording as backup.
+
+**Scope**
+
+- Build an Android app file (APK) with EAS Build and install it on my phone. This is not publishing to an app store.
+- The app talks to the deployed backend, so it works over mobile data or any network.
+- Show the phone's screen on the computer with scrcpy over USB.
+- Record a short screen recording of the demo as a backup (shared with issue 39).
+
+**Out of scope**
+
+- iPhone builds and app store publishing.
+- The web version (separate Should item).
+
+**Technical notes**
+
+- EAS Build needs a free Expo account. Use a build profile that produces an APK (not an AAB, which is only for the Play Store).
+- `EXPO_PUBLIC_API_URL` must be set for the build, since `mobile/.env` is not uploaded to EAS. Set it in `eas.json` or as an EAS environment variable.
+- `app.json` needs an Android package name, for example `se.patriciafrykberg.dagenssaga`.
+- Installing the APK requires allowing installs from that source on the phone.
+
+**Acceptance criteria**
+
+- [ ] The APK is installed and the app works on the phone without the computer running.
+- [ ] It works on mobile data, and on the school's Wi-Fi if possible.
+- [ ] The phone's screen can be shown on the computer with scrcpy.
+- [ ] A screen recording of the demo exists as a backup.
+- [ ] The steps are written down in the README, so they can be repeated before the presentation.
