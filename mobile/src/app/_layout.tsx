@@ -7,7 +7,7 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import { Slot } from "expo-router";
 import { useEffect } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Platform } from "react-native";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider, useTheme } from "@/hooks/use-theme";
 import { BottomNav } from "@/components/bottom-nav";
@@ -29,6 +29,9 @@ function AppShell() {
   const screenSize = useScreenSize();
   const backgroundShape = useBackgroundShape();
   const isWide = screenSize !== "mobile";
+  const isWeb = Platform.OS === "web";
+  // Bottom nav everywhere except on desktop-sized web windows
+  const showBottomNav = !isWeb || screenSize !== "desktop";
 
   const [fontsLoaded] = useFonts({
     IrishGrover_400Regular,
@@ -51,28 +54,33 @@ function AppShell() {
         resizeMode="cover"
       />
 
-      <View
-        style={[
-          isWide ? styles.panel : styles.content, // wide screens: the panel look
-          isWide && { backgroundColor: theme.colors.panel },
-        ]}
-      >
-        <SiteHeader showNav={isWide} />
-        <View style={styles.page}>
-          <Slot />
+      {/* Side margin only around the panel, so the bottom nav can still reach the edges */}
+      <View style={[styles.main, isWide && styles.mainWide]}>
+        <View
+          style={[
+            isWide ? styles.panel : styles.content,
+            isWide && { backgroundColor: theme.colors.panel },
+          ]}
+        >
+          <SiteHeader showNav={!showBottomNav} isWide={isWide} />
+          <View style={styles.page}>
+            <Slot />
+          </View>
         </View>
       </View>
 
-      {!isWide && <BottomNav />}
+      {showBottomNav && <BottomNav />}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  content: { flex: 1 }, // mobile: fill the space above the bottom nav
+  main: { flex: 1 }, // takes the space above the bottom nav
+  mainWide: { paddingHorizontal: 24 }, // keeps the panel away from the screen edges
+  content: { flex: 1 },
   panel: {
-    flexShrink: 1, // as tall as its content, but never taller than the screen
+    flexShrink: 1,
     width: "100%",
     maxWidth: 800,
     alignSelf: "center",

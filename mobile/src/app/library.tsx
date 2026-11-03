@@ -64,7 +64,7 @@ export default function LibraryScreen() {
             return (
               <Pressable
                 onPress={() => router.push(`/story/${item.id}`)}
-                style={styles.item}
+                style={[styles.item, { paddingVertical: rem(0.75) }]}
               >
                 <Text
                   style={[
@@ -103,13 +103,10 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     paddingBottom: 10,
   },
-  item: {
-    paddingVertical: 12,
-  },
+  item: {},
   title: {
     fontFamily: fonts.bodyBold,
     marginTop: 4,
-    /* fontSize: 20, */
   },
   date: {
     fontFamily: fonts.body,

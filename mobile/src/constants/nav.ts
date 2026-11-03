@@ -21,5 +21,5 @@ export function isNavItemActive(href: string, pathname: string) {
 }
 
 // Screens at least this wide get the top menu instead of the bottom bar
-export const WIDE_SCREEN = 768; // tablet and up
+export const WIDE_SCREEN = 600; // tablet and up (phones are at most about 480 px wide)
 export const DESKTOP_SCREEN = 1200; // desktop browser

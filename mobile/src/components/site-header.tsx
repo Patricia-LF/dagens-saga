@@ -10,22 +10,30 @@ import { fonts } from "@/constants/theme";
 import { navItems, isNavItemActive } from "@/constants/nav";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {
   showNav: boolean; // show the menu under the title (wide screens only)
+  isWide: boolean;
 };
 
-export function SiteHeader({ showNav }: Props) {
+export function SiteHeader({ showNav, isWide }: Props) {
+  const insets = useSafeAreaInsets();
+
   const theme = useTheme();
   const rem = useRem();
   const pathname = usePathname();
   const { width } = useWindowDimensions();
 
+  // Phones: at least 58 for the look, more if the status bar or camera needs it.
+  // Tablet and web: the panel already has its own padding.
+  const paddingTop = isWide ? 0 : Math.max(58, insets.top + 12);
+
   // Scale the title with the screen width, but never above 84
   const titleSize = Math.min(rem(3.5), width / 8.5);
 
   return (
-    <View style={styles.header}>
+    <View style={[styles.header, { paddingTop }]}>
       {/* The title also works as a link back to the start page */}
       <Pressable onPress={() => router.navigate("/")}>
         <Text
@@ -44,7 +52,13 @@ export function SiteHeader({ showNav }: Props) {
               <Pressable
                 key={item.href}
                 onPress={() => router.navigate(item.href)}
-                style={[styles.pill, { backgroundColor: theme.colors.pill }]}
+                style={[
+                  styles.pill,
+                  {
+                    backgroundColor: theme.colors.pill,
+                    paddingHorizontal: rem(1.375),
+                  },
+                ]}
               >
                 <Text
                   style={[
@@ -66,7 +80,7 @@ export function SiteHeader({ showNav }: Props) {
 const styles = StyleSheet.create({
   header: {
     alignItems: "center",
-    paddingTop: 58,
+    /* paddingTop: 58, */
     paddingBottom: 16,
   },
   title: {
@@ -80,18 +94,15 @@ const styles = StyleSheet.create({
   },
   navItem: {
     fontFamily: fonts.heading,
-    /* fontSize: 20, */
   },
   navItemActive: {
     textDecorationLine: "underline",
   },
   pill: {
-    paddingHorizontal: 22,
     paddingVertical: 10,
     borderRadius: 999, // fully rounded ends
   },
   pillText: {
     fontFamily: fonts.heading,
-    /* fontSize: 20, */
   },
 });

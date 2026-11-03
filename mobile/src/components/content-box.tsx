@@ -21,6 +21,12 @@ export function ContentBox({ title, fill = false, children }: Props) {
     <View
       style={[
         styles.box,
+        {
+          padding: rem(1.5),
+          marginHorizontal: rem(1),
+          marginTop: rem(1.25),
+          borderRadius: rem(1.25),
+        },
         fill && { flexGrow: 1, flexShrink: 1 },
         {
           backgroundColor: isHome
@@ -46,10 +52,7 @@ export function ContentBox({ title, fill = false, children }: Props) {
 
 const styles = StyleSheet.create({
   box: {
-    borderRadius: 24,
-    padding: 24,
-    marginHorizontal: 20,
-    marginVertical: 20,
+    marginBottom: 10,
     justifyContent: "center",
   },
   fill: {
@@ -57,11 +60,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.heading,
-    /* fontSize: 26, */
     textAlign: "center",
     marginBottom: 16,
   },
-  /*  surface: {
-    marginHorizontal: 40,
-  }, */
 });

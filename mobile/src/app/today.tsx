@@ -8,6 +8,7 @@ import { StoryText } from "@/components/story-text";
 import { useRem } from "@/hooks/use-screen-size";
 import { LoadingIndicator } from "@/components/loading-indicator";
 import { MessageBox } from "@/components/message-box";
+import { StoryCover } from "@/components/story-cover";
 
 export default function TodayScreen() {
   const theme = useTheme();
@@ -54,8 +55,13 @@ export default function TodayScreen() {
 
   return (
     <View style={styles.screen}>
-      <ContentBox title={story.title} fill>
+      <ContentBox /* title={story.title} */ fill>
         <ScrollView>
+          <StoryCover
+            title={story.title}
+            source={story.source}
+            imageUrl={story.imageUrl}
+          />
           <StoryText body={story.body} />
         </ScrollView>
       </ContentBox>
@@ -72,12 +78,10 @@ const styles = StyleSheet.create({
   centered: {
     flexGrow: 1,
     flexShrink: 1,
-    /* justifyContent: "center", */
     paddingBottom: 40,
   },
   message: {
     fontFamily: fonts.body,
-    /*  fontSize: 18, */
     textAlign: "center",
   },
 });
