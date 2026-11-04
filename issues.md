@@ -351,7 +351,9 @@ A stop at the end of sprint 3 to check that the MVP works end to end, before any
 
 ## Sprint 4: Admin page, light/dark mode, animations
 
-### 26. Create the `web/` project (React + Vite + TS)
+### 26. Create the `web/` project (React + Vite + TS) ❌
+
+**2026-11-04:** Decided not to build an admin page, after supervision. The Supabase table view already has everything needed to review, edit and publish stories (see docs/review-routine.md).
 
 `should` `web`
 
@@ -371,7 +373,7 @@ The web project for the admin page, as its own Vercel project.
 
 ---
 
-### 27. Admin login and protected endpoints
+### 27. Admin login and protected endpoints ❌
 
 `should` `backend` `web`
 
@@ -397,7 +399,7 @@ Only I may create, edit and publish stories, so all admin endpoints require logi
 
 ---
 
-### 28. Admin: list, create, edit and schedule stories
+### 28. Admin: list, create, edit and schedule stories ❌
 
 `should` `web`
 
@@ -418,7 +420,7 @@ Read, edit and schedule stories on a big screen, instead of in the Supabase tabl
 
 ---
 
-### 29. Admin: publish and unpublish
+### 29. Admin: publish and unpublish ❌
 
 `should` `web`
 
@@ -481,7 +483,9 @@ A few meaningful animations that make the app feel magical, without slowing it d
 
 ## Sprint 5: Membership, favorites, polish
 
-### 32. Registration and login (JWT)
+### 32. Registration and login (JWT) ❌
+
+**2026-11-04:** Decided not to have login in the app, after supervision. Without paid features, an account would only be an obstacle for a child, who should be able to open the app and read right away. Favorites will be saved on the device instead (issue 33).
 
 `should` `backend` `mobile`
 
@@ -701,41 +705,53 @@ Every story starts with a cover page before the text, like a picture book. The c
 
 ---
 
-### 44. Reading view: page turning with swipe and arrows
+### 44. Reading view: page turning, with a choice between pages and scrolling
 
-`should` `mobile` · Sprint 4 · Depends on: 43
+`should` `mobile` · Sprint 4 · Depends on: 43 · Related: 30
 
 **Description**
-Stories are read one page at a time instead of by scrolling, like an e-book. A page with a limited amount of text feels less overwhelming for young readers, and turning pages makes reading more like a real book. The first page is the cover.
+Stories can be read one page at a time, like an e-book, or by scrolling as before. The reader picks the mode with a toggle, and the choice is remembered. A page with a limited amount of text feels less overwhelming for young readers and makes reading more like a real book, while some readers, and parents reading aloud, prefer to scroll. The first page is the cover.
 
 **Scope**
 
-- Swipe left and right between pages on phone and tablet.
-- Back and forward arrows on all platforms. They are the main way to turn pages on the web, where swiping with a mouse works poorly.
-- A page indicator, for example "Sida 2 av 5" or dots.
-- The text is split into pages at paragraph breaks (blank lines). Each page holds roughly a fixed amount of text, adjusted for screen size.
-- If a page is still too long for the screen (large system font, small phone), that page can scroll a little, so no text is ever cut off.
+- A reading mode toggle on the story screen with two options: "Bläddra" and "Scrolla". The default is "Bläddra".
+- The choice is saved on the device and used for every story, also after the app restarts.
+- Page mode:
+  - Swipe left and right between pages on phone and tablet.
+  - Back and forward arrows on all platforms. They are the main way to turn pages on the web, where swiping with a mouse works poorly.
+  - A page indicator, for example "Sida 2 av 5".
+  - The text is split into pages at paragraph breaks (blank lines). Each page holds roughly a fixed amount of text, adjusted for screen size.
+  - If a page is still too long for the screen (large system font, small phone), that page can scroll a little, so no text is ever cut off.
+- Scroll mode works as it does today: the cover, then the whole text.
+- The story of the day and the archive use the same reader component.
 
 **Out of scope**
 
 - Measuring the exact amount of text that fits on each screen. Splitting at paragraphs is enough.
 - Remembering which page you were on when you come back.
-- Page-turn animations beyond the built-in swipe.
+- Page-turn animations beyond the built-in swipe (issues 45 and 31).
+- The light/dark toggle (issue 30). It reuses the settings storage built here.
 
 **Technical notes**
 
-- `FlatList` with `horizontal` and `pagingEnabled` gives swipeable pages without a new dependency.
-- Reuse the paragraph splitting from `StoryText`. The page splitting can be a small pure function (`splitIntoPages(body, maxChars)`), which is easy to unit test.
-- Arrows: hide "back" on the cover and "forward" on the last page.
-- Each page needs an accessible label so screen readers can follow along.
+- Settings storage: `@react-native-async-storage/async-storage`, installed with `npx expo install` (new dependency, approved). It works in Expo Go.
+- A small `SettingsProvider` with a `useSettings()` hook, placed in `_layout.tsx`. It loads the settings once at start and saves them on every change. Build it so issue 30 can add a color scheme to the same settings object. Wrap reads and writes in try/catch and fall back to the defaults.
+- Wait to render the reader until the settings are loaded, so the mode doesn't jump from pages to scroll on start.
+- A `StoryReader` component takes the story and renders either the scroll view or the page view. `today.tsx` and `story/[id].tsx` both use it.
+- Pages: `FlatList` with `horizontal` and `pagingEnabled`, no new dependency. Take the page width from the container's `onLayout`, not from the window width, since `main` has padding on wide screens. Use `getItemLayout` so `scrollToIndex` works for the arrows. Track the current page with `onViewableItemsChanged`, which also works on the web.
+- `splitIntoPages(body, maxChars): string[]` is a pure function in `src/utils/`. Each page is a string that is passed to `StoryText` as it is, so dialogue and paragraphs render as before. A paragraph is never split. A paragraph longer than `maxChars` gets its own page.
+- `maxChars` depends on `useScreenSize`, for example 600 on mobile and 1000 on tablet and desktop. Adjust after testing on the phone.
+- Arrows: hide "back" on the cover and "forward" on the last page. Labels for screen readers: "Föregående sida" and "Nästa sida". Each page gets the label "Sida X av Y".
+- The toggle tells screen readers which option is selected (`accessibilityState={{ selected }}`).
 
 **Acceptance criteria**
 
+- [ ] The toggle switches between pages and scrolling, and the choice is still there after the app restarts.
 - [ ] Swiping changes page on phone and tablet (tested in Expo Go).
 - [ ] The arrows change page on all platforms, and are hidden at the start and end.
 - [ ] The page indicator shows the current page and the total.
 - [ ] No paragraph is split across two pages, and no text is cut off.
-- [ ] Works for both the story of the day and the archive.
+- [ ] Works for both the story of the day and the archive, in both modes.
 - [ ] `splitIntoPages` has unit tests for a short story, a long story and a single very long paragraph.
 
 ---
@@ -905,3 +921,15 @@ Expo Go needs the phone and the computer on the same network, which doesn't work
 - [ ] The phone's screen can be shown on the computer with scrcpy.
 - [ ] A screen recording of the demo exists as a backup.
 - [ ] The steps are written down in the README, so they can be repeated before the presentation.
+
+### 50. A real website (after the thesis)
+
+`could` `web` · Backlog
+
+**Description**
+A separate website for Dagens saga, for example built with React + Vite, alongside the Expo app. It would load faster and be easier to find in search engines than the app running in the browser.
+
+**Notes**
+
+- The backend API (GET /stories, /stories/today, /stories/:id) already works for any client and has CORS enabled, so the website can use it as it is.
+- Decided 2026-11-04 to wait until after the thesis, since it would mean building the whole interface a second time.

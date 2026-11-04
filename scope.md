@@ -20,15 +20,14 @@ Every AI-generated story must be editable before it is published (title and text
 - Lots of magic and fantasy, ideally with a lesson or something useful for children
 - Prompt template variables: theme, length, age, lesson
 
-## Should (in priority order, updated 2026-10-30)
+## Should (in priority order, updated 2026-11-04 after supervision)
 
-1. Book-like reading view — cover page with title, illustration and author (AI or me), page turning with swipe and arrows, and a short summary in the archive
-2. Animations (React Native Reanimated) — animated cover, page turns, small details
-3. Light/dark mode toggle (styling is already done)
-4. Membership and favorites — registration, login and starred stories per user. Fallback if time runs short: favorites saved on the device, without login
-5. Web version of the app in the browser — the same Expo app, polished for desktop
-6. Illustrations — an image per story
-7. Admin page — only if there is time left, since stories can already be reviewed and edited in Supabase
+1. Book-like reading view — cover page, page turning with swipe and arrows, and a setting to choose between turning pages and scrolling
+2. Animations (React Native Reanimated)
+3. Light/dark mode toggle
+4. Favorites saved on the device, without login
+5. Web version of the app in the browser
+6. Illustrations - an image per story
 
 ## Could
 
@@ -42,6 +41,8 @@ Every AI-generated story must be editable before it is published (title and text
 - Paid membership / payments
 - Text-to-speech narration
 - A built-in writing tool for stories (content goes through the admin page or the database)
+- Membership and login - a child should be able to open the app and read right away. Without paid features, an account would only be an obstacle.
+- Admin page - stories are reviewed and edited in the Supabase table view, which works well.
 
 ## Data model (initial idea)
 
@@ -64,3 +65,8 @@ Every AI-generated story must be editable before it is published (title and text
 - Core endpoints and the scheduling logic are tested.
 - Secrets are kept out of the repository, input is validated, and AI content is reviewed before it is published.
 - README explains how to run the project, including how to set up `.env` (with an `.env.example`) and how to generate the JWT secret, and the AI log is up to date.
+
+## Later (after the thesis)
+
+- A real website for Dagens saga, built as a separate web project (for example React + Vite), using the same backend API. Not part of the thesis, since it would mean building the whole interface twice. The Expo app in the browser covers the web for now.
+- Login and paid membership. If paid content is added (for example premium stories), accounts become worthwhile. The Story model already has a `tier` field (free/premium) prepared for this. Favorites would then move from the device to the account, so they follow the user between devices. Favorites already saved on a device could be moved to the account at the first login.
