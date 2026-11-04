@@ -3,6 +3,12 @@ import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
 
+// Exported so the page reader can estimate how much text fits on a page
+export const STORY_FONT_REM = 1.125;
+export const STORY_LINE_HEIGHT_REM = 1.75;
+export const STORY_LINE_GAP = 6; // px below every source line (not scaled by rem)
+export const STORY_PARAGRAPH_GAP_REM = 1; // space below every paragraph
+
 type Props = {
   body: string;
 };
@@ -20,7 +26,10 @@ export function StoryText({ body }: Props) {
       {paragraphs.map((paragraph, paragraphIndex) => (
         <View
           key={paragraphIndex}
-          style={[styles.paragraph, { marginBottom: rem(1) }]}
+          style={[
+            styles.paragraph,
+            { marginBottom: rem(STORY_PARAGRAPH_GAP_REM) },
+          ]}
         >
           {paragraph
             .trim()
@@ -32,8 +41,8 @@ export function StoryText({ body }: Props) {
                   styles.line,
                   {
                     color: theme.colors.text,
-                    fontSize: rem(1.125),
-                    lineHeight: rem(1.75),
+                    fontSize: rem(STORY_FONT_REM),
+                    lineHeight: rem(STORY_LINE_HEIGHT_REM),
                   },
                 ]}
               >
@@ -50,6 +59,6 @@ const styles = StyleSheet.create({
   paragraph: {},
   line: {
     fontFamily: fonts.body,
-    marginBottom: 6,
+    marginBottom: STORY_LINE_GAP,
   },
 });

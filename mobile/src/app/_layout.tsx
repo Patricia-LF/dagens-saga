@@ -5,11 +5,12 @@ import {
   ComicNeue_700Bold,
 } from "@expo-google-fonts/comic-neue";
 import * as SplashScreen from "expo-splash-screen";
-import { Slot } from "expo-router";
+import { Slot, usePathname } from "expo-router";
 import { useEffect } from "react";
 import { Image, StyleSheet, View, Platform } from "react-native";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider, useTheme } from "@/hooks/use-theme";
+import { SettingsProvider, useSettings } from "@/hooks/use-settings";
 import { BottomNav } from "@/components/bottom-nav";
 import { useBackgroundShape, useScreenSize } from "@/hooks/use-screen-size";
 
@@ -19,7 +20,9 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <AppShell />
+      <SettingsProvider>
+        <AppShell />
+      </SettingsProvider>
     </ThemeProvider>
   );
 }
@@ -39,11 +42,20 @@ function AppShell() {
     ComicNeue_700Bold,
   });
 
-  useEffect(() => {
-    if (fontsLoaded) SplashScreen.hideAsync();
-  }, [fontsLoaded]);
+  // Wait for the saved settings too, so the reading mode doesn't jump at start
+  const { loaded: settingsLoaded } = useSettings();
+  const ready = fontsLoaded && settingsLoaded;
 
-  if (!fontsLoaded) return null;
+  // The reading screens need the panel to fill the height, so the page view gets a height
+  const pathname = usePathname();
+  const readingFillsHeight =
+    pathname === "/today" || pathname.startsWith("/story");
+
+  useEffect(() => {
+    if (ready) SplashScreen.hideAsync();
+  }, [ready]);
+
+  if (!ready) return null;
 
   return (
     <View style={styles.root}>
@@ -55,11 +67,13 @@ function AppShell() {
       />
 
       {/* Side margin only around the panel, so the bottom nav can still reach the edges */}
-      <View style={[styles.main, isWide && styles.mainWide]}>
+      <View testID="main" style={[styles.main, isWide && styles.mainWide]}>
         <View
+          testID="panel"
           style={[
             isWide ? styles.panel : styles.content,
             isWide && { backgroundColor: theme.colors.panel },
+            isWide && readingFillsHeight && styles.panelFill,
           ]}
         >
           <SiteHeader showNav={!showBottomNav} isWide={isWide} />
@@ -88,5 +102,8 @@ const styles = StyleSheet.create({
     marginVertical: 32,
     padding: 32,
   },
+  // Without flexGrow the panel is only as tall as its content (on web, the height
+  // is not passed down), so a child with flex: 1 would end up 0 px tall
+  panelFill: { flexGrow: 1 },
   page: { flexGrow: 1, flexShrink: 1 },
 });

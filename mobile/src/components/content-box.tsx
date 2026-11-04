@@ -19,6 +19,7 @@ export function ContentBox({ title, fill = false, children }: Props) {
 
   return (
     <View
+      testID="content-box"
       style={[
         styles.box,
         {
@@ -27,7 +28,7 @@ export function ContentBox({ title, fill = false, children }: Props) {
           marginTop: rem(1.25),
           borderRadius: rem(1.25),
         },
-        fill && { flexGrow: 1, flexShrink: 1 },
+        fill && { flexGrow: 1, flexShrink: 1, minHeight: 0 },
         {
           backgroundColor: isHome
             ? theme.colors.surface

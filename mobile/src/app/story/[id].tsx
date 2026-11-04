@@ -1,15 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { getStory, type Story } from "@/api/stories";
 import { ContentBox } from "@/components/content-box";
 import { LoadingIndicator } from "@/components/loading-indicator";
 import { MessageBox } from "@/components/message-box";
-import { StoryText } from "@/components/story-text";
 import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
-import { StoryCover } from "@/components/story-cover";
+import { StoryReader } from "@/components/story-reader";
 
 export default function StoryScreen() {
   const theme = useTheme();
@@ -60,26 +59,29 @@ export default function StoryScreen() {
   }
 
   return (
-    <View style={styles.screen}>
+    <View testID="screen" style={styles.screen}>
       <ContentBox /* title={story.title} */ fill>
-        <Pressable onPress={goToLibrary} style={styles.backButton}>
-          <Text
-            style={[
-              styles.backText,
-              { color: theme.colors.text, fontSize: rem(1) },
-            ]}
-          >
-            ← Tillbaka till biblioteket
-          </Text>
-        </Pressable>
-        <ScrollView>
-          <StoryCover
-            title={story.title}
-            source={story.source}
-            imageUrl={story.imageUrl}
-          />
-          <StoryText body={story.body} />
-        </ScrollView>
+        <StoryReader
+          key={story.id}
+          story={story}
+          leading={
+            <Pressable
+              onPress={goToLibrary}
+              accessibilityRole="button"
+              accessibilityLabel="Tillbaka till biblioteket"
+              style={styles.backButton}
+            >
+              <Text
+                style={[
+                  styles.backText,
+                  { color: theme.colors.text, fontSize: rem(1) },
+                ]}
+              >
+                ← Tillbaka
+              </Text>
+            </Pressable>
+          }
+        />
       </ContentBox>
     </View>
   );
@@ -88,9 +90,8 @@ export default function StoryScreen() {
 const styles = StyleSheet.create({
   screen: { flexGrow: 1, flexShrink: 1, paddingBottom: 10 },
   backButton: {
-    alignSelf: "flex-start", // only as wide as the text, aligned to the left
-    paddingVertical: 8, // larger tap area for small fingers
-    marginBottom: 8,
+    minHeight: 44, // large enough tap area for small fingers
+    justifyContent: "center",
   },
   backText: {
     fontFamily: fonts.bodyBold,
