@@ -8,7 +8,7 @@ Suggested setup in GitHub:
 
 Each issue has a short **Description** (what and why), **Scope** (what is included), **Out of scope** where it helps to draw a line, **Technical notes** where there is something worth knowing in advance, and **Acceptance criteria** as a checklist. Smaller issues have fewer sections.
 
-Issue numbers are kept stable. New issues are added at the end (43 and up) instead of renumbering.
+Issue numbers match the numbers on GitHub. Issues that are not on GitHub yet are listed without a number under "Not on GitHub", and get the next free GitHub number when they are created.
 
 ---
 
@@ -467,7 +467,7 @@ A few meaningful animations that make the app feel magical, without slowing it d
 
 **Scope**
 
-- For example: a soft transition when a story opens, the star when favouriting (sprint 5), and the cover animation (issue 45).
+- For example: a soft transition when a story opens, the star when favouriting (sprint 5), and the cover animation (issue 44).
 
 **Technical notes**
 
@@ -629,9 +629,9 @@ A short, rehearsed demo that shows the MVP and the most important choices.
 **Description**
 Story of the day and the archive as public pages in the `web/` project, for people without the app.
 
-- The cover page (issue 43) does not look right on wide web screens yet. Check its size and layout when styling the web version.
+- The cover page (issue 42) does not look right on wide web screens yet. Check its size and layout when styling the web version.
 
-**Found while testing issue 44 (desktop, page mode)**
+**Found while testing issue 43 (desktop, page mode)**
 
 - The cover does not fit the panel's height: the image is cut off and the page has to scroll. The cover image should be limited by the available height too, not only by maxWidth.
 - The panel stops well above the bottom of the window. It could use more of the height on the story screens.
@@ -645,39 +645,46 @@ Story of the day and the archive as public pages in the `web/` project, for peop
 
 ---
 
-### 41. Categories/themes and filtering in the archive
+## Sprint 4–5: new issues
 
-`could` `mobile` `backend`
+### 41. Save each story's theme and skip themes that are already used ✅
 
-**Description**
-Filter the archive by theme (for example friendship, courage, nature).
-
-**Acceptance criteria**
-
-- [ ] Stories have a theme, and the archive can be filtered by it.
-
----
-
-### 42. Share the story of the day via a link
-
-`could` `mobile`
+`should` `ai` `backend` · Sprint 4 (after the Must issues)
 
 **Description**
-Share a link to a story, for example to a grandparent.
+The batch script picks themes at random from `src/ai/themes.ts`, but it only avoids repeats within one run. It does not know which themes earlier runs have already used, so the same theme can come back as a new story (this happened with the bear and the mermaid). Saving the theme on each story lets the script skip themes that already have a story. The saved theme can later also be used for categories and filtering in the archive (see "Not on GitHub").
+
+**Scope**
+
+- A new optional field `theme` (`String?`) on the Story model, added with a Prisma migration (with RLS kept on, see constraints.md).
+- The batch script saves the theme with each story.
+- Before picking, the script loads the themes already in the database and only picks from the ones that are not used.
+- If a story is deleted (for example a draft I reject), its theme becomes available again, so it can be tried once more.
+- If there are fewer unused themes than `--count`, the script stops before any API call with a clear message, for example "Only 2 unused themes left. Add more to src/ai/themes.ts."
+
+**Out of scope**
+
+- Showing or filtering by theme in the app (see "Categories/themes and filtering" under "Not on GitHub").
+- Filling in the theme for existing stories. Do that by hand in Supabase where wanted. Handwritten stories can have an empty theme.
 
 **Technical notes**
 
-- Needs a web page the link can open, so it depends on issue 40.
+- Compare themes exactly as written in `themes.ts`. If a theme's wording is changed there, it counts as a new theme.
+- Keep the selection as a small pure function (all themes, used themes, count → picked themes), so it can be unit tested without the database or the API.
+- The existing check that `--count` is not larger than the theme list should now compare against the number of _unused_ themes.
 
 **Acceptance criteria**
 
-- [ ] Sharing opens the phone's share sheet with a working link.
+- [ ] New stories are saved with their theme.
+- [ ] A theme that already has a story is never picked again.
+- [ ] Deleting a story makes its theme available again.
+- [ ] Too few unused themes stops the script with a clear message, before any API call.
+- [ ] Existing stories are unaffected by the migration.
+- [ ] Unit tests for the theme selection, and `npm test` passes.
 
 ---
 
-## New issues (book-like reading view, Sprint 4)
-
-### 43. Reading view: cover page with title, illustration and author ✅
+### 42. Reading view: cover page with title, illustration and author ✅
 
 `should` `mobile` · Sprint 4
 
@@ -693,8 +700,8 @@ Every story starts with a cover page before the text, like a picture book. The c
 
 **Out of scope**
 
-- Page turning (issue 44). Until that is done, the cover is shown above the scrolling text.
-- Animation on the cover (issue 45).
+- Page turning (issue 43). Until that is done, the cover is shown above the scrolling text.
+- Animation on the cover (issue 44).
 - Creating the illustrations themselves.
 
 **Technical notes**
@@ -712,9 +719,9 @@ Every story starts with a cover page before the text, like a picture book. The c
 
 ---
 
-### 44. Reading view: page turning, with a choice between pages and scrolling
+### 43. Reading view: page turning, with a choice between pages and scrolling ✅
 
-`should` `mobile` · Sprint 4 · Depends on: 43 · Related: 30
+`should` `mobile` · Sprint 4 · Depends on: 42 · Related: 30
 
 **Description**
 Stories can be read one page at a time, like an e-book, or by scrolling as before. The reader picks the mode with a toggle, and the choice is remembered. A page with a limited amount of text feels less overwhelming for young readers and makes reading more like a real book, while some readers, and parents reading aloud, prefer to scroll. The first page is the cover.
@@ -736,7 +743,7 @@ Stories can be read one page at a time, like an e-book, or by scrolling as befor
 
 - Measuring the exact amount of text that fits on each screen. Splitting at paragraphs is enough.
 - Remembering which page you were on when you come back.
-- Page-turn animations beyond the built-in swipe (issues 45 and 31).
+- Page-turn animations beyond the built-in swipe (issues 44 and 31).
 - The light/dark toggle (issue 30). It reuses the settings storage built here.
 
 **Technical notes**
@@ -769,9 +776,9 @@ Stories can be read one page at a time, like an e-book, or by scrolling as befor
 
 ---
 
-### 45. Cover animation: title letters and floating illustration
+### 44. Cover animation: title letters and floating illustration
 
-`should` `mobile` · Sprint 4 · Depends on: 43 · Related: 31
+`should` `mobile` · Sprint 4 · Depends on: 42 · Related: 31
 
 **Description**
 When a story opens, the cover comes to life: the title's letters fly into place one by one, and the illustration floats gently up and down. It gives a magical start to each story and fits the fairy-tale feel of the app.
@@ -803,105 +810,9 @@ When a story opens, the cover comes to life: the title's letters fly into place 
 - [ ] The animation runs smoothly in Expo Go on a real phone, not just in the browser.
 - [ ] A screen reader reads the title as one word or phrase, not letter by letter.
 
-### 46. Rotating background images
+---
 
-`could` `mobile`
-
-**Description**
-A different background image each day, in a fixed order, so the app feels new every day like the story does.
-
-**Scope**
-
-- 2–3 backgrounds to start with, each in three shapes (portrait, landscape, wide) and two themes (6 files per background).
-- Today's date (Europe/Stockholm) picks the background, so it is the same all day on every screen.
-
-**Out of scope**
-
-- Animated cross-fades between images.
-
-**Acceptance criteria**
-
-- [ ] The background changes from one day to the next and stays the same during the day.
-- [ ] Text is easy to read on every background, in both themes.
-- [ ] The images are compressed, and the app is not noticeably slower to load.
-- [ ] Decide first whether this is still wanted once stories have their own cover illustrations (issues 34 and 43).
-
-### 47. Short story summary for the archive
-
-`should` `ai` `backend` `mobile` · Sprint 4 (or right after the Must checkpoint, issue 25)
-
-**Description**
-Each story gets a short summary of one sentence, like the blurb on the back of a book, for example "En liten snigel som är långsammast i hela trädgården upptäcker något som ingen annan har." It is shown in the archive instead of only the date, which makes the list more inviting to browse. It can also be used on the cover page (issue 43) and when sharing a story (issue 42).
-
-**Scope**
-
-- A new optional field `summary` (`String?`) on the Story model, added with a Prisma migration.
-- The prompt asks for one more line in the answer: `Beskrivning:` followed by one sentence of at most 20 words, placed before the `Figurer:` line. It must not reveal the ending.
-- The parser reads the `Beskrivning:` line. If it is missing, `summary` is `null` instead of the parse failing.
-- The batch script saves `summary`.
-- `GET /stories` includes `summary` in each list item.
-- The app shows the summary in the archive list. Stories without one show the date, as now.
-- The review checklist in `docs/review-routine.md` gets a line for checking the summary.
-
-**Out of scope**
-
-- Writing summaries for existing stories. Do that by hand in Supabase where wanted.
-- Showing the summary on the cover page (part of issue 43).
-
-**Technical notes**
-
-- The new migration must not affect existing rows: the field is optional, so old stories simply get `null`.
-- Follow the same pattern as the `Figurer:` line in `parse-story-response.ts`, including tolerating `**` around the label.
-- Keep the order in the prompt's format rule clear: title, blank line, story, blank line, `Beskrivning:`, `Figurer:`. Test once with `--count 1` that the model follows it and that the summary line doesn't end up in the story body.
-- Update the tests: parser (with and without the summary line), and the list endpoint's `select`.
-
-**Acceptance criteria**
-
-- [ ] New AI stories are saved with a summary, and the story body does not contain the summary line.
-- [ ] A response without a `Beskrivning:` line still parses, with `summary: null`.
-- [ ] The archive shows the summary where there is one, and the date otherwise.
-- [ ] Existing stories are unaffected by the migration.
-- [ ] Tests for the parser and the list endpoint are updated, and `npm test` passes.
-- [ ] The review checklist includes the summary.
-
-Closed: decided against summaries. A picture says more to young readers than a sentence of text, so the archive will show each story’s cover image instead (issues 34 and 43). The title and date are enough as text.
-
-### 48. Save each story's theme and skip themes that are already used ✅
-
-`should` `ai` `backend` · Sprint 4 (after the Must issues)
-
-**Description**
-The batch script picks themes at random from `src/ai/themes.ts`, but it only avoids repeats within one run. It does not know which themes earlier runs have already used, so the same theme can come back as a new story (this happened with the bear and the mermaid). Saving the theme on each story lets the script skip themes that already have a story. The saved theme can later also be used for categories and filtering in the archive (issue 41).
-
-**Scope**
-
-- A new optional field `theme` (`String?`) on the Story model, added with a Prisma migration (with RLS kept on, see constraints.md).
-- The batch script saves the theme with each story.
-- Before picking, the script loads the themes already in the database and only picks from the ones that are not used.
-- If a story is deleted (for example a draft I reject), its theme becomes available again, so it can be tried once more.
-- If there are fewer unused themes than `--count`, the script stops before any API call with a clear message, for example "Only 2 unused themes left. Add more to src/ai/themes.ts."
-
-**Out of scope**
-
-- Showing or filtering by theme in the app (issue 41).
-- Filling in the theme for existing stories. Do that by hand in Supabase where wanted. Handwritten stories can have an empty theme.
-
-**Technical notes**
-
-- Compare themes exactly as written in `themes.ts`. If a theme's wording is changed there, it counts as a new theme.
-- Keep the selection as a small pure function (all themes, used themes, count → picked themes), so it can be unit tested without the database or the API.
-- The existing check that `--count` is not larger than the theme list should now compare against the number of _unused_ themes.
-
-**Acceptance criteria**
-
-- [ ] New stories are saved with their theme.
-- [ ] A theme that already has a story is never picked again.
-- [ ] Deleting a story makes its theme available again.
-- [ ] Too few unused themes stops the script with a clear message, before any API call.
-- [ ] Existing stories are unaffected by the migration.
-- [ ] Unit tests for the theme selection, and `npm test` passes.
-
-### 49. Demo setup that works without Expo Go
+### 45. Demo setup that works without Expo Go
 
 `must` `docs` · Sprint 5 · Timebox: half a day
 
@@ -935,7 +846,68 @@ Expo Go needs the phone and the computer on the same network, which doesn't work
 - [ ] A screen recording of the demo exists as a backup.
 - [ ] The steps are written down in the README, so they can be repeated before the presentation.
 
-### 50. A real website (after the thesis)
+---
+
+## Not on GitHub (backlog)
+
+These have no GitHub issue yet. When one is created, it gets the next free number on GitHub, and the same number is added here.
+
+### Categories/themes and filtering in the archive
+
+`could` `mobile` `backend`
+
+**Description**
+Filter the archive by theme (for example friendship, courage, nature).
+
+**Acceptance criteria**
+
+- [ ] Stories have a theme, and the archive can be filtered by it.
+
+---
+
+### Share the story of the day via a link
+
+`could` `mobile`
+
+**Description**
+Share a link to a story, for example to a grandparent.
+
+**Technical notes**
+
+- Needs a web page the link can open, so it depends on issue 40.
+
+**Acceptance criteria**
+
+- [ ] Sharing opens the phone's share sheet with a working link.
+
+---
+
+### Rotating background images
+
+`could` `mobile`
+
+**Description**
+A different background image each day, in a fixed order, so the app feels new every day like the story does.
+
+**Scope**
+
+- 2–3 backgrounds to start with, each in three shapes (portrait, landscape, wide) and two themes (6 files per background).
+- Today's date (Europe/Stockholm) picks the background, so it is the same all day on every screen.
+
+**Out of scope**
+
+- Animated cross-fades between images.
+
+**Acceptance criteria**
+
+- [ ] The background changes from one day to the next and stays the same during the day.
+- [ ] Text is easy to read on every background, in both themes.
+- [ ] The images are compressed, and the app is not noticeably slower to load.
+- [ ] Decide first whether this is still wanted once stories have their own cover illustrations (issues 34 and 42).
+
+---
+
+### A real website (after the thesis)
 
 `could` `web` · Backlog
 
@@ -946,3 +918,45 @@ A separate website for Dagens saga, for example built with React + Vite, alongsi
 
 - The backend API (GET /stories, /stories/today, /stories/:id) already works for any client and has CORS enabled, so the website can use it as it is.
 - Decided 2026-11-04 to wait until after the thesis, since it would mean building the whole interface a second time.
+
+---
+
+### Short story summary for the archive (closed)
+
+`should` `ai` `backend` `mobile` · Sprint 4 (or right after the Must checkpoint, issue 25)
+
+**Description**
+Each story gets a short summary of one sentence, like the blurb on the back of a book, for example "En liten snigel som är långsammast i hela trädgården upptäcker något som ingen annan har." It is shown in the archive instead of only the date, which makes the list more inviting to browse. It can also be used on the cover page (issue 42) and when sharing a story.
+
+**Scope**
+
+- A new optional field `summary` (`String?`) on the Story model, added with a Prisma migration.
+- The prompt asks for one more line in the answer: `Beskrivning:` followed by one sentence of at most 20 words, placed before the `Figurer:` line. It must not reveal the ending.
+- The parser reads the `Beskrivning:` line. If it is missing, `summary` is `null` instead of the parse failing.
+- The batch script saves `summary`.
+- `GET /stories` includes `summary` in each list item.
+- The app shows the summary in the archive list. Stories without one show the date, as now.
+- The review checklist in `docs/review-routine.md` gets a line for checking the summary.
+
+**Out of scope**
+
+- Writing summaries for existing stories. Do that by hand in Supabase where wanted.
+- Showing the summary on the cover page (part of issue 42).
+
+**Technical notes**
+
+- The new migration must not affect existing rows: the field is optional, so old stories simply get `null`.
+- Follow the same pattern as the `Figurer:` line in `parse-story-response.ts`, including tolerating `**` around the label.
+- Keep the order in the prompt's format rule clear: title, blank line, story, blank line, `Beskrivning:`, `Figurer:`. Test once with `--count 1` that the model follows it and that the summary line doesn't end up in the story body.
+- Update the tests: parser (with and without the summary line), and the list endpoint's `select`.
+
+**Acceptance criteria**
+
+- [ ] New AI stories are saved with a summary, and the story body does not contain the summary line.
+- [ ] A response without a `Beskrivning:` line still parses, with `summary: null`.
+- [ ] The archive shows the summary where there is one, and the date otherwise.
+- [ ] Existing stories are unaffected by the migration.
+- [ ] Tests for the parser and the list endpoint are updated, and `npm test` passes.
+- [ ] The review checklist includes the summary.
+
+Closed: decided against summaries. A picture says more to young readers than a sentence of text, so the archive will show each story’s cover image instead (issues 34 and 42). The title and date are enough as text.
