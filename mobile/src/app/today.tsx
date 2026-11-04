@@ -1,14 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ContentBox } from "@/components/content-box";
 import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { getTodaysStory, Story } from "@/api/stories";
-import { StoryText } from "@/components/story-text";
 import { useRem } from "@/hooks/use-screen-size";
 import { LoadingIndicator } from "@/components/loading-indicator";
 import { MessageBox } from "@/components/message-box";
-import { StoryCover } from "@/components/story-cover";
+import { StoryReader } from "@/components/story-reader";
 
 export default function TodayScreen() {
   const theme = useTheme();
@@ -54,16 +53,9 @@ export default function TodayScreen() {
   }
 
   return (
-    <View style={styles.screen}>
+    <View testID="screen" style={styles.screen}>
       <ContentBox /* title={story.title} */ fill>
-        <ScrollView>
-          <StoryCover
-            title={story.title}
-            source={story.source}
-            imageUrl={story.imageUrl}
-          />
-          <StoryText body={story.body} />
-        </ScrollView>
+        <StoryReader key={story.id} story={story} />
       </ContentBox>
     </View>
   );
