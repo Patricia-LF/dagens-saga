@@ -631,6 +631,13 @@ Story of the day and the archive as public pages in the `web/` project, for peop
 
 - The cover page (issue 43) does not look right on wide web screens yet. Check its size and layout when styling the web version.
 
+**Found while testing issue 44 (desktop, page mode)**
+
+- The cover does not fit the panel's height: the image is cut off and the page has to scroll. The cover image should be limited by the available height too, not only by maxWidth.
+- The panel stops well above the bottom of the window. It could use more of the height on the story screens.
+- The browser's grey scrollbar shows inside the page. Consider hiding it once pages fit without scrolling.
+- In page mode on desktop, each page only holds 1–2 sentences because the panel is low and wide. The reading view should be taller and narrower on desktop, more like a book page.
+
 **Acceptance criteria**
 
 - [ ] Story of the day and the archive work in the browser and use the same API.
@@ -753,6 +760,12 @@ Stories can be read one page at a time, like an e-book, or by scrolling as befor
 - [ ] No paragraph is split across two pages, and no text is cut off.
 - [ ] Works for both the story of the day and the archive, in both modes.
 - [ ] `splitIntoPages` has unit tests for a short story, a long story and a single very long paragraph.
+
+**Changes during implementation**
+
+- The page size is estimated from the measured page area in pixels, not a fixed number of characters. A fixed count gave pages that were too long on the tablet, and too short with dialogue, because a short line of dialogue still takes a whole line on screen.
+- The reading mode toggle sits on the same row as the back link, to give the text more room. The visible back link text is "← Tillbaka", with "Tillbaka till biblioteket" kept as the screen reader label.
+- Desktop layout issues found during testing are moved to issue 40.
 
 ---
 
