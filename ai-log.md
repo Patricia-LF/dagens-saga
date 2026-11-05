@@ -40,6 +40,7 @@ _E.g. Claude Code use while coding: scaffolding, debugging, rubber-ducking, whic
 - 2026-11-03: Built the cover page for stories (issue 43) myself, with guidance from Claude in chat. StoryCover shows the title, an image (from imageUrl, or a default image) and who wrote the story, based on the source field. Solved two layout problems along the way: the image grew larger than the screen, because an image on the web takes the size of its file unless it gets an explicit height, so the image now fills a frame that sets the size. And the title stayed fixed at the top, because ContentBox showed it outside the scroll view, so it was moved onto the cover. The cover's layout on wide web screens is left for the web version.
 - 2026-11-04: issue 43 (page reader) with Claude Code, Opus for the plan and Sonnet for the implementation. It generated the settings storage with AsyncStorage, the page reader with FlatList, the reading mode toggle, and Vitest tests for the page splitting. I set up Vitest in `mobile/` with the same version as the backend. Cost: $2.40 (Opus planning $0.44, Sonnet implementation $1.96).
 - 2026-11-04: Claude chat taught me how React Native components map to HTML in DevTools (View and Text become divs, Pressable becomes a button, testID becomes data-testid), and suggested React Developer Tools for finding components by name.
+- 2026-11-05: issue 30 (light/dark mode), written by hand with help from Claude chat. Extended the SettingsProvider from issue 43 with the theme mode, removed the old ThemeProvider and its own state, and built an animated day/night switch with Reanimated that respects "reduce motion".
 
 ## Code control, validation, reviews, security
 
@@ -56,6 +57,7 @@ _E.g. how AI suggestions were reviewed before going into the code, security revi
 - 2026-11-04: reviewed the plan for issue 43 before implementation, and asked for the same Vitest version as the backend, a check of the height chain, and text arrows instead of a new icon library.
 - 2026-11-04: found in DevTools that the page view was 0 px tall on the web (632 × 0). The cause was the wide-screen panel in `_layout.tsx`, which did not fill the height.
 - 2026-11-04: testing showed that pages were too short with dialogue and too long with plain text. This led to estimating the page size in pixels instead of characters. I tuned `LINE_FILL` from 0.8 to 0.9 after testing on the phone, and adjusted the toggle row, the back link and the pill size myself.
+- 2026-11-05: Claude pointed out that my first version of `loadSettings` returned before the theme mode was read, and that the setters could overwrite each other if both changed quickly. Fixed with one return and `setSettings(prev => ...)`.
 
 ## Other necessary or interesting information
 
