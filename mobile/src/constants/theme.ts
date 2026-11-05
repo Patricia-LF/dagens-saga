@@ -1,13 +1,8 @@
 import { ImageSourcePropType, TextStyle } from "react-native";
 import type { BackgroundShape } from "@/hooks/use-screen-size";
 
-// The three shadow properties React Native uses instead of CSS text-shadow
-/* type TextGlow = Pick<
-  TextStyle,
-  "textShadowColor" | "textShadowOffset" | "textShadowRadius"
->; */
-
 export type NavIconName = "home" | "today" | "library";
+export type ThemeIconName = "sun" | "moon";
 
 export const fonts = {
   heading: "IrishGrover_400Regular",
@@ -23,12 +18,13 @@ export type Theme = {
     panel: string; // the large panel behind everything (wide screens only)
     pill: string; // menu buttons
     pillText: string;
-    toggle: string; // day/night button
+    toggle: string; // selected toggle (reading mode, day/night)
     toggleText: string;
   };
   title: TextStyle; // title color and glow
   backgroundImages: Record<BackgroundShape, ImageSourcePropType>;
   navIcons: Record<NavIconName, ImageSourcePropType>;
+  themeIcons: Record<ThemeIconName, ImageSourcePropType>;
 };
 
 export const lightTheme: Theme = {
@@ -58,6 +54,10 @@ export const lightTheme: Theme = {
     today: require("@/assets/images/tabIcons/dagens-light.png"),
     library: require("@/assets/images/tabIcons/library-light.png"),
   },
+  themeIcons: {
+    sun: require("@/assets/icons/sun-light.png"),
+    moon: require("@/assets/icons/moon-light.png"),
+  },
 };
 
 export const darkTheme: Theme = {
@@ -86,5 +86,9 @@ export const darkTheme: Theme = {
     home: require("@/assets/images/tabIcons/home-dark.png"),
     today: require("@/assets/images/tabIcons/dagens-dark.png"),
     library: require("@/assets/images/tabIcons/library-dark.png"),
+  },
+  themeIcons: {
+    sun: require("@/assets/icons/sun-dark.png"),
+    moon: require("@/assets/icons/moon-dark.png"),
   },
 };

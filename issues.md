@@ -435,7 +435,7 @@ Change the status of a story directly in the admin page.
 
 ---
 
-### 30. Light/dark mode
+### 30. Light/dark mode ✅
 
 `should` `mobile`
 
@@ -456,6 +456,12 @@ A toggle between "Dagsläge" and "Nattläge", with the system setting as default
 - [ ] The toggle works and the choice is remembered when the app restarts.
 - [ ] All screens look right in both themes, including text contrast.
 
+**Changes during implementation**
+
+- No separate ThemeProvider. The theme mode is stored in the settings from issue 43 (SettingsProvider), and `useTheme()` reads it from there. A second provider with its own state would only duplicate the settings, and the choice would not be saved.
+- The default is "system", which follows the phone's setting until the reader picks a mode.
+- The toggle is an animated day/night switch with sun and moon icons in the top right corner, outside all boxes. It counts as one of the animations in issue 31.
+
 ---
 
 ### 31. Animations with Reanimated
@@ -468,6 +474,7 @@ A few meaningful animations that make the app feel magical, without slowing it d
 **Scope**
 
 - For example: a soft transition when a story opens, the star when favouriting (sprint 5), and the cover animation (issue 44).
+- Theme switch (issue 30)
 
 **Technical notes**
 

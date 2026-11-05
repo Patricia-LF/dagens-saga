@@ -8,11 +8,15 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type ReadingMode = "pages" | "scroll";
+export type ThemeMode = "system" | "light" | "dark";
 
-// All saved settings live in one object (issue 30 adds the color scheme here)
-type Settings = { readingMode: ReadingMode };
+// All saved settings live in one object
+type Settings = { readingMode: ReadingMode; themeMode: ThemeMode };
 
-const DEFAULT_SETTINGS: Settings = { readingMode: "pages" };
+const DEFAULT_SETTINGS: Settings = {
+  readingMode: "pages",
+  themeMode: "system",
+};
 
 // AsyncStorage is a small key/value store on the device, like localStorage in a browser
 const STORAGE_KEY = "settings";
@@ -21,13 +25,24 @@ type SettingsContextValue = {
   settings: Settings;
   loaded: boolean; // false until the saved settings have been read
   setReadingMode: (mode: ReadingMode) => void;
+  setThemeMode: (mode: ThemeMode) => void;
 };
 
 const SettingsContext = createContext<SettingsContextValue>({
   settings: DEFAULT_SETTINGS,
   loaded: false,
   setReadingMode: () => {},
+  setThemeMode: () => {},
 });
+
+// Returns the value if it is one of the allowed options, otherwise the fallback
+function pick<T extends string>(
+  value: unknown,
+  allowed: readonly T[],
+  fallback: T,
+): T {
+  return allowed.includes(value as T) ? (value as T) : fallback;
+}
 
 // Reads the saved settings. Anything missing or invalid falls back to the defaults.
 async function loadSettings(): Promise<Settings> {
@@ -35,11 +50,18 @@ async function loadSettings(): Promise<Settings> {
     const saved = await AsyncStorage.getItem(STORAGE_KEY);
     if (!saved) return DEFAULT_SETTINGS;
     const parsed = JSON.parse(saved);
-    const readingMode =
-      parsed?.readingMode === "pages" || parsed?.readingMode === "scroll"
-        ? parsed.readingMode
-        : DEFAULT_SETTINGS.readingMode;
-    return { ...DEFAULT_SETTINGS, readingMode };
+    return {
+      readingMode: pick(
+        parsed?.readingMode,
+        ["pages", "scroll"],
+        DEFAULT_SETTINGS.readingMode,
+      ),
+      themeMode: pick(
+        parsed?.themeMode,
+        ["system", "light", "dark"],
+        DEFAULT_SETTINGS.themeMode,
+      ),
+    };
   } catch (error) {
     console.error(error);
     return DEFAULT_SETTINGS;
@@ -58,16 +80,24 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const setReadingMode = (readingMode: ReadingMode) => {
-    const next = { ...settings, readingMode };
-    setSettings(next);
-    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next)).catch((error) =>
+  // Save whenever the settings change, but not before the saved ones have been read
+  useEffect(() => {
+    if (!loaded) return;
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(settings)).catch((error) =>
       console.error(error),
     );
-  };
+  }, [settings, loaded]);
+
+  // prev is always the latest settings, so two quick changes can't overwrite each other
+  const setReadingMode = (readingMode: ReadingMode) =>
+    setSettings((prev) => ({ ...prev, readingMode }));
+  const setThemeMode = (themeMode: ThemeMode) =>
+    setSettings((prev) => ({ ...prev, themeMode }));
 
   return (
-    <SettingsContext.Provider value={{ settings, loaded, setReadingMode }}>
+    <SettingsContext.Provider
+      value={{ settings, loaded, setReadingMode, setThemeMode }}
+    >
       {children}
     </SettingsContext.Provider>
   );

@@ -9,21 +9,20 @@ import { Slot, usePathname } from "expo-router";
 import { useEffect } from "react";
 import { Image, StyleSheet, View, Platform } from "react-native";
 import { SiteHeader } from "@/components/site-header";
-import { ThemeProvider, useTheme } from "@/hooks/use-theme";
+import { useTheme } from "@/hooks/use-theme";
 import { SettingsProvider, useSettings } from "@/hooks/use-settings";
 import { BottomNav } from "@/components/bottom-nav";
 import { useBackgroundShape, useScreenSize } from "@/hooks/use-screen-size";
+import { ThemeToggle } from "@/components/theme-toggle";
 
-// Keep the splash screen visible until the fonts are loaded
+// Keep the splash screen visible until the fonts and settings are loaded
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <SettingsProvider>
-        <AppShell />
-      </SettingsProvider>
-    </ThemeProvider>
+    <SettingsProvider>
+      <AppShell />
+    </SettingsProvider>
   );
 }
 
@@ -84,6 +83,7 @@ function AppShell() {
       </View>
 
       {showBottomNav && <BottomNav />}
+      <ThemeToggle />
     </View>
   );
 }
