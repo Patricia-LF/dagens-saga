@@ -1,39 +1,31 @@
-// src/hooks/use-theme.tsx (note: .tsx now, since it contains JSX)
-import { createContext, ReactNode, useContext, useState } from "react";
+// src/hooks/use-theme.tsx
 import { useColorScheme } from "react-native";
 import { darkTheme, lightTheme, Theme } from "@/constants/theme";
+import { useSettings } from "@/hooks/use-settings";
 
 type Mode = "light" | "dark";
-type ThemeMode = { mode: Mode; toggleMode: () => void };
+type ThemeModeControls = { mode: Mode; toggleMode: () => void };
 
-const ThemeModeContext = createContext<ThemeMode>({
-  mode: "dark",
-  toggleMode: () => {},
-});
-
-// Wraps the app and remembers the chosen mode. Starts with the phone's setting.
-export function ThemeProvider({ children }: { children: ReactNode }) {
+// The mode in use right now. "system" follows the phone's setting (dark if unknown).
+export function useThemeMode(): ThemeModeControls {
+  const { settings, setThemeMode } = useSettings();
   const systemScheme = useColorScheme();
-  const [mode, setMode] = useState<Mode>(
-    systemScheme === "light" ? "light" : "dark",
-  );
-  const toggleMode = () =>
-    setMode((current) => (current === "dark" ? "light" : "dark"));
 
-  return (
-    <ThemeModeContext.Provider value={{ mode, toggleMode }}>
-      {children}
-    </ThemeModeContext.Provider>
-  );
+  const mode: Mode =
+    settings.themeMode === "system"
+      ? systemScheme === "light"
+        ? "light"
+        : "dark"
+      : settings.themeMode;
+
+  // Choosing a mode saves it, so the app stops following the phone from then on
+  const toggleMode = () => setThemeMode(mode === "dark" ? "light" : "dark");
+
+  return { mode, toggleMode };
 }
 
 // The active theme, used by every screen as before
 export function useTheme(): Theme {
-  const { mode } = useContext(ThemeModeContext);
+  const { mode } = useThemeMode();
   return mode === "dark" ? darkTheme : lightTheme;
-}
-
-// For the toggle button
-export function useThemeMode(): ThemeMode {
-  return useContext(ThemeModeContext);
 }
