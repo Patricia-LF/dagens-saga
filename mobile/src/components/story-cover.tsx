@@ -2,6 +2,8 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
+import { AnimatedTitle } from "./animated-title";
+import { FloatingView } from "@/components/floating-view";
 
 const DEFAULT_COVER = require("@/assets/images/covers/default-cover.jpg");
 
@@ -20,17 +22,21 @@ export function StoryCover({ title, source, imageUrl }: Props) {
 
   return (
     <View style={styles.cover}>
-      <Text
-        style={[
-          styles.title,
-          { color: theme.colors.text, fontSize: rem(1.75) },
-        ]}
-      >
-        {title}
-      </Text>
-      <View style={[styles.imageFrame, { maxWidth: rem(20) }]}>
-        <Image source={imageSource} style={styles.image} resizeMode="cover" />
+      <View style={styles.titleWrapper}>
+        <AnimatedTitle
+          title={title}
+          style={[
+            styles.title,
+            { color: theme.colors.text, fontSize: rem(1.75) },
+          ]}
+        />
       </View>
+
+      <FloatingView>
+        <View style={[styles.imageFrame, { maxWidth: rem(20) }]}>
+          <Image source={imageSource} style={styles.image} resizeMode="cover" />
+        </View>
+      </FloatingView>
 
       <Text
         style={[styles.byline, { color: theme.colors.text, fontSize: rem(1) }]}
@@ -43,7 +49,8 @@ export function StoryCover({ title, source, imageUrl }: Props) {
 
 const styles = StyleSheet.create({
   cover: {},
-  title: { fontFamily: fonts.heading, textAlign: "center", marginBottom: 20 },
+  titleWrapper: { marginBottom: 20 }, // on the wrapper, not on every letter
+  title: { fontFamily: fonts.heading, textAlign: "center" },
   byline: { fontFamily: fonts.body, textAlign: "center", margin: 10 },
   imageFrame: {
     width: "90%",

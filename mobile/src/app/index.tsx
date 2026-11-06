@@ -1,46 +1,78 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { ContentBox } from "@/components/content-box";
 import { fonts } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
-import { useRem } from "@/hooks/use-screen-size";
+import { useRem, useScreenSize } from "@/hooks/use-screen-size";
+import { FloatingView } from "@/components/floating-view";
+
+// Decorative fairies on the start page (change the file names to yours)
+const FAIRY_LEFT = require("@/assets/images/fairies/fairy-1.png");
+const FAIRY_RIGHT = require("@/assets/images/fairies/fairy-2.png");
 
 export default function StartScreen() {
   const theme = useTheme();
   const rem = useRem();
 
+  const screenSize = useScreenSize();
+  const fairyInset = screenSize === "mobile" ? rem(1) : rem(0.1);
+
   return (
     <View style={styles.screen}>
-      <ContentBox>
-        <Text
-          style={[
-            styles.text,
-            styles.paragraph,
-            {
-              color: theme.colors.text,
-              fontSize: rem(1.125),
-              lineHeight: rem(1.75),
-            },
-          ]}
-        >
-          🌈 Välkommen till <Text style={styles.bold}>Sagolandet</Text>! Här
-          hittar du en ny saga varje dag - fylld med äventyr, vänskap och magi.
-          🧚
-        </Text>
+      <View>
+        <ContentBox>
+          <Text
+            style={[
+              styles.text,
+              styles.paragraph,
+              {
+                color: theme.colors.text,
+                fontSize: rem(1.125),
+                lineHeight: rem(1.75),
+              },
+            ]}
+          >
+            🌈 Välkommen till <Text style={styles.bold}>Sagolandet</Text>! Här
+            hittar du en ny saga varje dag - fylld med äventyr, vänskap och
+            magi.
+          </Text>
 
-        <Text
-          style={[
-            styles.text,
-            {
-              color: theme.colors.text,
-              fontSize: rem(1.125),
-              lineHeight: rem(1.75),
-            },
-          ]}
+          <Text
+            style={[
+              styles.text,
+              {
+                color: theme.colors.text,
+                fontSize: rem(1.125),
+                lineHeight: rem(1.75),
+              },
+            ]}
+          >
+            Tryck på Dagens för att läsa dagens saga, eller besök Biblioteket
+            för att hitta äldre sagor.
+          </Text>
+        </ContentBox>
+        <FloatingView
+          style={[styles.fairy, { top: -rem(1.5), left: fairyInset }]}
         >
-          Tryck på Dagens för att läsa dagens saga, eller besök Biblioteket för
-          att hitta äldre sagor.
-        </Text>
-      </ContentBox>
+          <Image
+            source={FAIRY_LEFT}
+            style={{ width: rem(4), height: rem(4) }}
+            resizeMode="contain"
+            accessible={false}
+          />
+        </FloatingView>
+        <FloatingView
+          delay={800}
+          duration={2400}
+          style={[styles.fairy, { top: -rem(1.5), right: fairyInset }]}
+        >
+          <Image
+            source={FAIRY_RIGHT}
+            style={{ width: rem(4), height: rem(4) }}
+            resizeMode="contain"
+            accessible={false}
+          />
+        </FloatingView>
+      </View>
     </View>
   );
 }
@@ -49,6 +81,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     paddingBottom: 40,
+    marginTop: 30,
   },
   text: {
     fontFamily: fonts.body,
@@ -59,5 +92,9 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     marginBottom: 16, // space between paragraphs
+  },
+  fairy: {
+    position: "absolute",
+    pointerEvents: "none", // taps go through to whatever is underneath
   },
 });
