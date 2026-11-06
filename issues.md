@@ -475,6 +475,7 @@ A few meaningful animations that make the app feel magical, without slowing it d
 
 - For example: a soft transition when a story opens, the star when favouriting (sprint 5), and the cover animation (issue 44).
 - Theme switch (issue 30)
+- Floating fairies on start page
 
 **Technical notes**
 
@@ -581,6 +582,11 @@ Time set aside to fix what has come up, and to check that the tests cover the co
 - [ ] Core endpoints and the scheduling logic are tested, and `npm test` passes.
 - [ ] The device checklist (issue 24) passes.
 - [ ] Known bugs are fixed or listed in the README as known issues.
+
+**Found by `npx expo lint`**
+
+- [ ] Remove unused `theme` and `rem` in `today.tsx`, and unused `active` in `site-header.tsx`.
+- [ ] Fix "setState synchronously within an effect" (`react-hooks/set-state-in-effect`) from the `load()` pattern in `today.tsx`, `story/[id].tsx` and `library.tsx`.
 
 ---
 
