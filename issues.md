@@ -475,7 +475,9 @@ A few meaningful animations that make the app feel magical, without slowing it d
 
 - For example: a soft transition when a story opens, the star when favouriting (sprint 5), and the cover animation (issue 44).
 - Theme switch (issue 30)
-- Floating fairies on start page
+- Cover: sparkles along the title as the letters fly in (issue 44).
+- Start page: two fairies float on the corners of the content box.
+- Scroll mode: the scroll hint fades out as the reader scrolls.
 
 **Technical notes**
 
@@ -825,6 +827,12 @@ When a story opens, the cover comes to life: the title's letters fly into place 
 - [ ] With "reduce motion" turned on, there is no animation.
 - [ ] The animation runs smoothly in Expo Go on a real phone, not just in the browser.
 - [ ] A screen reader reads the title as one word or phrase, not letter by letter.
+
+**Changes during implementation**
+
+- Sparkles twinkle along the title from left to right, in step with the letters. Their colors and glow are in the theme, so they show in both light and dark mode.
+- In scroll mode the cover now fills the first view, like in page mode. A "Scrolla ner för att läsa ↓" hint sits where the arrows are in page mode, and fades out when the reader starts scrolling.
+- The cover image size comes from measuring the title and byline: the image gets the height that is left, so the whole cover fits on small phones and with titles on two lines. Both maxWidth and maxHeight limit the image, since aspectRatio computes the height before maxWidth shrinks the width. The cover stays hidden until it is measured, so the image doesn't jump in size when switching reading mode.
 
 ---
 
