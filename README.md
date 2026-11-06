@@ -99,6 +99,10 @@ npm run db:migrate
 
 Never commit `.env`. Only `.env.example`, with placeholder values, belongs in the repository.
 
+### Story images
+
+Create a public bucket called `story-images` (file size limit 1 MB, allowed MIME types `image/jpeg, image/png, image/webp`). Do not add any policies: the public setting only allows reading through the image URL, and uploads are done in the Supabase dashboard. Put each image's public URL in the story's `imageUrl`.
+
 ### Run the backend
 
 ```bash
