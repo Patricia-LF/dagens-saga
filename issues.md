@@ -484,6 +484,9 @@ A few meaningful animations that make the app feel magical, without slowing it d
 **Acceptance criteria**
 
 - [ ] At least two animations are in place.
+- [ ] Theme switch: the knob slides and the sun fades into the moon (issue 30).
+- [ ] Cover: the title letters fly in, and the illustration floats (issue 44).
+- [ ] Start page: two fairies float on the corners of the content box.
 - [ ] They run smoothly on a real phone.
 - [ ] No animation runs when "reduce motion" is on.
 
