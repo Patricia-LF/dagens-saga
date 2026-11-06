@@ -54,7 +54,7 @@ export default function TodayScreen() {
 
   return (
     <View testID="screen" style={styles.screen}>
-      <ContentBox /* title={story.title} */ fill>
+      <ContentBox fill>
         <StoryReader key={story.id} story={story} />
       </ContentBox>
     </View>
