@@ -95,6 +95,9 @@ export function PageReader({ story }: Props) {
     );
   };
 
+  const maxImageSize =
+    size.height > 0 ? Math.max(120, size.height - rem(10) + 44) : undefined;
+
   const goToPage = (index: number) => {
     listRef.current?.scrollToIndex({ index, animated: true });
   };
@@ -141,6 +144,9 @@ export function PageReader({ story }: Props) {
                       title={story.title}
                       source={story.source}
                       imageUrl={story.imageUrl}
+                      availableHeight={
+                        size.height > 0 ? size.height : undefined
+                      }
                     />
                   ) : (
                     <StoryText body={item.text} />

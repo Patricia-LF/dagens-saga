@@ -20,6 +20,8 @@ export type Theme = {
     pillText: string;
     toggle: string; // selected toggle (reading mode, day/night)
     toggleText: string;
+    sparkle: string; // the twinkling stars on the cover and buttons
+    sparkleGlow: string; // the glow around each star
   };
   title: TextStyle; // title color and glow
   backgroundImages: Record<BackgroundShape, ImageSourcePropType>;
@@ -37,6 +39,8 @@ export const lightTheme: Theme = {
     pillText: "#6b21a8",
     toggle: "#e9a3f8",
     toggleText: "#4b0082",
+    sparkle: "#e0a100", // deeper gold, visible on the light background
+    sparkleGlow: "rgba(255, 255, 255, 0.9)",
   },
   title: {
     color: "#f5e9ff",
@@ -70,6 +74,8 @@ export const darkTheme: Theme = {
     pillText: "#fef9c3",
     toggle: "#6a5ef0",
     toggleText: "#fff8dc",
+    sparkle: "#ffe680", // pale gold
+    sparkleGlow: "rgba(255, 230, 128, 0.8)",
   },
   title: {
     color: "#E9F6FF",

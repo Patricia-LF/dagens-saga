@@ -7,7 +7,7 @@ import Animated, {
 
 type Props = { title: string; style?: StyleProp<TextStyle> };
 
-const LETTER_DELAY = 40; // ms between each letter
+export const LETTER_DELAY = 40; // ms between each letter
 
 // The title's letters fly in one by one, then stay still
 export function AnimatedTitle({ title, style }: Props) {
@@ -34,9 +34,10 @@ export function AnimatedTitle({ title, style }: Props) {
         justifyContent: "center",
       }}
     >
-      {title.split(" ").map((word, w) => (
+      {title.split(" ").map((word, w, words) => (
         <View key={w} style={{ flexDirection: "row" }}>
-          {[...word, " "].map((char, c) => (
+          {/* A space after every word except the last, so the title stays centered */}
+          {[...word, ...(w < words.length - 1 ? [" "] : [])].map((char, c) => (
             <Animated.Text
               key={c}
               entering={FadeInDown.delay(index++ * LETTER_DELAY).springify()}
