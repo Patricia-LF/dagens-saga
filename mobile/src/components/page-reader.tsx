@@ -131,7 +131,11 @@ export function PageReader({ story }: Props) {
                 accessibilityLabel={`Sida ${index + 1} av ${pages.length}`}
               >
                 {/* A page that is too long for the screen scrolls, so no text is cut off */}
-                <ScrollView>
+                <ScrollView
+                  contentContainerStyle={
+                    item.kind === "cover" ? styles.coverPage : undefined
+                  }
+                >
                   {item.kind === "cover" ? (
                     <StoryCover
                       title={story.title}
@@ -206,4 +210,6 @@ const styles = StyleSheet.create({
   // No fontFamily on purpose: the system font has the arrow characters on every platform
   arrowText: {},
   indicator: { fontFamily: fonts.bodyBold },
+  // flexGrow lets the content fill the page, so the cover can be centered vertically
+  coverPage: { flexGrow: 1, justifyContent: "center" },
 });
