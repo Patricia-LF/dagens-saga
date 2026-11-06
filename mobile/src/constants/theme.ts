@@ -50,9 +50,9 @@ export const lightTheme: Theme = {
     wide: require("@/assets/images/backgrounds/light-web.jpg"),
   },
   navIcons: {
-    home: require("@/assets/images/tabIcons/home-light.png"),
-    today: require("@/assets/images/tabIcons/dagens-light.png"),
-    library: require("@/assets/images/tabIcons/library-light.png"),
+    home: require("@/assets/icons/home-light.png"),
+    today: require("@/assets/icons/dagens-light.png"),
+    library: require("@/assets/icons/library-light.png"),
   },
   themeIcons: {
     sun: require("@/assets/icons/sun-light.png"),
@@ -83,9 +83,9 @@ export const darkTheme: Theme = {
     wide: require("@/assets/images/backgrounds/dark-web.jpg"),
   },
   navIcons: {
-    home: require("@/assets/images/tabIcons/home-dark.png"),
-    today: require("@/assets/images/tabIcons/dagens-dark.png"),
-    library: require("@/assets/images/tabIcons/library-dark.png"),
+    home: require("@/assets/icons/home-dark.png"),
+    today: require("@/assets/icons/dagens-dark.png"),
+    library: require("@/assets/icons/library-dark.png"),
   },
   themeIcons: {
     sun: require("@/assets/icons/sun-dark.png"),
