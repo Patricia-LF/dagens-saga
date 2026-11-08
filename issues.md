@@ -464,7 +464,7 @@ A toggle between "Dagsläge" and "Nattläge", with the system setting as default
 
 ---
 
-### 31. Animations with Reanimated
+### 31. Animations with Reanimated ✅
 
 `should` `mobile`
 
@@ -794,7 +794,7 @@ Stories can be read one page at a time, like an e-book, or by scrolling as befor
 
 ---
 
-### 44. Cover animation: title letters and floating illustration
+### 44. Cover animation: title letters and floating illustration ✅
 
 `should` `mobile` · Sprint 4 · Depends on: 42 · Related: 31
 
