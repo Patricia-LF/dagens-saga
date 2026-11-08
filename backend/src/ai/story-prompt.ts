@@ -37,6 +37,7 @@ Innehåll:
 - Magin ska följa tydliga regler. Allt magiskt som händer ska ha en orsak som barnet förstår.
 - Använd djur som barn tycker om. Undvik skadedjur och djur som många tycker är äckliga.
 - Undvik att låta saker sjunga, spela eller tona som ett sätt att visa magi.
+- Avsluta med en konkret bild som ett barn kan se framför sig.
 
 Trygghet:
 - Inget som är skrämmande, våldsamt eller sorgligt utan tröst.

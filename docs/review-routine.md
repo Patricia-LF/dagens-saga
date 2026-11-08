@@ -100,3 +100,15 @@ _Add things here that come up during reviews, so the prompt or the checklist can
 - Small things still to fix by hand: a rabbit eating a cheese sandwich, an empty simile, and a last sentence close to a stated moral.
 - Two of the stories repeated themes that already had stories, because the script only avoids repeats within one run. Deleted them. Until issue 48 is done, I remove a theme from themes.ts once it has become a kept story.
 - Not yet changed: "Mycket magi och fantasi" in the prompt may be pushing the model to add too much magic. Waiting to see the effect of today's changes first.
+
+**2026-11-08 ("Sirra", the unicorn who wanted a friend)**
+
+- Sirra and Veno: good story, but the last sentence ("Sjön låg stilla och höll deras speglar nära") was a poetic image that didn't mean anything concrete. Rewrote the ending by hand. If it happens again, add a rule to the prompt: end with a clear, concrete image a child can picture.
+- Added a more specific description of the pegasus (a white horse with wings and a blue tail). If a character's species is rare, the story benefits from a short description of it the first time it appears.
+
+**2026-11-08 ("Sille", the snake who couldn't say S)**
+
+- Sille couldn't say S, but his own lines contained S ("Fast det känns knepigt"), and "ta Tille" was in the narrator's text. The model can't keep a rule about letters or sounds in the characters' speech.
+- The story also had several magical things that were never explained and had no clear role in the story.
+- Since it needed a lot of changes, I had it rewritten with Claude in chat. I asked for one clear magic rule, and for the message that practicing can help, but that it's okay not to pronounce everything right (for children who stutter or lisp).
+- Added a rule to the prompt: end with a clear, concrete image a child can picture. The vague ending was a repeated problem from the previous story.
