@@ -44,7 +44,13 @@ router.get("/", async (_req, res) => {
   const stories = await prisma.story.findMany({
     where: visibleWhere(todayInStockholm()),
     orderBy: { scheduledDate: "desc" },
-    select: { id: true, title: true, scheduledDate: true, source: true },
+    select: {
+      id: true,
+      title: true,
+      scheduledDate: true,
+      source: true,
+      imageUrl: true,
+    },
   });
 
   res.json(
@@ -92,7 +98,10 @@ router.get("/:id", async (req, res) => {
     return;
   }
 
-  res.json({ ...story, scheduledDate: formatScheduledDate(story.scheduledDate) });
+  res.json({
+    ...story,
+    scheduledDate: formatScheduledDate(story.scheduledDate),
+  });
 });
 
 export default router;

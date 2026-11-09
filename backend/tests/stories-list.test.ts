@@ -30,12 +30,14 @@ const listItems = [
     title: "Ugglan Ruff",
     scheduledDate: parseDate("2026-10-22"),
     source: "handwritten",
+    imageUrl: "https://example.com/ugglan.jpg",
   },
   {
     id: 5,
     title: "Draken Fnula",
     scheduledDate: parseDate("2026-10-21"),
     source: "ai",
+    imageUrl: null,
   },
 ];
 
@@ -63,8 +65,20 @@ describe("GET /stories", () => {
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual([
-      { id: 6, title: "Ugglan Ruff", scheduledDate: "2026-10-22", source: "handwritten" },
-      { id: 5, title: "Draken Fnula", scheduledDate: "2026-10-21", source: "ai" },
+      {
+        id: 6,
+        title: "Ugglan Ruff",
+        scheduledDate: "2026-10-22",
+        source: "handwritten",
+        imageUrl: "https://example.com/ugglan.jpg",
+      },
+      {
+        id: 5,
+        title: "Draken Fnula",
+        scheduledDate: "2026-10-21",
+        source: "ai",
+        imageUrl: null,
+      },
     ]);
   });
 
@@ -102,6 +116,7 @@ describe("GET /stories", () => {
       title: true,
       scheduledDate: true,
       source: true,
+      imageUrl: true,
     });
     expect(args.select).not.toHaveProperty("body");
     expect(args.select).not.toHaveProperty("status");

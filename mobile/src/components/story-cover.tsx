@@ -7,7 +7,7 @@ import { AnimatedTitle, LETTER_DELAY } from "@/components/animated-title";
 import { FloatingView } from "@/components/floating-view";
 import { Sparkles } from "@/components/sparkles";
 
-const DEFAULT_COVER = require("@/assets/images/covers/default-cover.jpg");
+export const DEFAULT_COVER = require("@/assets/images/covers/default-cover.jpg");
 
 // Spacing on the cover. Used both in the styles and in the image size calculation,
 // so the two always match.

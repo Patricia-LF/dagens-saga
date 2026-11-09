@@ -12,7 +12,7 @@ export type Story = {
 // The archive list only gets the fields it shows, not the whole story
 export type StorySummary = Pick<
   Story,
-  "id" | "title" | "scheduledDate" | "source"
+  "id" | "title" | "scheduledDate" | "source" | "imageUrl"
 >;
 
 // Fetches JSON from the backend. Returns null on 404, throws on other errors.

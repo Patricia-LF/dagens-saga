@@ -1,6 +1,13 @@
 // src/app/library.tsx
 import { useCallback, useEffect, useState } from "react";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { router } from "expo-router";
 import { getArchive, type StorySummary } from "@/api/stories";
 import { ContentBox } from "@/components/content-box";
@@ -10,6 +17,7 @@ import { useRem } from "@/hooks/use-screen-size";
 import { formatStoryDate, todayInStockholm } from "@/utils/dates";
 import { LoadingIndicator } from "@/components/loading-indicator";
 import { MessageBox } from "@/components/message-box";
+import { DEFAULT_COVER } from "@/components/story-cover";
 
 export default function LibraryScreen() {
   const theme = useTheme();
@@ -61,33 +69,51 @@ export default function LibraryScreen() {
           keyExtractor={(story) => String(story.id)}
           renderItem={({ item }) => {
             const isToday = item.scheduledDate === today;
+            const dateLabel = isToday
+              ? "I dag"
+              : formatStoryDate(item.scheduledDate);
             return (
               <Pressable
                 onPress={() => router.push(`/story/${item.id}`)}
+                accessibilityRole="button"
+                accessibilityLabel={`${item.title}, ${dateLabel}`}
                 style={[styles.item, { paddingVertical: rem(0.75) }]}
               >
-                <Text
+                <Image
+                  source={
+                    item.imageUrl ? { uri: item.imageUrl } : DEFAULT_COVER
+                  }
                   style={[
-                    styles.date,
-                    {
-                      color: theme.colors.toggleText,
-                      fontSize: rem(1),
-                      lineHeight: rem(1.5),
-                    },
-                    isToday && styles.today,
+                    styles.thumbnail,
+                    { width: rem(3.5), height: rem(3.5) },
                   ]}
-                  numberOfLines={1}
-                >
-                  {isToday ? "I dag" : formatStoryDate(item.scheduledDate)}
-                </Text>
-                <Text
-                  style={[
-                    styles.title,
-                    { color: theme.colors.text, fontSize: rem(1.25) },
-                  ]}
-                >
-                  {item.title}
-                </Text>
+                  accessible={false} // decorative, the title says which story it is
+                />
+
+                <View style={styles.itemText}>
+                  <Text
+                    style={[
+                      styles.date,
+                      {
+                        color: theme.colors.toggleText,
+                        fontSize: rem(1),
+                        lineHeight: rem(1.5),
+                      },
+                      isToday && styles.today,
+                    ]}
+                    numberOfLines={1}
+                  >
+                    {dateLabel}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.title,
+                      { color: theme.colors.text, fontSize: rem(1.25) },
+                    ]}
+                  >
+                    {item.title}
+                  </Text>
+                </View>
               </Pressable>
             );
           }}
@@ -103,7 +129,9 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     paddingBottom: 10,
   },
-  item: {},
+  item: { flexDirection: "row", alignItems: "center", gap: 12 },
+  thumbnail: { borderRadius: 8 },
+  itemText: { flex: 1 }, // takes the rest of the width, so long titles wrap
   title: {
     fontFamily: fonts.bodyBold,
     marginTop: 4,
