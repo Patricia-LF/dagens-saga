@@ -523,7 +523,7 @@ Members can create an account and log in, which is needed for favorites.
 
 ---
 
-### 33. Favorites (star a story)
+### 33. Favorites (star a story) ✅
 
 `should` `backend` `mobile`
 

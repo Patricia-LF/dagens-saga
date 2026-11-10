@@ -125,15 +125,18 @@ export default function LibraryScreen() {
         </View>
 
         {visibleStories.length === 0 ? (
-          <Text
-            style={[
-              styles.emptyText,
-              { color: theme.colors.text, fontSize: rem(1.125) },
-            ]}
-          >
-            Du har inga favoriter än. Tryck på stjärnan när du läser en saga du
-            gillar!
-          </Text>
+          // Fills the rest of the box like the list does, so the heading stays at the top
+          <View style={styles.emptyArea}>
+            <Text
+              style={[
+                styles.emptyText,
+                { color: theme.colors.text, fontSize: rem(1.125) },
+              ]}
+            >
+              Du har inga favoriter än. Tryck på stjärnan när du läser en saga
+              du gillar!
+            </Text>
+          </View>
         ) : (
           <FlatList
             data={visibleStories}
@@ -243,5 +246,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   heading: { fontFamily: fonts.heading, flexShrink: 1 },
-  emptyText: { fontFamily: fonts.body, textAlign: "center", marginTop: 24 },
+  emptyText: { fontFamily: fonts.body, textAlign: "left", marginTop: 24 },
+  emptyArea: { flex: 1 },
 });
