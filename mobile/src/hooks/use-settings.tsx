@@ -11,11 +11,16 @@ export type ReadingMode = "pages" | "scroll";
 export type ThemeMode = "system" | "light" | "dark";
 
 // All saved settings live in one object
-type Settings = { readingMode: ReadingMode; themeMode: ThemeMode };
+type Settings = {
+  readingMode: ReadingMode;
+  themeMode: ThemeMode;
+  favorites: number[];
+};
 
 const DEFAULT_SETTINGS: Settings = {
   readingMode: "pages",
   themeMode: "system",
+  favorites: [],
 };
 
 // AsyncStorage is a small key/value store on the device, like localStorage in a browser
@@ -26,6 +31,7 @@ type SettingsContextValue = {
   loaded: boolean; // false until the saved settings have been read
   setReadingMode: (mode: ReadingMode) => void;
   setThemeMode: (mode: ThemeMode) => void;
+  toggleFavorite: (storyId: number) => void;
 };
 
 const SettingsContext = createContext<SettingsContextValue>({
@@ -33,6 +39,7 @@ const SettingsContext = createContext<SettingsContextValue>({
   loaded: false,
   setReadingMode: () => {},
   setThemeMode: () => {},
+  toggleFavorite: () => {},
 });
 
 // Returns the value if it is one of the allowed options, otherwise the fallback
@@ -46,6 +53,14 @@ function pick<T extends string>(
 
 // Reads the saved settings. Anything missing or invalid falls back to the defaults.
 async function loadSettings(): Promise<Settings> {
+  // Only whole positive numbers, without duplicates. Anything else is dropped.
+  function pickFavorites(value: unknown): number[] {
+    if (!Array.isArray(value)) return [];
+    const ids = value.filter(
+      (id): id is number => Number.isInteger(id) && id > 0,
+    );
+    return [...new Set(ids)];
+  }
   try {
     const saved = await AsyncStorage.getItem(STORAGE_KEY);
     if (!saved) return DEFAULT_SETTINGS;
@@ -61,6 +76,7 @@ async function loadSettings(): Promise<Settings> {
         ["system", "light", "dark"],
         DEFAULT_SETTINGS.themeMode,
       ),
+      favorites: pickFavorites(parsed?.favorites),
     };
   } catch (error) {
     console.error(error);
@@ -94,9 +110,18 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
   const setThemeMode = (themeMode: ThemeMode) =>
     setSettings((prev) => ({ ...prev, themeMode }));
 
+  // Adds the story if it isn't a favorite, removes it if it is
+  const toggleFavorite = (storyId: number) =>
+    setSettings((prev) => ({
+      ...prev,
+      favorites: prev.favorites.includes(storyId)
+        ? prev.favorites.filter((id) => id !== storyId)
+        : [...prev.favorites, storyId],
+    }));
+
   return (
     <SettingsContext.Provider
-      value={{ settings, loaded, setReadingMode, setThemeMode }}
+      value={{ settings, loaded, setReadingMode, setThemeMode, toggleFavorite }}
     >
       {children}
     </SettingsContext.Provider>

@@ -2,7 +2,21 @@ import { ImageSourcePropType, TextStyle } from "react-native";
 import type { BackgroundShape } from "@/hooks/use-screen-size";
 
 export type NavIconName = "home" | "today" | "library";
-export type ThemeIconName = "sun" | "moon";
+export type ThemeIconName =
+  | "sun"
+  | "moon"
+  | "pagesOn"
+  | "pagesOff"
+  | "scrollOn"
+  | "scrollOff"
+  | "arrowBack"
+  | "arrowForward"
+  | "star"
+  | "starFilled"
+  | "allOn"
+  | "allOff"
+  | "favoritesOn"
+  | "favoritesOff";
 
 export const fonts = {
   heading: "IrishGrover_400Regular",
@@ -35,7 +49,7 @@ export const lightTheme: Theme = {
     surface: "rgba(254, 243, 199, 0.7)",
     surfaceStrong: "rgba(254, 243, 199, 0.95)",
     panel: "rgba(71, 71, 71, 0.31)",
-    pill: "#fdeca8",
+    pill: "#fdeca866",
     pillText: "#6b21a8",
     toggle: "#e9a3f8",
     toggleText: "#4b0082",
@@ -61,6 +75,18 @@ export const lightTheme: Theme = {
   themeIcons: {
     sun: require("@/assets/icons/sun-light.png"),
     moon: require("@/assets/icons/moon-light.png"),
+    pagesOn: require("@/assets/icons/bläddra-on-light.png"),
+    pagesOff: require("@/assets/icons/bläddra-off-light.png"),
+    scrollOn: require("@/assets/icons/scrolla-on-light.png"),
+    scrollOff: require("@/assets/icons/scrolla-off-light.png"),
+    arrowBack: require("@/assets/icons/arrow-left-light.png"),
+    arrowForward: require("@/assets/icons/arrow-right-light.png"),
+    star: require("@/assets/icons/star-empty-light.png"),
+    starFilled: require("@/assets/icons/star-filled-light.png"),
+    allOn: require("@/assets/icons/all-on-light.png"),
+    allOff: require("@/assets/icons/all-off-light.png"),
+    favoritesOn: require("@/assets/icons/starred-on-light.png"),
+    favoritesOff: require("@/assets/icons/starred-off-light.png"),
   },
 };
 
@@ -96,5 +122,17 @@ export const darkTheme: Theme = {
   themeIcons: {
     sun: require("@/assets/icons/sun-dark.png"),
     moon: require("@/assets/icons/moon-dark.png"),
+    pagesOn: require("@/assets/icons/bläddra-on-dark.png"),
+    pagesOff: require("@/assets/icons/bläddra-off-dark.png"),
+    scrollOn: require("@/assets/icons/scrolla-on-dark.png"),
+    scrollOff: require("@/assets/icons/scrolla-off-dark.png"),
+    arrowBack: require("@/assets/icons/arrow-left-dark.png"),
+    arrowForward: require("@/assets/icons/arrow-right-dark.png"),
+    star: require("@/assets/icons/star-empty-dark.png"),
+    starFilled: require("@/assets/icons/star-filled-dark.png"),
+    allOn: require("@/assets/icons/all-on-dark.png"),
+    allOff: require("@/assets/icons/all-off-dark.png"),
+    favoritesOn: require("@/assets/icons/starred-on-dark.png"),
+    favoritesOff: require("@/assets/icons/starred-off-dark.png"),
   },
 };

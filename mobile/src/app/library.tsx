@@ -18,11 +18,31 @@ import { formatStoryDate, todayInStockholm } from "@/utils/dates";
 import { LoadingIndicator } from "@/components/loading-indicator";
 import { MessageBox } from "@/components/message-box";
 import { DEFAULT_COVER } from "@/components/story-cover";
+import { useSettings } from "@/hooks/use-settings";
+
+type LibraryFilter = "all" | "favorites";
 
 export default function LibraryScreen() {
   const theme = useTheme();
   const rem = useRem();
   const today = todayInStockholm();
+  const { settings } = useSettings();
+  const [filter, setFilter] = useState<LibraryFilter>("all");
+
+  const filterOptions = [
+    {
+      value: "all",
+      label: "Alla sagor",
+      on: theme.themeIcons.allOn,
+      off: theme.themeIcons.allOff,
+    },
+    {
+      value: "favorites",
+      label: "Favoriter",
+      on: theme.themeIcons.favoritesOn,
+      off: theme.themeIcons.favoritesOff,
+    },
+  ] as const;
 
   // undefined = loading, [] = no stories yet, otherwise the list
   const [stories, setStories] = useState<StorySummary[] | undefined>(undefined);
@@ -61,63 +81,126 @@ export default function LibraryScreen() {
     );
   }
 
+  const visibleStories =
+    filter === "favorites"
+      ? stories.filter((story) => settings.favorites.includes(story.id))
+      : stories;
+
   return (
     <View style={styles.screen}>
       <ContentBox fill>
-        <FlatList
-          data={stories}
-          keyExtractor={(story) => String(story.id)}
-          renderItem={({ item }) => {
-            const isToday = item.scheduledDate === today;
-            const dateLabel = isToday
-              ? "I dag"
-              : formatStoryDate(item.scheduledDate);
-            return (
-              <Pressable
-                onPress={() => router.push(`/story/${item.id}`)}
-                accessibilityRole="button"
-                accessibilityLabel={`${item.title}, ${dateLabel}`}
-                style={[styles.item, { paddingVertical: rem(0.75) }]}
-              >
-                <Image
-                  source={
-                    item.imageUrl ? { uri: item.imageUrl } : DEFAULT_COVER
-                  }
-                  style={[
-                    styles.thumbnail,
-                    { width: rem(3.5), height: rem(3.5) },
-                  ]}
-                  accessible={false} // decorative, the title says which story it is
-                />
+        <View style={styles.filterRow}>
+          <Text
+            accessibilityRole="header"
+            style={[
+              styles.heading,
+              { color: theme.colors.text, fontSize: rem(1.5) },
+            ]}
+          >
+            {filter === "favorites" ? "Mina favoriter" : "Alla sagor"}
+          </Text>
 
-                <View style={styles.itemText}>
-                  <Text
+          {/* The filter buttons, grouped so they stay together on the right */}
+          <View style={styles.filterButtons}>
+            {filterOptions.map((option) => {
+              const selected = filter === option.value;
+              return (
+                <Pressable
+                  key={option.value}
+                  onPress={() => setFilter(option.value)}
+                  accessibilityRole="button"
+                  accessibilityLabel={option.label}
+                  accessibilityState={{ selected }}
+                  style={styles.filterButton}
+                >
+                  <Image
+                    source={selected ? option.on : option.off}
+                    style={{ width: rem(2.25), height: rem(2.25) }}
+                    accessible={false}
+                  />
+                </Pressable>
+              );
+            })}
+          </View>
+        </View>
+
+        {visibleStories.length === 0 ? (
+          <Text
+            style={[
+              styles.emptyText,
+              { color: theme.colors.text, fontSize: rem(1.125) },
+            ]}
+          >
+            Du har inga favoriter än. Tryck på stjärnan när du läser en saga du
+            gillar!
+          </Text>
+        ) : (
+          <FlatList
+            data={visibleStories}
+            keyExtractor={(story) => String(story.id)}
+            renderItem={({ item }) => {
+              const isToday = item.scheduledDate === today;
+              const dateLabel = isToday
+                ? "I dag"
+                : formatStoryDate(item.scheduledDate);
+              const isFavorite = settings.favorites.includes(item.id);
+              return (
+                <Pressable
+                  onPress={() => router.push(`/story/${item.id}`)}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${item.title}, ${dateLabel}${isFavorite ? ", favorit" : ""}`}
+                  style={[styles.item, { paddingVertical: rem(0.75) }]}
+                >
+                  <Image
+                    source={
+                      item.imageUrl ? { uri: item.imageUrl } : DEFAULT_COVER
+                    }
                     style={[
-                      styles.date,
-                      {
-                        color: theme.colors.toggleText,
-                        fontSize: rem(1),
-                        lineHeight: rem(1.5),
-                      },
-                      isToday && styles.today,
+                      styles.thumbnail,
+                      { width: rem(6), height: rem(6) },
                     ]}
-                    numberOfLines={1}
-                  >
-                    {dateLabel}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.title,
-                      { color: theme.colors.text, fontSize: rem(1.25) },
-                    ]}
-                  >
-                    {item.title}
-                  </Text>
-                </View>
-              </Pressable>
-            );
-          }}
-        />
+                    accessible={false} // decorative, the title says which story it is
+                  />
+
+                  <View style={styles.itemText}>
+                    {/* The date and the star side by side */}
+                    <View style={styles.dateRow}>
+                      <Text
+                        style={[
+                          styles.date,
+                          {
+                            color: theme.colors.toggleText,
+                            fontSize: rem(1),
+                            lineHeight: rem(1.5),
+                          },
+                          isToday && styles.today,
+                        ]}
+                        numberOfLines={1}
+                      >
+                        {dateLabel}
+                      </Text>
+                      {isFavorite && (
+                        <Image
+                          source={theme.themeIcons.starFilled}
+                          style={{ width: rem(1.25), height: rem(1.25) }}
+                          accessible={false}
+                        />
+                      )}
+                    </View>
+                    <Text
+                      style={[
+                        styles.title,
+                        { color: theme.colors.text, fontSize: rem(1.25) },
+                      ]}
+                    >
+                      {item.title}
+                    </Text>
+                  </View>
+                </Pressable>
+              );
+            }}
+          />
+        )}
       </ContentBox>
     </View>
   );
@@ -136,11 +219,29 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bodyBold,
     marginTop: 4,
   },
-  date: {
-    fontFamily: fonts.body,
+  dateRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
     marginBottom: 2,
   },
+  date: { fontFamily: fonts.body },
   today: {
     fontFamily: fonts.bodyBold,
   },
+  filterRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  filterButtons: { flexDirection: "row", gap: 8 },
+  filterButton: {
+    minWidth: 44,
+    minHeight: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  heading: { fontFamily: fonts.heading, flexShrink: 1 },
+  emptyText: { fontFamily: fonts.body, textAlign: "center", marginTop: 24 },
 });

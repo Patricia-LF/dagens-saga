@@ -15,6 +15,7 @@ import { fonts } from "@/constants/theme";
 import { useRem } from "@/hooks/use-screen-size";
 import { useSettings } from "@/hooks/use-settings";
 import { useTheme } from "@/hooks/use-theme";
+import { FavoriteButton } from "./favorite-button";
 
 const HINT_HEIGHT = 44; // same as the arrow row in page mode
 
@@ -47,6 +48,7 @@ export function StoryReader({ story, leading }: Props) {
       <View style={styles.topRow}>
         {leading}
         <View style={styles.toggle}>
+          <FavoriteButton storyId={story.id} />
           <ReadingModeToggle />
         </View>
       </View>
@@ -111,7 +113,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   // marginLeft: auto keeps the toggle on the right even when there is no leading element
-  toggle: { marginLeft: "auto", flexShrink: 0 },
+  toggle: {
+    marginLeft: "auto",
+    flexShrink: 0,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
   coverScreen: { justifyContent: "center" }, // keeps the cover in the middle of the first view
   scrollArea: { flex: 1 },
   scrollHint: {

@@ -9,6 +9,7 @@ import {
   Text,
   View,
   ViewToken,
+  Image,
 } from "react-native";
 import type { Story } from "@/api/stories";
 import { StoryCover } from "@/components/story-cover";
@@ -167,7 +168,11 @@ export function PageReader({ story }: Props) {
             accessibilityLabel="Föregående sida"
             style={styles.arrow}
           >
-            <Text style={arrowStyle}>←</Text>
+            <Image
+              source={theme.themeIcons.arrowBack}
+              style={{ width: rem(2.25), height: rem(2.25) }}
+              accessible={false}
+            />
           </Pressable>
         ) : (
           <View style={styles.arrow} />
@@ -189,7 +194,11 @@ export function PageReader({ story }: Props) {
             accessibilityLabel="Nästa sida"
             style={styles.arrow}
           >
-            <Text style={arrowStyle}>→</Text>
+            <Image
+              source={theme.themeIcons.arrowForward}
+              style={{ width: rem(2.25), height: rem(2.25) }}
+              accessible={false}
+            />
           </Pressable>
         ) : (
           <View style={styles.arrow} />
