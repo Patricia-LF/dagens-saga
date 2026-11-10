@@ -528,22 +528,33 @@ Members can create an account and log in, which is needed for favorites.
 `should` `backend` `mobile`
 
 **Description**
-Logged-in members can star stories and find them again in their own list.
+Readers can star stories and find them again in a favorites list. The favorites are saved on the device, so no account is needed.
 
 **Scope**
 
-- A `Favorite` model linking a user and a story.
-- A star in the reading view, and a list of favorites.
+- A star on the story's cover or in the top row, to add or remove a favorite.
+- The library can show only favorites (for example with a toggle "Alla" / "Favoriter").
+- Favorites are saved on the device and kept after the app restarts.
+
+**Out of scope**
+
+- Syncing favorites between devices (needs an account, see the decision on login).
+
+**Technical notes**
+
+- Store the favorite story ids in the settings from issue 43 (SettingsProvider), as a list of numbers. Validate them when loading, like the other settings.
+- A story that no longer exists in the archive is simply not shown, even if its id is saved.
 
 **Acceptance criteria**
 
-- [ ] Favorites are saved per user and shown in a list.
-- [ ] Only logged-in users can star stories.
-- [ ] One user can never see or change another user's favorites.
+- [ ] A story can be starred and unstarred, and the star shows the current state.
+- [ ] The favorites are still there after the app restarts.
+- [ ] The library can show only favorites, with a friendly message when there are none.
+- [ ] The star has an accessibility label and tells screen readers whether the story is a favorite.
 
 ---
 
-### 34. Illustrations
+### 34. Illustrations ✅
 
 `should` `mobile`
 
@@ -984,3 +995,15 @@ Each story gets a short summary of one sentence, like the blurb on the back of a
 - [ ] The review checklist includes the summary.
 
 Closed: decided against summaries. A picture says more to young readers than a sentence of text, so the archive will show each story’s cover image instead (issues 34 and 42). The title and date are enough as text.
+
+### Library as a grid of covers
+
+`could` `mobile`
+
+**Description**
+Show the library as a grid with two cards per row, where the cover image fills the card and the title and date are below. More visual for young readers, and closer to a bookshelf. The list with larger thumbnails (`rem(6)`) works for now.
+
+**Technical notes**
+
+- `FlatList` with `numColumns={2}` and `columnWrapperStyle` for the gap between cards.
+- Do it before or together with the favorites star, since the star sits on the same card.
