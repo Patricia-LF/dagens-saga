@@ -25,7 +25,7 @@ export function ContentBox({ title, fill = false, children }: Props) {
         {
           padding: rem(1.5),
           marginHorizontal: rem(1),
-          marginTop: rem(1.25),
+          marginTop: rem(0.8),
           borderRadius: rem(1.25),
         },
         fill && { flexGrow: 1, flexShrink: 1, minHeight: 0 },

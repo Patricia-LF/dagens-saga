@@ -16,6 +16,8 @@ type Props = {
   children: ReactNode;
   distance?: number; // how many px it moves up
   duration?: number; // ms for one way (up or down)
+  distanceX?: number; // how many px it moves sideways (0 = only up and down)
+  durationX?: number; // ms for one way sideways. Different from duration gives a softer path
   delay?: number; // ms before it starts, so several items don't move in sync
   style?: StyleProp<ViewStyle>;
 };
@@ -25,27 +27,50 @@ export function FloatingView({
   children,
   distance = 6,
   duration = 2000,
+  distanceX = 0,
+  durationX = 2600,
   delay = 0,
   style,
 }: Props) {
   const reduceMotion = useReducedMotion();
   const offset = useSharedValue(0);
+  const offsetX = useSharedValue(0);
 
   useEffect(() => {
     if (reduceMotion) return;
+    const easing = Easing.inOut(Easing.sin);
     offset.value = withDelay(
       delay,
+      withRepeat(withTiming(-distance, { duration, easing }), -1, true),
+    );
+    // Starts at -distanceX / 2 and moves to +distanceX / 2, so it sways around its place
+    offsetX.value = -distanceX / 2;
+    offsetX.value = withDelay(
+      delay,
       withRepeat(
-        withTiming(-distance, { duration, easing: Easing.inOut(Easing.sin) }),
-        -1, // repeat forever
-        true, // go back down again instead of jumping
+        withTiming(distanceX / 2, { duration: durationX, easing }),
+        -1,
+        true,
       ),
     );
-    return () => cancelAnimation(offset);
-  }, [reduceMotion, distance, duration, delay, offset]);
+
+    return () => {
+      cancelAnimation(offset);
+      cancelAnimation(offsetX);
+    };
+  }, [
+    reduceMotion,
+    distance,
+    duration,
+    distanceX,
+    durationX,
+    delay,
+    offset,
+    offsetX,
+  ]);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: offset.value }],
+    transform: [{ translateX: offsetX.value }, { translateY: offset.value }],
   }));
 
   return (
