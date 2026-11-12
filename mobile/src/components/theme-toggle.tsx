@@ -49,10 +49,7 @@ export function ThemeToggle() {
       accessibilityLabel="Nattläge"
       accessibilityState={{ checked: isDark }}
       hitSlop={8}
-      style={[
-        styles.track,
-        { top: insets.top + 8, backgroundColor: theme.colors.pill },
-      ]}
+      style={[styles.track, { backgroundColor: theme.colors.pill }]}
     >
       <Animated.View
         style={[
@@ -76,14 +73,13 @@ export function ThemeToggle() {
 
 const styles = StyleSheet.create({
   track: {
-    position: "absolute",
-    right: 16,
-    zIndex: 10,
     width: TRACK_WIDTH,
     height: TRACK_HEIGHT,
     borderRadius: TRACK_HEIGHT / 2,
     padding: PADDING,
   },
+  floating: { position: "absolute", right: 16, zIndex: 10 },
+  inFlow: { alignSelf: "flex-end", marginRight: 16 }, // on the right, above the title
   knob: {
     width: KNOB_SIZE,
     height: KNOB_SIZE,
@@ -92,5 +88,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   // Both icons sit on top of each other inside the knob
-  icon: { position: "absolute", width: 22, height: 22 },
+  icon: {
+    position: "absolute",
+    width: 22,
+    height: 22,
+  },
 });

@@ -14,6 +14,7 @@ import { SettingsProvider, useSettings } from "@/hooks/use-settings";
 import { BottomNav } from "@/components/bottom-nav";
 import { useBackgroundShape, useScreenSize } from "@/hooks/use-screen-size";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // Keep the splash screen visible until the fonts and settings are loaded
 SplashScreen.preventAutoHideAsync();
@@ -50,6 +51,8 @@ function AppShell() {
   const readingFillsHeight =
     pathname === "/today" || pathname.startsWith("/story");
 
+  const insets = useSafeAreaInsets();
+
   useEffect(() => {
     if (ready) SplashScreen.hideAsync();
   }, [ready]);
@@ -67,6 +70,12 @@ function AppShell() {
 
       {/* Side margin only around the panel, so the bottom nav can still reach the edges */}
       <View testID="main" style={[styles.main, isWide && styles.mainWide]}>
+        {/* Wide screens: the toggle on its own row above the panel */}
+        {isWide && (
+          <View style={[styles.toggleRow, { paddingTop: insets.top + 8 }]}>
+            <ThemeToggle />
+          </View>
+        )}
         <View
           testID="panel"
           style={[
@@ -83,7 +92,6 @@ function AppShell() {
       </View>
 
       {showBottomNav && <BottomNav />}
-      <ThemeToggle />
     </View>
   );
 }
@@ -106,4 +114,5 @@ const styles = StyleSheet.create({
   // is not passed down), so a child with flex: 1 would end up 0 px tall
   panelFill: { flexGrow: 1 },
   page: { flexGrow: 1, flexShrink: 1 },
+  toggleRow: { alignItems: "flex-end" },
 });

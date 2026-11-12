@@ -11,6 +11,7 @@ import { navItems, isNavItemActive } from "@/constants/nav";
 import { useTheme } from "@/hooks/use-theme";
 import { useRem } from "@/hooks/use-screen-size";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type Props = {
   showNav: boolean; // show the menu under the title (wide screens only)
@@ -27,13 +28,19 @@ export function SiteHeader({ showNav, isWide }: Props) {
 
   // Phones: at least 58 for the look, more if the status bar or camera needs it.
   // Tablet and web: the panel already has its own padding.
-  const paddingTop = isWide ? 0 : Math.max(58, insets.top + 12);
+  const paddingTop = isWide ? 0 : insets.top + 8;
 
   // Scale the title with the screen width, but never above 84
   const titleSize = Math.min(rem(3.5), width / 8.5);
 
   return (
-    <View style={[styles.header, { paddingTop }]}>
+    <View style={[styles.header, { paddingTop, gap: isWide ? 0 : 8 }]}>
+      {!isWide && (
+        // Its own row, so the toggle can sit on the right while the title stays centered
+        <View style={styles.toggleRow}>
+          <ThemeToggle />
+        </View>
+      )}
       {/* The title also works as a link back to the start page */}
       <Pressable onPress={() => router.navigate("/")}>
         <Text
@@ -105,4 +112,5 @@ const styles = StyleSheet.create({
   pillText: {
     fontFamily: fonts.heading,
   },
+  toggleRow: { alignSelf: "stretch", alignItems: "flex-end", paddingRight: 16 },
 });
