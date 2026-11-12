@@ -2,12 +2,13 @@
 
 ## Source descriptions
 
-| Source  | Description                                                                                   |
-| ------- | --------------------------------------------------------------------------------------------- |
-| Canva   | Canva, free elements combined by me (Canva Content License)                                   |
-| AI      | Generated with ChatGPT (OpenAI) or Gemini (Google), prompt by me. The tool is noted in Notes. |
-| Drawing | Drawn by me                                                                                   |
-| Default | No own image yet, the app shows the default cover                                             |
+| Source   | Description                                                                                               |
+| -------- | --------------------------------------------------------------------------------------------------------- |
+| Canva    | Canva, free elements combined by me (Canva Content License)                                               |
+| AI       | Generated with ChatGPT (OpenAI) or Gemini (Google), prompt by me. The tool is noted in Notes.             |
+| Drawing  | Drawn by me                                                                                               |
+| Default  | No own image yet, the app shows the default cover                                                         |
+| Figma AI | Generated with Figma's AI features, edited by me. Figma's AI terms give the user ownership of the output. |
 
 ## Story images
 
@@ -35,19 +36,17 @@ The source column uses the names from the table above.
 
 ## App images
 
-| File                                  | Used for         | Source   | Notes                    |
-| ------------------------------------- | ---------------- | -------- | ------------------------ |
-| `covers/default-cover.jpg`            | Default cover    | AI       | Gemini                   |
-| `backgrounds/*.jpg`                   | Backgrounds      | AI       | Gemini                   |
-| `fairies/*.png`                       | Start page       | Canva    | 4 fairies, free elements |
-| `icons/sun-*.png`, `icons/moon-*.png` | Day/night switch | Figma AI | Edited by me             |
-| `icons/star-*.png`                    | Favorite star    | Figma AI | Edited by me             |
-| `icons/starfilled-*.png`              | Favorite star    | Figma AI | Edited by me             |
-| `icons/favorites-*.png`               | Library filter   | Figma AI | Edited by me             |
-| `icons/all-*.png`                     | Library filter   | Figma AI | Edited by me             |
-| `icons/read-*.png`                    | Reading mode     | Figma AI | Edited by me             |
-| `icons/scroll-*.png`                  | Reading mode     | Figma AI | Edited by me             |
-| `icons/arrow-*.png`                   | Page arrows      | Figma AI | Edited by me             |
-| `tabIcons/home-*.png`                 | Bottom nav       | Figma AI | Edited by me             |
-| `tabIcons/dagens-*.png`               | Bottom nav       | Figma AI | Edited by me             |
-| `tabIcons/library-*.png`              | Bottom nav       | Figma AI | Edited by me             |
+| File                                                           | Used for         | Source   | Notes                                  |
+| -------------------------------------------------------------- | ---------------- | -------- | -------------------------------------- |
+| `images/icon.png`, `images/android-icon-foreground.png`        | App icon         | AI       | The blue fairy                         |
+| `images/splash-icon.png`                                       | Splash screen    | AI       | The blue fairy, transparent background |
+| `images/favicon.png`                                           | Web browser tab  | ...      |                                        |
+| `images/covers/default-cover.jpg`                              | Default cover    | AI       | Gemini                                 |
+| `images/backgrounds/*.jpg`                                     | Backgrounds      | AI       | Gemini                                 |
+| `images/fairies/*.png`                                         | Start page       | Canva    | Free elements, light and dark versions |
+| `icons/sun-*.png`, `icons/moon-*.png`                          | Day/night switch | Figma AI | Edited by me                           |
+| `icons/star-empty-*.png`, `icons/star-filled-*.png`            | Favorite star    | Figma AI | Edited by me                           |
+| `icons/all-*.png`, `icons/starred-*.png`                       | Library filter   | Figma AI | Edited by me                           |
+| `icons/read-*.png`, `icons/scroll-*.png`                       | Reading mode     | Figma AI | Edited by me                           |
+| `icons/arrow-left-*.png`, `icons/arrow-right-*.png`            | Page arrows      | Figma AI | Edited by me                           |
+| `icons/home-*.png`, `icons/today-*.png`, `icons/library-*.png` | Bottom nav       | Figma AI | Edited by me                           |
