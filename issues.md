@@ -880,6 +880,12 @@ Expo Go needs the phone and the computer on the same network, which doesn't work
 - [ ] The phone's screen can be shown on the computer with scrcpy.
 - [ ] A screen recording of the demo exists as a backup.
 - [ ] The steps are written down in the README, so they can be repeated before the presentation.
+- [ ] Make the app icon and splash image (the template files were deleted):
+  - `icon.png`: 1024 × 1024, no transparency
+  - `android-icon-foreground.png`: 1024 × 1024, transparent background, motif inside the center 66 % so Android's round crop doesn't cut it
+  - `android-icon-background.png`: 1024 × 1024, a solid color or a simple background
+  - `android-icon-monochrome.png`: 1024 × 1024, the motif in one color on a transparent background
+  - `splash-icon.png`: the motif on a transparent background. The background color is set in `app.json`
 
 ---
 
