@@ -1,5 +1,5 @@
 node_modules
 .env
-mobile/assets/
+mobile/assets/images/not-in-use/
 backend/src/generated/
 backend/dist/

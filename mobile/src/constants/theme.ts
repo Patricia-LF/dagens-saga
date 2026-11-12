@@ -18,6 +18,12 @@ export type ThemeIconName =
   | "favoritesOn"
   | "favoritesOff";
 
+export type FairyPosition =
+  | "topLeft"
+  | "topRight"
+  | "bottomLeft"
+  | "bottomRight";
+
 export const fonts = {
   heading: "IrishGrover_400Regular",
   body: "ComicNeue_400Regular",
@@ -41,6 +47,7 @@ export type Theme = {
   backgroundImages: Record<BackgroundShape, ImageSourcePropType>;
   navIcons: Record<NavIconName, ImageSourcePropType>;
   themeIcons: Record<ThemeIconName, ImageSourcePropType>;
+  fairies: Record<FairyPosition, ImageSourcePropType>;
 };
 
 export const lightTheme: Theme = {
@@ -69,16 +76,16 @@ export const lightTheme: Theme = {
   },
   navIcons: {
     home: require("@/assets/icons/home-light.png"),
-    today: require("@/assets/icons/dagens-light.png"),
+    today: require("@/assets/icons/today-light.png"),
     library: require("@/assets/icons/library-light.png"),
   },
   themeIcons: {
     sun: require("@/assets/icons/sun-light.png"),
     moon: require("@/assets/icons/moon-light.png"),
-    pagesOn: require("@/assets/icons/bläddra-on-light.png"),
-    pagesOff: require("@/assets/icons/bläddra-off-light.png"),
-    scrollOn: require("@/assets/icons/scrolla-on-light.png"),
-    scrollOff: require("@/assets/icons/scrolla-off-light.png"),
+    pagesOn: require("@/assets/icons/read-on-light.png"),
+    pagesOff: require("@/assets/icons/read-off-light.png"),
+    scrollOn: require("@/assets/icons/scroll-on-light.png"),
+    scrollOff: require("@/assets/icons/scroll-off-light.png"),
     arrowBack: require("@/assets/icons/arrow-left-light.png"),
     arrowForward: require("@/assets/icons/arrow-right-light.png"),
     star: require("@/assets/icons/star-empty-light.png"),
@@ -87,6 +94,12 @@ export const lightTheme: Theme = {
     allOff: require("@/assets/icons/all-off-light.png"),
     favoritesOn: require("@/assets/icons/starred-on-light.png"),
     favoritesOff: require("@/assets/icons/starred-off-light.png"),
+  },
+  fairies: {
+    topLeft: require("@/assets/images/fairies/fairy-top-left-light.png"),
+    topRight: require("@/assets/images/fairies/fairy-top-right-light.png"),
+    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left-light.png"),
+    bottomRight: require("@/assets/images/fairies/fairy-bottom-right-light.png"),
   },
 };
 
@@ -116,16 +129,16 @@ export const darkTheme: Theme = {
   },
   navIcons: {
     home: require("@/assets/icons/home-dark.png"),
-    today: require("@/assets/icons/dagens-dark.png"),
+    today: require("@/assets/icons/today-dark.png"),
     library: require("@/assets/icons/library-dark.png"),
   },
   themeIcons: {
     sun: require("@/assets/icons/sun-dark.png"),
     moon: require("@/assets/icons/moon-dark.png"),
-    pagesOn: require("@/assets/icons/bläddra-on-dark.png"),
-    pagesOff: require("@/assets/icons/bläddra-off-dark.png"),
-    scrollOn: require("@/assets/icons/scrolla-on-dark.png"),
-    scrollOff: require("@/assets/icons/scrolla-off-dark.png"),
+    pagesOn: require("@/assets/icons/read-on-dark.png"),
+    pagesOff: require("@/assets/icons/read-off-dark.png"),
+    scrollOn: require("@/assets/icons/scroll-on-dark.png"),
+    scrollOff: require("@/assets/icons/scroll-off-dark.png"),
     arrowBack: require("@/assets/icons/arrow-left-dark.png"),
     arrowForward: require("@/assets/icons/arrow-right-dark.png"),
     star: require("@/assets/icons/star-empty-dark.png"),
@@ -134,5 +147,11 @@ export const darkTheme: Theme = {
     allOff: require("@/assets/icons/all-off-dark.png"),
     favoritesOn: require("@/assets/icons/starred-on-dark.png"),
     favoritesOff: require("@/assets/icons/starred-off-dark.png"),
+  },
+  fairies: {
+    topLeft: require("@/assets/images/fairies/fairy-top-left-light.png"),
+    topRight: require("@/assets/images/fairies/fairy-top-right-light.png"),
+    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left-light.png"),
+    bottomRight: require("@/assets/images/fairies/fairy-bottom-right-light.png"),
   },
 };
