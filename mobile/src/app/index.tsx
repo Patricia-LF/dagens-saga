@@ -6,10 +6,10 @@ import { useRem, useScreenSize } from "@/hooks/use-screen-size";
 import { FloatingView } from "@/components/floating-view";
 
 // Decorative fairies on the start page (change the file names to yours)
-const FAIRY_LEFT_UP = require("@/assets/images/fairies/fairy-1-left.png");
-const FAIRY_LEFT_DOWN = require("@/assets/images/fairies/fairy-2-left.png");
-const FAIRY_RIGHT_UP = require("@/assets/images/fairies/fairy-1-right.png");
-const FAIRY_RIGHT_DOWN = require("@/assets/images/fairies/fairy-2-right.png");
+/* const FAIRY_LEFT_UP = require("@/assets/images/fairies/fairy-1-left-up.png");
+const FAIRY_LEFT_DOWN = require("@/assets/images/fairies/fairy-2-left-down.png");
+const FAIRY_RIGHT_UP = require("@/assets/images/fairies/fairy-1-right-up.png");
+const FAIRY_RIGHT_DOWN = require("@/assets/images/fairies/fairy-2-right-down.png"); */
 
 export default function StartScreen() {
   const theme = useTheme();
@@ -53,10 +53,14 @@ export default function StartScreen() {
           </Text>
         </ContentBox>
         <FloatingView
+          distance={12}
+          distanceX={8}
+          duration={1000}
+          durationX={1700}
           style={[styles.fairy, { top: -rem(1.5), left: fairyInset }]}
         >
           <Image
-            source={FAIRY_LEFT_UP}
+            source={theme.fairies.topLeft}
             style={{ width: rem(4), height: rem(4) }}
             resizeMode="contain"
             accessible={false}
@@ -64,33 +68,43 @@ export default function StartScreen() {
         </FloatingView>
         <FloatingView
           delay={800}
-          duration={2400}
+          distance={10}
+          distanceX={12}
+          duration={1400}
+          durationX={2100}
           style={[styles.fairy, { top: -rem(1.5), right: fairyInset }]}
         >
           <Image
-            source={FAIRY_RIGHT_UP}
+            source={theme.fairies.topRight}
             style={{ width: rem(4), height: rem(4) }}
             resizeMode="contain"
             accessible={false}
           />
         </FloatingView>
         <FloatingView
+          delay={600}
+          distance={14}
+          distanceX={10}
+          duration={1600}
+          durationX={2400}
           style={[styles.fairy, { bottom: -rem(1.5), left: fairyInset }]}
         >
           <Image
-            source={FAIRY_LEFT_DOWN}
+            source={theme.fairies.bottomLeft}
             style={{ width: rem(4), height: rem(4) }}
             resizeMode="contain"
             accessible={false}
           />
         </FloatingView>
         <FloatingView
-          delay={800}
-          duration={2400}
+          distance={16}
+          distanceX={14}
+          duration={1200}
+          durationX={1400}
           style={[styles.fairy, { bottom: -rem(1.5), right: fairyInset }]}
         >
           <Image
-            source={FAIRY_RIGHT_DOWN}
+            source={theme.fairies.bottomRight}
             style={{ width: rem(4), height: rem(4) }}
             resizeMode="contain"
             accessible={false}

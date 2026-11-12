@@ -96,10 +96,10 @@ export const lightTheme: Theme = {
     favoritesOff: require("@/assets/icons/starred-off-light.png"),
   },
   fairies: {
-    topLeft: require("@/assets/images/fairies/fairy-top-left-light.png"),
-    topRight: require("@/assets/images/fairies/fairy-top-right-light.png"),
-    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left-light.png"),
-    bottomRight: require("@/assets/images/fairies/fairy-bottom-right-light.png"),
+    topLeft: require("@/assets/images/fairies/fairy-top-left.png"),
+    topRight: require("@/assets/images/fairies/fairy-top-right.png"),
+    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left.png"),
+    bottomRight: require("@/assets/images/fairies/fairy-bottom-right.png"),
   },
 };
 
@@ -149,9 +149,9 @@ export const darkTheme: Theme = {
     favoritesOff: require("@/assets/icons/starred-off-dark.png"),
   },
   fairies: {
-    topLeft: require("@/assets/images/fairies/fairy-top-left-light.png"),
-    topRight: require("@/assets/images/fairies/fairy-top-right-light.png"),
-    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left-light.png"),
-    bottomRight: require("@/assets/images/fairies/fairy-bottom-right-light.png"),
+    topLeft: require("@/assets/images/fairies/fairy-top-left.png"),
+    topRight: require("@/assets/images/fairies/fairy-top-right.png"),
+    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left.png"),
+    bottomRight: require("@/assets/images/fairies/fairy-bottom-right.png"),
   },
 };

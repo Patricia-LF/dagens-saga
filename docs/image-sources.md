@@ -2,13 +2,12 @@
 
 ## Source descriptions
 
-| Source  | Description                                                                                              |
-| ------- | -------------------------------------------------------------------------------------------------------- |
-| Canva   | Canva, free elements combined by me (Canva Content License)                                              |
-| AI      | Generated with ChatGPT (OpenAI) or Gemini (Google), prompt by me. The tool is noted in Notes.            |
-| Drawing | Drawn by me                                                                                              |
-| Default | No own image yet, the app shows the default cover                                                        |
-| svgrepo | Icons from svgrepo.com, recolored and given a background by me. The license is listed per icon in Notes. |
+| Source  | Description                                                                                   |
+| ------- | --------------------------------------------------------------------------------------------- |
+| Canva   | Canva, free elements combined by me (Canva Content License)                                   |
+| AI      | Generated with ChatGPT (OpenAI) or Gemini (Google), prompt by me. The tool is noted in Notes. |
+| Drawing | Drawn by me                                                                                   |
+| Default | No own image yet, the app shows the default cover                                             |
 
 ## Story images
 
@@ -36,21 +35,19 @@ The source column uses the names from the table above.
 
 ## App images
 
-| File                                  | Used for         | Source  | Notes                                                                                      |
-| ------------------------------------- | ---------------- | ------- | ------------------------------------------------------------------------------------------ |
-| `covers/default-cover.jpg`            | Default cover    | AI      | Gemini                                                                                     |
-| `backgrounds/*.jpg`                   | Backgrounds      | AI      | Gemini                                                                                     |
-| `fairies/*.png`                       | Start page       | Canva   | 4 fairies, free elements                                                                   |
-| `icons/sun-*.png`, `icons/moon-*.png` | Day/night switch | svgrepo | Solar Bold Icons by Solar Icons, CC BY. Recolored by me                                    |
-| `icons/star-*.png`                    | Favorite star    | svgrepo | Solar Linear Icons by Solar Icons, CC BY. Recolored by me                                  |
-| `icons/starfilled-*.png`              | Favorite star    | svgrepo | Solar Bold Icons by Solar Icons, CC BY. Recolored by me                                    |
-| `icons/favorites-*.png`               | Library filter   | svgrepo | Solar Bold Icons by Solar Icons, CC BY. Recolored, background added by me                  |
-| `icons/all-*.png`                     | Library filter   | svgrepo | Neuicons Oval Line Icons by Neuicons, MIT. Recolored, background added by me               |
-| `icons/read-*.png`                    | Reading mode     | svgrepo | Libre Variety Filled Icons by Diemen Design, MIT. Recolored, background added by me        |
-| `icons/scroll-*.png`                  | Reading mode     | svgrepo | Gentlecons Interface Icons by Konstantin Filatov, CC BY. Recolored, background added by me |
-| `icons/arrow-*.png`                   | Page arrows      | svgrepo | Gentlecons Interface Icons by Konstantin Filatov, CC BY. Recolored, background added by me |
-| `tabIcons/home-*.png`                 | Bottom nav       | svgrepo | Nova Circular Filled Icons by Dmitriy Novikov, CC BY. Recolored by me                      |
-| `tabIcons/dagens-*.png`               | Bottom nav       | svgrepo | Items And Tools Icooon Mono Vectors by Icooon Mono, Public Domain                          |
-| `tabIcons/library-*.png`              | Bottom nav       | svgrepo | Ionicons Filled Interface Icons by Ionicons, MIT. Recolored by me                          |
-
-[svgrepo.com](https://www.svgrepo.com/page/licensing/)
+| File                                  | Used for         | Source   | Notes                    |
+| ------------------------------------- | ---------------- | -------- | ------------------------ |
+| `covers/default-cover.jpg`            | Default cover    | AI       | Gemini                   |
+| `backgrounds/*.jpg`                   | Backgrounds      | AI       | Gemini                   |
+| `fairies/*.png`                       | Start page       | Canva    | 4 fairies, free elements |
+| `icons/sun-*.png`, `icons/moon-*.png` | Day/night switch | Figma AI | Edited by me             |
+| `icons/star-*.png`                    | Favorite star    | Figma AI | Edited by me             |
+| `icons/starfilled-*.png`              | Favorite star    | Figma AI | Edited by me             |
+| `icons/favorites-*.png`               | Library filter   | Figma AI | Edited by me             |
+| `icons/all-*.png`                     | Library filter   | Figma AI | Edited by me             |
+| `icons/read-*.png`                    | Reading mode     | Figma AI | Edited by me             |
+| `icons/scroll-*.png`                  | Reading mode     | Figma AI | Edited by me             |
+| `icons/arrow-*.png`                   | Page arrows      | Figma AI | Edited by me             |
+| `tabIcons/home-*.png`                 | Bottom nav       | Figma AI | Edited by me             |
+| `tabIcons/dagens-*.png`               | Bottom nav       | Figma AI | Edited by me             |
+| `tabIcons/library-*.png`              | Bottom nav       | Figma AI | Edited by me             |
