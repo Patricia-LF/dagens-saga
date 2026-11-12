@@ -83,13 +83,13 @@ Check that:
 | `P1001: Can't reach database server` | `DIRECT_URL` uses the direct connection (`db.<ref>.supabase.co`) | Use the **Session pooler** string instead                                                             |
 | `P1000: Authentication failed`       | Wrong password, or the password contains special characters      | Reset the password (**Project Settings → Database**) to letters and digits only, and update both URLs |
 
-### Generate JWT_SECRET
+<!-- ### Generate JWT_SECRET
 
 `JWT_SECRET` in `backend/.env` is a long random string used to sign login tokens. Generate one with:
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-```
+``` -->
 
 ### Create the database tables
 
@@ -209,6 +209,16 @@ The project uses **Expo SDK 57**. The Expo Go app only opens projects made with 
 
 - **Android:** uninstall Expo Go, then install Expo Go for SDK 57 from [expo.dev/go](https://expo.dev/go). To keep it, turn off automatic updates for Expo Go in the Play Store.
 - **iPhone:** only the newest Expo Go is available, so the project would need to be upgraded to the newer SDK. Use the browser preview (`w`) instead.
+
+### Build an Android app (APK) for demos
+
+The demo runs as a standalone app on an Android phone, so it doesn't need Expo Go or the same network as the computer.
+
+1. Create a free account on [expo.dev](https://expo.dev) and log in: `npx eas-cli@latest login`
+2. In `mobile/`, start the build: `npx eas-cli@latest build --platform android --profile preview`
+3. When the build is done, open the link (or scan the QR code) on the phone, download the APK and install it. Allow installs from the browser when the phone asks.
+
+The `preview` profile in `eas.json` builds an APK and sets `EXPO_PUBLIC_API_URL`, since `.env` is not uploaded to EAS. The build runs in the cloud and can wait in a queue for a while on the free plan.
 
 ## Known issues
 
