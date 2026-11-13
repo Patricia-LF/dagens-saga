@@ -18,7 +18,45 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 
 ## Repo layout
 
-One repo, separate folders, each with its own `package.json`:
+One repo with two projects, each with its own `package.json`:
+
+```
+dagens-saga/
+├── backend/                  Express API
+│   ├── prisma/               Database schema and migrations
+│   ├── scripts/              Story generation and the AI model comparison
+│   ├── src/
+│   │   ├── ai/               Prompt template, response parser, themes, OpenAI call
+│   │   ├── routes/           /stories and /cron endpoints
+│   │   ├── app.ts            The Express app (used by Vercel and the tests)
+│   │   ├── db.ts             The Prisma client
+│   │   ├── server.ts         Starts the server locally
+│   │   └── stockholm-date.ts "Today" in Stockholm, and date helpers
+│   ├── tests/                Vitest and Supertest
+│   ├── prisma.config.ts      Prisma settings (migrations use DIRECT_URL)
+│   └── vercel.json           The daily cron job
+├── mobile/                   Expo app (also the web version and the Android APK)
+│   ├── assets/               Icons, backgrounds, fairies, app icon and splash image
+│   ├── src/
+│   │   ├── api/              Calls to the backend
+│   │   ├── app/              Screens (Expo Router: one file per route)
+│   │   ├── components/       Reader, cover, animations, buttons and more
+│   │   ├── constants/        Themes (light and dark) and the menu
+│   │   ├── hooks/            Settings, theme and screen size
+│   │   └── utils/            Dates and page splitting
+│   ├── tests/                Vitest
+│   ├── app.json              App name, icons, splash screen and Android package
+│   ├── eas.json              EAS Build profiles (the APK)
+│   └── vercel.json           Rewrites for the web version
+├── docs/                     Review routine, device checklist, image sources
+├── CLAUDE.md                 Instructions for Claude Code
+├── scope.md                  What is in and out of scope (MoSCoW)
+├── constraints.md            Technical and security rules
+├── ambiguity.md              Decisions, with reasons and dates
+├── ai-log.md                 How AI was used during the project
+├── issues.md                 All issues, numbered as on GitHub
+└── LICENSE
+```
 
 - `mobile/` — the Expo app (also built as the web version and as an Android APK)
 - `backend/` — Express API, Prisma schema and migrations

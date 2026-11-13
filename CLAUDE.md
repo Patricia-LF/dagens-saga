@@ -41,6 +41,12 @@ One repo, separate folders, each with its own `package.json`:
 - Use kebab-case file names to match the rest of the repo: story-prompt.ts, parse-story-response
   ts, and the same for the test files.
 
+  ## Expo rules
+
+- Install packages with `npx expo install <package>`, not `npm install`, so the versions match the Expo SDK.
+- Expo changes between SDK versions. Check the docs for the SDK in `mobile/package.json` instead of relying on memory.
+- Never create or edit `mobile/android/` or `mobile/ios/` by hand. Native settings belong in `app.json`.
+
 ## Documentation
 
 - I keep an AI log (`ai-log.md`) for the course. After a meaningful task, suggest a one or two line entry (what AI was used for, what I had to change or fix manually). Do not write it unless I say so.
