@@ -9,9 +9,9 @@ A child (or parent) opens the app and gets a new story every day, and can go bac
 - **AI pipeline** — generates story text from a fixed prompt template (variables: theme, length, target age) and saves it as a draft.
 - **Story of the day** — a new story is published automatically every day, selected by its scheduled date.
 - **Archive** — list of all published stories, and a reading view for any of them.
-- **Mobile app** — React Native (Expo), running on a real device via Expo Go, connected to the deployed backend.
+- **Mobile app** — React Native (Expo), running on a real device via Expo Go, connected to the deployed backend. Also built as a standalone Android app (APK, EAS Build) for demos.
 
-Every AI-generated story must be editable before it is published (title and text, for example to fix spelling or wording). Until the admin page exists, drafts are edited, reviewed and published directly in the Supabase table view. The admin page later makes this easier on desktop.
+Every AI-generated story must be editable before it is published (title and text, for example to fix spelling or wording). Drafts are edited, reviewed and published directly in the Supabase table view (see docs/review-routine.md).
 
 ## Story format
 
@@ -26,12 +26,11 @@ Every AI-generated story must be editable before it is published (title and text
 2. Animations (React Native Reanimated)
 3. Light/dark mode toggle
 4. Favorites saved on the device, without login
-5. Web version of the app in the browser
+5. Web version of the app in the browser (the Expo app exported for web, published on Vercel)
 6. Illustrations - an image per story
 
 ## Could
 
-- Web version of the app — public pages (story of the day, archive) added to the same `web/` project as the admin page
 - Categories/themes and filtering in the archive
 - Sharing the story of the day via a link
 
@@ -40,7 +39,7 @@ Every AI-generated story must be editable before it is published (title and text
 - Publishing to App Store / Google Play
 - Paid membership / payments
 - Text-to-speech narration
-- A built-in writing tool for stories (content goes through the admin page or the database)
+- A built-in writing tool for stories (content goes through the Supabase table view)
 - Membership and login - a child should be able to open the app and read right away. Without paid features, an account would only be an obstacle.
 - Admin page - stories are reviewed and edited in the Supabase table view, which works well.
 
@@ -48,15 +47,15 @@ Every AI-generated story must be editable before it is published (title and text
 
 - Story: id, title, body, scheduled date, status (draft / scheduled / published), source (ai / handwritten), tier (free / premium, prepared but unused), optional image URL, characters (list of characters as name and kind, e.g. "Fnula (dragon)", used later to avoid repeating characters across stories), created at, updated at
   - Scheduled date is a calendar date (no time) in Europe/Stockholm, unique (at most one story per day), empty for unscheduled drafts. New stories default to status draft.
-- User and Favorite: added only when membership is built
+- No User or Favorite tables. Favorites are saved on the device.
 
 ## Sprint overview (5 weeks)
 
 1. Foundation: set up Expo app, Express backend, Supabase and Prisma; app shows mocked data (a small API layer in `mobile/api/stories.ts` with `getTodaysStory()` and `getArchive()` returning mock stories first, later swapped to real API calls without changing the screens). Preview in the browser with `npx expo start` and `w`, and check on a real device via Expo Go.
 2. AI pipeline and story of the day, end-to-end
 3. Archive and daily rotation (Must complete)
-4. Admin page, light/dark mode, animations
-5. Membership, favorites, illustrations (if time allows), testing, bug fixing, documentation, demo
+4. Admin page, light/dark mode, animations (planned; changed 2026-11-04, see ambiguity.md)
+5. Membership, favorites, illustrations (if time allows), testing, bug fixing, documentation, demo (planned; changed 2026-11-04, see ambiguity.md)
 
 ## Definition of done
 
@@ -64,7 +63,7 @@ Every AI-generated story must be editable before it is published (title and text
 - The daily rotation works without manual action.
 - Core endpoints and the scheduling logic are tested.
 - Secrets are kept out of the repository, input is validated, and AI content is reviewed before it is published.
-- README explains how to run the project, including how to set up `.env` (with an `.env.example`) and how to generate the JWT secret, and the AI log is up to date.
+- README explains how to run the project, including how to set up `.env` (with an `.env.example`) and how to generate the cron secret (`CRON_SECRET`), and the AI log is up to date.
 
 ## Later (after the thesis)
 

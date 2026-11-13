@@ -6,11 +6,11 @@ These are fixed. If a task seems to require breaking one of them, stop and ask.
 
 - The whole project is 5 weeks, solo. Prefer the simplest solution that meets the Must list.
 - Do not build Should/Could/Won't items unless I ask for them. Do not add "nice to have" features.
-- Membership and favorites must be possible to skip without leaving a visible gap in the product.
+- Favorites are saved on the device. There is no membership or login (decided 2026-11-04).
 
 ## Technology (decided)
 
-- React Native with Expo, tested via Expo Go. No ejecting, no native modules that Expo Go cannot run.
+- React Native with Expo, tested via Expo Go. No ejecting, no native modules that Expo Go cannot run. A standalone Android APK is built with EAS Build (profile `preview`), which is not ejecting.
 - Node.js + Express with TypeScript.
 - Supabase (PostgreSQL) used only as the hosted database, accessed through Prisma. Backend logic stays in my own Express code.
 - Vercel hosting for the backend (serverless). Express must be written so it works as a Vercel function: no reliance on a long-running server process, and keep function run time short.
@@ -38,8 +38,8 @@ These are fixed. If a task seems to require breaking one of them, stop and ask.
 
 - No secrets in the repository. API keys and the database URL live in environment variables.
 - Validate all input on the backend.
-- Any admin endpoints require authentication.
-- Secrets (including the JWT secret) live in `.env`. Commit an `.env.example` with placeholder values only. Passwords are always hashed (bcrypt or argon2), never stored in plain text.
+- There are no admin endpoints. The cron endpoint requires `CRON_SECRET`.
+- Secrets (database URLs, `OPENAI_API_KEY`, `CRON_SECRET`) live in `.env`. Commit an `.env.example` with placeholder values only.
 - RLS is enabled on every table with no policies, on purpose. "RLS Enabled No Policy" in Supabase's Security Advisor is expected and should not be "fixed" by adding policies. All access goes through the Express backend. Do not add GRANTs to the anon or authenticated roles. The Data API is not used, and new tables should stay unreachable through it.
 
 ## Code and language
@@ -50,6 +50,5 @@ These are fixed. If a task seems to require breaking one of them, stop and ask.
 ## Design
 
 - Builds on an existing visual identity (color palette, storybook theme, fairy characters). Styling for light and dark mode is mostly done and will be provided. Do not invent a new design.
-- The existing images come from Adobe Stock (downloaded during a free trial) and were edited with ChatGPT (not Adobe's own AI tool) to fit mobile and tablet. The app must show a note that the images are licensed via Adobe Stock. Before any public release I check the Adobe Stock license terms myself (commercial use, editing with AI tools, use inside an app). Keep the original asset IDs and license documents.
-- The images are only used as part of the app's look. Never offer them as downloads, wallpapers, or separate files, and never build products where the image itself is the main value (Adobe Stock Standard license).
-- Do not commit the licensed Adobe Stock images to git. The license does not allow third parties to access the files as standalone files, and the repo is shared with others. Keep the real images locally in `mobile/assets/` and in `.gitignore`, use simple placeholder images in the repo, and explain in the README where to put the images.
+- App images are made with AI (backgrounds, default cover), Canva free elements (fairies) or Figma AI (icons), and can be committed. No image credits are shown in the app. Every image's source is listed in `docs/image-sources.md`.
+- Never offer the app's images as separate downloads or wallpapers, and never use images that require attribution, forbid commercial use or forbid use in an app. In Canva, never use Branded or Disney content.

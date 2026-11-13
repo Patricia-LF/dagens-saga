@@ -10,7 +10,7 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 
 ## Stack
 
-- App: React Native (Expo, Expo Go), TypeScript, Expo Router for navigation
+- App: React Native (Expo, Expo Go), TypeScript, Expo Router for navigation. The same app is exported as the web version (`npx expo export --platform web`) and built as an Android APK with EAS Build (profile `preview`)
 - Backend: Node.js + Express, TypeScript, hosted on Vercel (Vercel Cron for the daily rotation)
 - Database: Supabase (PostgreSQL) accessed through Prisma
 - AI: text generation via the OpenAI API (see ambiguity.md)
@@ -21,7 +21,6 @@ One repo, separate folders, each with its own `package.json`:
 
 - `mobile/` — the Expo app
 - `backend/` — Express API, Prisma schema and migrations
-- `web/` — web project (React + Vite): the admin page under `/admin` (Should), and maybe the public web version later (Could)
 - Project documents (`CLAUDE.md`, `scope.md`, `constraints.md`, `ambiguity.md`, `ai-log.md`) live in the repo root.
 
 ## How to work

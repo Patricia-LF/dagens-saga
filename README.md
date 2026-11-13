@@ -20,9 +20,8 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 
 One repo, separate folders, each with its own `package.json`:
 
-- `mobile/` — the Expo app
+- `mobile/` — the Expo app (also built as the web version and as an Android APK)
 - `backend/` — Express API, Prisma schema and migrations
-- `web/` — web project (React + Vite): the admin page under `/admin` (Should), and maybe the public web version later (Could)
 - Project documents (`CLAUDE.md`, `scope.md`, `constraints.md`, `ambiguity.md`, `ai-log.md`) live in the repo root.
 
 ## Getting started
@@ -87,14 +86,6 @@ Check that:
 | ------------------------------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `P1001: Can't reach database server` | `DIRECT_URL` uses the direct connection (`db.<ref>.supabase.co`) | Use the **Session pooler** string instead                                                             |
 | `P1000: Authentication failed`       | Wrong password, or the password contains special characters      | Reset the password (**Project Settings → Database**) to letters and digits only, and update both URLs |
-
-<!-- ### Generate JWT_SECRET
-
-`JWT_SECRET` in `backend/.env` is a long random string used to sign login tokens. Generate one with:
-
-```bash
-node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-``` -->
 
 ### Create the database tables
 
@@ -169,7 +160,7 @@ Press `w` to open the app in the browser, or scan the QR code with Expo Go.
 
 ### Images
 
-The background images are licensed via Adobe Stock and are not included in the repository. Place them in `mobile/assets/images/backgrounds/` with the file names used in `mobile/src/constants/theme.ts`.
+All images are in the repository. The backgrounds and the default cover are made with AI, the fairies on the start page come from Canva's free elements, and the icons are made with Figma AI. No image credits are shown in the app. The sources are listed in [docs/image-sources.md](docs/image-sources.md).
 
 ### Platform notes
 
@@ -225,11 +216,21 @@ The demo runs as a standalone app on an Android phone, so it doesn't need Expo G
 
 The `preview` profile in `eas.json` builds an APK and sets `EXPO_PUBLIC_API_URL`, since `.env` is not uploaded to EAS. The build runs in the cloud and can wait in a queue for a while on the free plan.
 
+### Web version on Vercel
+
+The app is published as a second Vercel project from the same repo:
+
+- Root Directory: `mobile`
+- Build Command: `npx expo export --platform web`
+- Output Directory: `dist`
+- Environment variable: `EXPO_PUBLIC_API_URL` = the API's URL
+
+`mobile/vercel.json` sends all paths to `index.html`, so links like `/story/12` work when the page is reloaded.
+
 ## Known issues
 
 - The project needs Expo Go for SDK 57. The version in the app stores is newer (see "Expo Go version").
 - The app is locked to portrait on phones (`orientation` in `mobile/app.json`).
-- The decision on background images is still open (Adobe Stock or my own images), see ambiguity.md.
 
 ## License
 
@@ -237,4 +238,4 @@ Copyright (c) 2026 Patricia Frykberg. All rights reserved.
 
 The source code is provided for viewing only. See the `LICENSE` file for details.
 
-The images and stories are not covered by any license and may not be copied, used, or redistributed. The images are licensed to me via Adobe Stock and are not included in this repository.
+The images and stories are not covered by any license and may not be copied, used, or redistributed. The sources of the images are listed in `docs/image-sources.md`.

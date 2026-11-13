@@ -4,10 +4,10 @@ The app has no automated UI tests, so this checklist is run by hand on a real ph
 
 ## Before you start
 
-- [ ] Expo Go for SDK 57 is installed on the phone (see "Expo Go version" in the README).
+- [ ] Expo Go for SDK 57 is installed on the phone (see "Expo Go version" in the README), or the APK from EAS Build is installed (see "Build an Android app (APK) for demos" in the README).
 - [ ] `mobile/.env` points to the deployed backend (`https://dagens-saga.vercel.app`).
 - [ ] At least one story is approved for today, and a few for earlier days, so the screens have real data.
-- [ ] `npx expo start` is running, and the phone has scanned the QR code.
+- [ ] With Expo Go: `npx expo start` is running, and the phone has scanned the QR code. With the APK this is not needed.
 
 ## Navigation
 

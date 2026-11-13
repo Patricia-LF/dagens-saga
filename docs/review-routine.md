@@ -1,6 +1,6 @@
 # Review routine for AI-generated stories
 
-Every AI story is read and approved by me before it is shown in the app. Until the admin page exists (issues 28–29), this is done in the Supabase table view.
+Every AI story is read and approved by me before it is shown in the app. This is done in the Supabase table view (the admin page was dropped 2026-11-04).
 
 ## Statuses
 
