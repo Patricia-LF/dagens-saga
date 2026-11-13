@@ -96,17 +96,9 @@ export function PageReader({ story }: Props) {
     );
   };
 
-  const maxImageSize =
-    size.height > 0 ? Math.max(120, size.height - rem(10) + 44) : undefined;
-
   const goToPage = (index: number) => {
     listRef.current?.scrollToIndex({ index, animated: true });
   };
-
-  const arrowStyle = [
-    styles.arrowText,
-    { color: theme.colors.text, fontSize: rem(2) },
-  ];
 
   return (
     <View testID="page-reader" style={styles.container}>

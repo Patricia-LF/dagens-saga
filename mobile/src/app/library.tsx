@@ -48,9 +48,9 @@ export default function LibraryScreen() {
   const [stories, setStories] = useState<StorySummary[] | undefined>(undefined);
   const [failed, setFailed] = useState(false);
 
-  const load = useCallback(() => {
-    setFailed(false);
-    setStories(undefined);
+  // Fetches the stories. State is only set when the answer comes, never right away,
+  // so it is safe to call from an effect.
+  const fetchStories = useCallback(() => {
     getArchive()
       .then(setStories)
       .catch((error) => {
@@ -60,15 +60,22 @@ export default function LibraryScreen() {
   }, []);
 
   useEffect(() => {
-    load();
-  }, [load]);
+    fetchStories();
+  }, [fetchStories]);
+
+  // "Försök igen": show loading again, then fetch
+  const retry = () => {
+    setFailed(false);
+    setStories(undefined);
+    fetchStories();
+  };
 
   if (failed) {
     return (
       <MessageBox
         message="Biblioteket gick inte att hämta just nu. Kolla att du är uppkopplad och försök igen."
         actionLabel="Försök igen"
-        onAction={load}
+        onAction={retry}
       />
     );
   }

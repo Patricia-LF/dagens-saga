@@ -19,9 +19,7 @@ export default function StoryScreen() {
   const [story, setStory] = useState<Story | null | undefined>(undefined);
   const [failed, setFailed] = useState(false);
 
-  const load = useCallback(() => {
-    setFailed(false);
-    setStory(undefined); // show the loading state again when retrying
+  const fetchStory = useCallback(() => {
     getStory(Number(id))
       .then(setStory)
       .catch((error) => {
@@ -31,8 +29,15 @@ export default function StoryScreen() {
   }, [id]);
 
   useEffect(() => {
-    load();
-  }, [load]);
+    fetchStory();
+  }, [fetchStory]);
+
+  // "Försök igen": show loading again, then fetch
+  const retry = () => {
+    setFailed(false);
+    setStory(undefined);
+    fetchStory();
+  };
 
   const goToLibrary = () => router.navigate("/library");
 
@@ -41,7 +46,7 @@ export default function StoryScreen() {
       <MessageBox
         message="Sagan gick inte att hämta just nu. Kolla att du är uppkopplad och försök igen."
         actionLabel="Försök igen"
-        onAction={load}
+        onAction={retry}
       />
     );
   }
@@ -60,7 +65,7 @@ export default function StoryScreen() {
 
   return (
     <View testID="screen" style={styles.screen}>
-      <ContentBox /* title={story.title} */ fill>
+      <ContentBox fill>
         <StoryReader
           key={story.id}
           story={story}

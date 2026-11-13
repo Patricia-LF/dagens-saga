@@ -7,7 +7,6 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useSettings } from "@/hooks/use-settings";
 import { useTheme, useThemeMode } from "@/hooks/use-theme";
 
@@ -19,7 +18,6 @@ const TRAVEL = TRACK_WIDTH - KNOB_SIZE - PADDING * 2; // how far the knob moves
 
 // Day/night switch in the top right corner. The knob slides and the sun fades into the moon.
 export function ThemeToggle() {
-  const insets = useSafeAreaInsets();
   const theme = useTheme();
   const { mode } = useThemeMode();
   const { setThemeMode } = useSettings();

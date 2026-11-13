@@ -2,24 +2,19 @@ import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { ContentBox } from "@/components/content-box";
 import { fonts } from "@/constants/theme";
-import { useTheme } from "@/hooks/use-theme";
 import { getTodaysStory, Story } from "@/api/stories";
-import { useRem } from "@/hooks/use-screen-size";
 import { LoadingIndicator } from "@/components/loading-indicator";
 import { MessageBox } from "@/components/message-box";
 import { StoryReader } from "@/components/story-reader";
 
 export default function TodayScreen() {
-  const theme = useTheme();
-  const rem = useRem();
-
   // undefined = loading, null = no story today, Story = today's story
   const [story, setStory] = useState<Story | null | undefined>(undefined);
   const [failed, setFailed] = useState(false);
 
-  const load = useCallback(() => {
-    setFailed(false);
-    setStory(undefined); // show the loading state again when retrying
+  // Fetches today's story. State is only set when the answer comes, never right away,
+  // so it is safe to call from an effect.
+  const fetchTodaysStory = useCallback(() => {
     getTodaysStory()
       .then(setStory)
       .catch((error) => {
@@ -29,15 +24,22 @@ export default function TodayScreen() {
   }, []);
 
   useEffect(() => {
-    load();
-  }, [load]);
+    fetchTodaysStory();
+  }, [fetchTodaysStory]);
+
+  // "Försök igen": show loading again, then fetch
+  const retry = () => {
+    setFailed(false);
+    setStory(undefined);
+    fetchTodaysStory();
+  };
 
   if (failed) {
     return (
       <MessageBox
         message="Sagorna gick inte att hämta just nu. Kolla att du är uppkopplad och försök igen."
         actionLabel="Försök igen"
-        onAction={load}
+        onAction={retry}
       />
     );
   }
