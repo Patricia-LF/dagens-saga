@@ -651,12 +651,17 @@ A short, rehearsed demo that shows the MVP and the most important choices.
 
 ## Backlog (Could)
 
-### 40. Public web version
+### 40. Public web version ✅
 
 `could` `web`
 
 **Description**
-Story of the day and the archive as public pages in the `web/` project, for people without the app.
+The Expo app published as a website on Vercel, for people without the app. Decided 2026-11-04: no separate `web/` project during the thesis. The app runs in the browser with Expo's web support, and a real website is in the backlog for after the thesis.
+
+**Scope**
+
+- Build the app for the web and publish it as its own Vercel project.
+- A layout that works on wide screens, especially for reading.
 
 - The cover page (issue 42) does not look right on wide web screens yet. Check its size and layout when styling the web version.
 
@@ -669,8 +674,20 @@ Story of the day and the archive as public pages in the `web/` project, for peop
 
 **Acceptance criteria**
 
-- [ ] Story of the day and the archive work in the browser and use the same API.
-- [ ] The admin page keeps working independently.
+- [x] The story of the day, the library and the reading view work in the browser and use the same API.
+- [x] Links to a story work after reloading the page.
+- [x] The reading view fits a desktop window, with enough text on each page.
+- [x] The settings (theme, reading mode, favorites) are kept after reloading.
+
+**Changes during implementation**
+
+- Built as a single page (`web.output: "single"`) with a `vercel.json` rewrite to `index.html`, since story ids come from the database and can't be known at build time.
+- Desktop gets a top bar with the title on the left, the menu in the middle and the theme toggle on the right, instead of the title inside the panel. This gave the reading view about three times more height.
+- No panel background on desktop, so the content box stands directly on the background image. The content box is at most 600 px wide, which gives comfortable line lengths.
+- Scrollbars are hidden in the reading view, since the scroll hint and the page arrows show how to move on.
+- The start page box is centered in the free space on phone and desktop.
+
+Live: https://dagens-saga-app.vercel.app
 
 ---
 

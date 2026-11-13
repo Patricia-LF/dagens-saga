@@ -2,6 +2,11 @@
 
 A mobile app for children that delivers a new, AI-generated fairy tale every day, with an archive of older stories. Thesis project (5 weeks, solo). Stories are generated with AI but the system is built so I can swap in my own stories later.
 
+## Live
+
+- Web version: https://dagens-saga-app.vercel.app
+- API: https://dagens-saga.vercel.app
+
 ![Dagens saga screenshot](docs/README-img.jpg)
 
 ## Stack

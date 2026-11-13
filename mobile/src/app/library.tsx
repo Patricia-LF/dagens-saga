@@ -140,6 +140,7 @@ export default function LibraryScreen() {
         ) : (
           <FlatList
             data={visibleStories}
+            showsVerticalScrollIndicator={false}
             keyExtractor={(story) => String(story.id)}
             renderItem={({ item }) => {
               const isToday = item.scheduledDate === today;

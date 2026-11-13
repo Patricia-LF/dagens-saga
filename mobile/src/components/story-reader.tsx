@@ -60,6 +60,7 @@ export function StoryReader({ story, leading }: Props) {
           <Animated.ScrollView
             onScroll={onScroll}
             scrollEventThrottle={16}
+            showsVerticalScrollIndicator={false}
             onLayout={(event) =>
               setViewportHeight(Math.round(event.nativeEvent.layout.height))
             }

@@ -16,10 +16,17 @@ export default function StartScreen() {
   const rem = useRem();
 
   const screenSize = useScreenSize();
+  const isTablet = screenSize === "tablet";
   const fairyInset = screenSize === "mobile" ? rem(1) : rem(0.1);
 
   return (
-    <View style={styles.screen}>
+    <View
+      style={[
+        styles.screen, // all sizes
+        !isTablet && styles.screenCentered, // phone and desktop
+        isTablet && styles.screenTablet, // only tablet
+      ]}
+    >
       <View>
         <ContentBox>
           <Text
@@ -116,11 +123,10 @@ export default function StartScreen() {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    paddingBottom: 40,
-    marginTop: 30,
-  },
+  screen: { flex: 1 },
+  // Phone and desktop: the box a bit above the middle of the free space
+  screenCentered: { justifyContent: "center", paddingBottom: 140 },
+  screenTablet: { marginTop: 60, paddingBottom: 20 },
   text: {
     fontFamily: fonts.body,
     textAlign: "center",

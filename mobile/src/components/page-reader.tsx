@@ -136,6 +136,7 @@ export function PageReader({ story }: Props) {
               >
                 {/* A page that is too long for the screen scrolls, so no text is cut off */}
                 <ScrollView
+                  showsVerticalScrollIndicator={false}
                   contentContainerStyle={
                     item.kind === "cover" ? styles.coverPage : undefined
                   }

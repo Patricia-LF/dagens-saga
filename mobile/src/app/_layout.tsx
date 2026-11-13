@@ -53,6 +53,8 @@ function AppShell() {
 
   const insets = useSafeAreaInsets();
 
+  const isDesktop = isWeb && screenSize === "desktop";
+
   useEffect(() => {
     if (ready) SplashScreen.hideAsync();
   }, [ready]);
@@ -70,8 +72,9 @@ function AppShell() {
 
       {/* Side margin only around the panel, so the bottom nav can still reach the edges */}
       <View testID="main" style={[styles.main, isWide && styles.mainWide]}>
-        {/* Wide screens: the toggle on its own row above the panel */}
-        {isWide && (
+        {isDesktop && <SiteHeader showNav isWide layout="bar" />}
+        {/* Tablet: the toggle on its own row above the panel */}
+        {isWide && !isDesktop && (
           <View style={[styles.toggleRow, { paddingTop: insets.top + 8 }]}>
             <ThemeToggle />
           </View>
@@ -80,11 +83,17 @@ function AppShell() {
           testID="panel"
           style={[
             isWide ? styles.panel : styles.content,
-            isWide && { backgroundColor: theme.colors.panel },
-            isWide && readingFillsHeight && styles.panelFill,
+            isWide &&
+              !isDesktop && {
+                backgroundColor: theme.colors.panel,
+                padding: 32,
+                marginTop: 32, // more space below the toggle row on tablet
+              },
+            isWide && (readingFillsHeight || isDesktop) && styles.panelFill,
           ]}
         >
-          <SiteHeader showNav={!showBottomNav} isWide={isWide} />
+          {/*  <SiteHeader showNav={!showBottomNav} isWide={isWide} /> */}
+          {!isDesktop && <SiteHeader showNav={false} isWide={isWide} />}
           <View style={styles.page}>
             <Slot />
           </View>
@@ -104,11 +113,10 @@ const styles = StyleSheet.create({
   panel: {
     flexShrink: 1,
     width: "100%",
-    maxWidth: 800,
+    maxWidth: 600,
     alignSelf: "center",
     borderRadius: 20,
-    marginVertical: 32,
-    padding: 32,
+    marginVertical: 8,
   },
   // Without flexGrow the panel is only as tall as its content (on web, the height
   // is not passed down), so a child with flex: 1 would end up 0 px tall
