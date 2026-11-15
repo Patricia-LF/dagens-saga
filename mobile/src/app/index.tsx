@@ -5,12 +5,6 @@ import { useTheme } from "@/hooks/use-theme";
 import { useRem, useScreenSize } from "@/hooks/use-screen-size";
 import { FloatingView } from "@/components/floating-view";
 
-// Decorative fairies on the start page (change the file names to yours)
-/* const FAIRY_LEFT_UP = require("@/assets/images/fairies/fairy-1-left-up.png");
-const FAIRY_LEFT_DOWN = require("@/assets/images/fairies/fairy-2-left-down.png");
-const FAIRY_RIGHT_UP = require("@/assets/images/fairies/fairy-1-right-up.png");
-const FAIRY_RIGHT_DOWN = require("@/assets/images/fairies/fairy-2-right-down.png"); */
-
 export default function StartScreen() {
   const theme = useTheme();
   const rem = useRem();

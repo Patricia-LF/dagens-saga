@@ -149,9 +149,9 @@ export const darkTheme: Theme = {
     favoritesOff: require("@/assets/icons/starred-off-dark.png"),
   },
   fairies: {
-    topLeft: require("@/assets/images/fairies/fairy-top-left.png"),
-    topRight: require("@/assets/images/fairies/fairy-top-right.png"),
-    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left.png"),
-    bottomRight: require("@/assets/images/fairies/fairy-bottom-right.png"),
+    topLeft: require("@/assets/images/fairies/fairy-top-left-dark.png"),
+    topRight: require("@/assets/images/fairies/fairy-top-right-dark.png"),
+    bottomLeft: require("@/assets/images/fairies/fairy-bottom-left-dark.png"),
+    bottomRight: require("@/assets/images/fairies/fairy-bottom-right-dark.png"),
   },
 };
