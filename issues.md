@@ -992,6 +992,7 @@ A separate website for Dagens saga, for example built with React + Vite, alongsi
 
 - The backend API (GET /stories, /stories/today, /stories/:id) already works for any client and has CORS enabled, so the website can use it as it is.
 - Decided 2026-11-04 to wait until after the thesis, since it would mean building the whole interface a second time.
+- A footer with copyright, contact and a short note that the site collects no data.
 
 ---
 
