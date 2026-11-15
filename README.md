@@ -9,12 +9,24 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 
 ![Dagens saga screenshot](docs/README-img.jpg)
 
+## Features
+
+- A new story every day, shown from midnight in Stockholm, and a library of earlier stories with cover images
+- Two reading modes: turn pages like a book, or scroll. The choice is saved on the device
+- Light and dark mode, following the phone's setting until the reader picks one
+- Favorites saved on the device, and a library filter that shows only favorites
+- Animated cover with sparkles and floating fairies, which all stand still when "reduce motion" is on
+- Screen reader labels on all buttons, and tap areas of at least 44 px
+- Runs as an Android app, in Expo Go, and on the web, with a desktop layout for wide screens
+- Every AI-generated story is read, edited and approved by me before it is published
+
 ## Stack
 
-- App: React Native (Expo, Expo Go), TypeScript, Expo Router for navigation
+- App: React Native (Expo SDK 57), TypeScript, Expo Router, Reanimated for animations, AsyncStorage for settings. Also exported as a web version and built as an Android APK with EAS Build
 - Backend: Node.js + Express, TypeScript, hosted on Vercel (Vercel Cron for the daily rotation)
-- Database: Supabase (PostgreSQL) accessed through Prisma
-- AI: text generation via the OpenAI API (see ambiguity.md)
+- Database: Supabase (PostgreSQL) accessed through Prisma, and Supabase Storage for story images
+- AI: story text with the OpenAI API (gpt-5.5, see ambiguity.md)
+- Tests: Vitest and Supertest
 
 ## Repo layout
 
@@ -147,11 +159,25 @@ The server runs on `http://localhost:3000`. Check it with `http://localhost:3000
 
 ### Run the tests
 
+Backend:
+
 ```bash
+cd backend
 npm test
 ```
 
 After a fresh clone, run `npm run db:generate` once first. The tests import the generated Prisma client, but never connect to the database.
+
+Mobile app (unit tests, type check and lint):
+
+```bash
+cd mobile
+npm test
+npx tsc --noEmit
+npx expo lint
+```
+
+The app has no automated UI tests. The screens are tested by hand with [docs/device-checklist.md](docs/device-checklist.md).
 
 ### Generate stories
 
@@ -198,7 +224,7 @@ Press `w` to open the app in the browser, or scan the QR code with Expo Go.
 
 ### Images
 
-All images are in the repository. The backgrounds and the default cover are made with AI, the fairies on the start page come from Canva's free elements, and the icons are made with Figma AI. No image credits are shown in the app. The sources are listed in [docs/image-sources.md](docs/image-sources.md).
+All images are in the repository, except the story images, which are in Supabase Storage. The backgrounds, the default cover and the app icon are made with AI, the fairies on the start page come from Canva's free elements, and the icons are made with Figma AI. No image credits are needed in the app. The sources are listed in [docs/image-sources.md](docs/image-sources.md).
 
 ### Platform notes
 
@@ -265,10 +291,17 @@ The app is published as a second Vercel project from the same repo:
 
 `mobile/vercel.json` sends all paths to `index.html`, so links like `/story/12` work when the page is reloaded.
 
+## AI use
+
+Stories are generated with gpt-5.5 and cost about $0.05 each. Every story is reviewed and edited by hand before it is published, following [docs/review-routine.md](docs/review-routine.md). The development was done with Claude Code and Claude in chat. How AI was used, what it got wrong and what it cost is described in [ai-log.md](ai-log.md).
+
 ## Known issues
 
 - The project needs Expo Go for SDK 57. The version in the app stores is newer (see "Expo Go version").
 - The app is locked to portrait on phones (`orientation` in `mobile/app.json`).
+- Favorites and settings are saved on each device and are not synced between devices, since the app has no accounts.
+- Only tested on Android and in desktop browsers. Not tested on an iPhone.
+- AI-generated stories still need human review. The prompt reduces common problems, but every story is read and usually edited before it is published.
 
 ## License
 

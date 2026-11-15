@@ -10,9 +10,9 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 
 ## Stack
 
-- App: React Native (Expo, Expo Go), TypeScript, Expo Router for navigation. The same app is exported as the web version (`npx expo export --platform web`) and built as an Android APK with EAS Build (profile `preview`)
+- App: React Native (Expo, Expo Go), TypeScript, Expo Router for navigation. The same app is exported as the web version (`npx expo export --platform web`) and built as an Android APK with EAS Build (profile `preview`) Reanimated for animations, AsyncStorage for settings
 - Backend: Node.js + Express, TypeScript, hosted on Vercel (Vercel Cron for the daily rotation)
-- Database: Supabase (PostgreSQL) accessed through Prisma
+- Database: Supabase (PostgreSQL) accessed through Prisma and Supabase Storage for story images
 - AI: text generation via the OpenAI API (see ambiguity.md)
 
 ## Repo layout
@@ -38,10 +38,9 @@ One repo, separate folders, each with its own `package.json`:
 - All code, file names, variable and function names, commit messages, and code comments are in English.
 - TypeScript in strict mode. No `any` without a comment explaining why.
 - Keep the user-facing app text in Swedish.
-- Use kebab-case file names to match the rest of the repo: story-prompt.ts, parse-story-response
-  ts, and the same for the test files.
+- Use kebab-case file names to match the rest of the repo: story-prompt.ts, parse-story-response.ts, and the same for the test files.
 
-  ## Expo rules
+## Expo rules
 
 - Install packages with `npx expo install <package>`, not `npm install`, so the versions match the Expo SDK.
 - Expo changes between SDK versions. Check the docs for the SDK in `mobile/package.json` instead of relying on memory.
@@ -57,5 +56,6 @@ One repo, separate folders, each with its own `package.json`:
 - Backend (in `backend/`): install with `npm install`. Copy `.env.example` to `.env` and fill in `DATABASE_URL` (transaction pooler, port 6543) and `DIRECT_URL` (session pooler, port 5432).
 - Prisma (in `backend/`): `npm run db:migrate -- --name <name>` (create and apply a migration), `npm run db:generate` (regenerate the client in `src/generated/`, which is not in git), `npm run db:studio` (browse the data).
 - Run the backend (in `backend/`): `npm run dev` starts the server with auto-reload on http://localhost:3000 (set `PORT` to change). `npm run build` compiles to `dist/`, then `npm start` runs the compiled build. Check it with `curl http://localhost:3000/health`.
-- Generate stories (in `backend/`): `npm run generate -- --count 7` generates a batch with gpt-5.5 and saves them as drafts (source ai) on the next free dates. Optional: `--age` (default 6), `--min-words` (250), `--max-words` (350). Themes and lessons come from `src/ai/themes.ts`. Costs money (about $0.023 per story) and writes to the database. Drafts are reviewed and published manually.
+- Generate stories (in `backend/`): `npm run generate -- --count 7` generates a batch with gpt-5.5 and saves them as drafts (source ai) on the next free dates. Optional: `--age` (default 6), `--min-words` (250), `--max-words` (350). Themes and lessons come from `src/ai/themes.ts`. Costs money (about $0.05–0.07 per story) and writes to the database. Drafts are reviewed and published manually.
 - Tests (in `backend/`): `npm test` runs all tests once (Vitest + Supertest, test files in `backend/tests/`, named `*.test.ts`). `npm run test:watch` re-runs them when files change. Tests are outside `src/`, so `npm run build` ignores them. `app.ts` imports the generated Prisma client, so after a fresh clone run `npm run db:generate` before `npm test` (no database connection needed).
+- Tests (in mobile/): npm test (Vitest), npx tsc --noEmit and npx expo lint.

@@ -6,7 +6,7 @@ A child (or parent) opens the app and gets a new story every day, and can go bac
 
 ## Must (done by the end of sprint 3)
 
-- **AI pipeline** — generates story text from a fixed prompt template (variables: theme, length, target age) and saves it as a draft.
+- **AI pipeline** — generates story text from a fixed prompt template (variables: theme, length, age, lesson) and saves it as a draft.
 - **Story of the day** — a new story is published automatically every day, selected by its scheduled date.
 - **Archive** — list of all published stories, and a reading view for any of them.
 - **Mobile app** — React Native (Expo), running on a real device via Expo Go, connected to the deployed backend. Also built as a standalone Android app (APK, EAS Build) for demos.
@@ -43,9 +43,9 @@ Every AI-generated story must be editable before it is published (title and text
 - Membership and login - a child should be able to open the app and read right away. Without paid features, an account would only be an obstacle.
 - Admin page - stories are reviewed and edited in the Supabase table view, which works well.
 
-## Data model (initial idea)
+## Data model
 
-- Story: id, title, body, scheduled date, status (draft / scheduled / published), source (ai / handwritten), tier (free / premium, prepared but unused), optional image URL, characters (list of characters as name and kind, e.g. "Fnula (dragon)", used later to avoid repeating characters across stories), created at, updated at
+- Story: id, title, body, scheduled date, status (draft / scheduled / published), source (ai / handwritten), tier (free / premium, prepared but unused), optional image URL, characters (list of characters as name and kind, e.g. "Fnula (dragon)", used to avoid repeating characters across stories), theme (optional, the theme from themes.ts, used to avoid repeating themes), created at, updated at
   - Scheduled date is a calendar date (no time) in Europe/Stockholm, unique (at most one story per day), empty for unscheduled drafts. New stories default to status draft.
 - No User or Favorite tables. Favorites are saved on the device.
 
@@ -64,6 +64,12 @@ Every AI-generated story must be editable before it is published (title and text
 - Core endpoints and the scheduling logic are tested.
 - Secrets are kept out of the repository, input is validated, and AI content is reviewed before it is published.
 - README explains how to run the project, including how to set up `.env` (with an `.env.example`) and how to generate the cron secret (`CRON_SECRET`), and the AI log is up to date.
+
+## Status at code freeze (2026-11-16)
+
+- Must: all done.
+- Should: all six done (book-like reading view, animations, light/dark mode, favorites, web version, illustrations).
+- Could: not started (categories, sharing).
 
 ## Later (after the thesis)
 

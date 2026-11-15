@@ -103,7 +103,7 @@ Make sure a bug or a mistake can never run up a large bill, and know roughly wha
 **Scope**
 
 - A monthly spending limit set in the OpenAI dashboard. Spending limit: $5 in prepaid credits with auto-recharge turned off, so the API can never cost more than that.
-- The approximate cost per story, measured from a real batch, written down. Cost per story: to be measured after the first batch (issue 14).
+- The approximate cost per story, measured from a real batch, written down. Cost per story: about $0.023 with reasoning effort low, and about $0.05–0.07 after the change to medium (2026-11-13). Noted in ai-log.md.
 
 **Acceptance criteria**
 
@@ -525,7 +525,7 @@ Members can create an account and log in, which is needed for favorites.
 
 ### 33. Favorites (star a story) ✅
 
-`should` `backend` `mobile`
+`should` `mobile`
 
 **Description**
 Readers can star stories and find them again in a favorites list. The favorites are saved on the device, so no account is needed.
@@ -552,6 +552,11 @@ Readers can star stories and find them again in a favorites list. The favorites 
 - [ ] The library can show only favorites, with a friendly message when there are none.
 - [ ] The star has an accessibility label and tells screen readers whether the story is a favorite.
 
+**Changes during implementation**
+
+- The star sits in the top row of the reader. In the library, a small star next to the date shows which stories are favorites.
+- The library filter has two icon buttons, "Alla sagor" and "Mina favoriter", with a heading that shows which list is visible.
+
 ---
 
 ### 34. Illustrations ✅
@@ -572,7 +577,7 @@ Each story can have its own illustration, shown on the cover and as a miniature 
 
 ---
 
-### 35. Image credits in the app
+### 35. Image credits in the app ❌
 
 `should` `mobile` `docs`
 
@@ -584,9 +589,11 @@ A note in the app about where the images come from. Its content depends on the o
 - [ ] The note is visible in the app and matches the images actually used.
 - [ ] The license check is done before any public release.
 
+**2026-11-12:** Closed. All app images now come from sources that don't require credits (AI, Canva free elements, Figma AI), so no note is needed in the app. The sources are listed in docs/image-sources.md.
+
 ---
 
-### 36. Testing and bug fixing
+### 36. Testing and bug fixing ✅
 
 `must` `bug`
 
@@ -604,9 +611,11 @@ Time set aside to fix what has come up, and to check that the tests cover the co
 - [ ] Remove unused `theme` and `rem` in `today.tsx`, and unused `active` in `site-header.tsx`.
 - [ ] Fix "setState synchronously within an effect" (`react-hooks/set-state-in-effect`) from the `load()` pattern in `today.tsx`, `story/[id].tsx` and `library.tsx`.
 
+2026-11-15: 73 tests pass (60 backend, 13 mobile), tsc and expo lint report no problems.
+
 ---
 
-### 37. Content check of published stories
+### 37. Content check of published stories ✅
 
 `must` `ai`
 
@@ -618,9 +627,11 @@ A last read-through of every published story before submission.
 - [ ] Every published story has been read and approved by me.
 - [ ] Anything unsuitable is unpublished or fixed.
 
+2026-11-15: read all 13 stories published so far, and fixed the last issues (an odd sentence and an invented creature in "Lovis och hunden av månljus", and small word errors in "Den lilla snigeln" and the story about Alva). New stories go through the review routine in docs/review-routine.md before they are approved, so they are checked the same way.
+
 ---
 
-### 38. README and AI log
+### 38. README and AI log ✅
 
 `must` `docs`
 
@@ -903,6 +914,11 @@ Expo Go needs the phone and the computer on the same network, which doesn't work
   - `android-icon-background.png`: 1024 × 1024, a solid color or a simple background
   - `android-icon-monochrome.png`: 1024 × 1024, the motif in one color on a transparent background
   - `splash-icon.png`: the motif on a transparent background. The background color is set in `app.json`
+
+  **Changes during implementation**
+
+- The adaptive icon uses `backgroundColor` in app.json instead of `android-icon-background.png`, and has no monochrome version.
+- The motif is from ChatGPT, with glow added in ibisPaint, on a starry background generated with code (see docs/image-sources.md).
 
 ---
 

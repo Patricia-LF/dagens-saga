@@ -50,5 +50,5 @@ These are fixed. If a task seems to require breaking one of them, stop and ask.
 ## Design
 
 - Builds on an existing visual identity (color palette, storybook theme, fairy characters). Styling for light and dark mode is mostly done and will be provided. Do not invent a new design.
-- App images are made with AI (backgrounds, default cover), Canva free elements (fairies) or Figma AI (icons), and can be committed. No image credits are shown in the app. Every image's source is listed in `docs/image-sources.md`.
+- App images are made with AI (backgrounds, default cover, app icon), Canva free elements (fairies) or Figma AI (icons), and can be committed. No image credits are shown in the app. Every image's source is listed in `docs/image-sources.md`.
 - Never offer the app's images as separate downloads or wallpapers, and never use images that require attribution, forbid commercial use or forbid use in an app. In Canva, never use Branded or Disney content.
