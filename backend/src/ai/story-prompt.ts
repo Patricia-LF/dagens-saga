@@ -31,7 +31,7 @@ Innehåll:
 - Visa lärdomen genom det som händer. Skriv inte ut den som en moral i slutet.
 - En tydlig början, mitt och slut, med ett varmt och tryggt slut.
 - Varje sak som nämns ska ha betydelse för handlingen. Lägg inte till föremål, mat eller platser bara för stämningens skull.
-- Avsluta med hur huvudpersonen känner sig, i en konkret bild som ett barn kan känna igen sig i.
+- Avsluta med hur huvudpersonen känner sig. Visa det genom vad figuren gör, hör eller tänker, inte med en liknelse.
 
 Figurer:
 - Nya figurer med egna unika namn. Använd INTE någon av dessa figurer eller liknande: {avoidCharacters}.

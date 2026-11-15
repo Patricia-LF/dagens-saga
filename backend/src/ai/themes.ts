@@ -9,24 +9,23 @@ export interface StoryTheme {
 // at least as many unused entries as --count.
 export const THEMES: StoryTheme[] = [
   {
-    theme: "en drake som var rädd för eld",
-    lesson: "att det är ok att be om hjälp",
+    theme: "en nyckelpiga på utflykt",
+    lesson: "att man kan upptäcka massa nya ställen",
   },
   {
-    theme: "en giraffunge som inte nådde upp till grenarna längst upp i träden",
-    lesson:
-      "att man får vänta på att bli vuxen och stor, och ta vara på barndomen",
+    theme: "en liten flicka som ville bli pilot, men var höjdrädd",
+    lesson: "att man kan övervinna sina rädslor",
   },
   {
-    theme: "en av tomtens renar som åkt vilse",
-    lesson: "att man alltid hittar hem, eller så hittar någon dig",
+    theme: "en häst som var snabbast i världen",
+    lesson: "att man inte ska skryta",
   },
   {
-    theme: "ett litet moln som ville lysa som en stjärna",
-    lesson: "att molnets regn också är bra och gör nytta",
+    theme: "en liten delfin som ville hälsa på hos sjöjungfruarna",
+    lesson: "att man inte får gå iväg utan en vuxen",
   },
   {
-    theme: "en pojke som råkade släppa sin ballong så den flög iväg",
-    lesson: "att det är bättre att berätta sanningen för sina föräldrar",
+    theme: "ett lejon som ville svalka sig",
+    lesson: "att vissa katter faktiskt gillar att bada",
   },
 ];
