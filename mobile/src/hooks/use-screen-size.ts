@@ -31,7 +31,7 @@ export function useBackgroundShape(): BackgroundShape {
   const { width, height } = useWindowDimensions();
   const ratio = width / height;
 
-  if (ratio < 1) return "portrait"; // taller than wide: phone, or tablet held upright (9:16 image)
+  if (ratio < 1) return "portrait"; // taller than wide: phone, or tablet held upright (about 9:19.5 image)
   if (ratio < 1.55) return "landscape"; // close to 4:3: tablet held sideways (4:3 image)
-  return "wide"; // close to 16:9: desktop browser or phone held sideways (16:9 image)
+  return "wide"; // close to 16:9: desktop browser
 }

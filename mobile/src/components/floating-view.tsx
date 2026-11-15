@@ -22,7 +22,7 @@ type Props = {
   style?: StyleProp<ViewStyle>;
 };
 
-// Moves its content slowly up and down, forever. Stands still with "reduce motion" on.
+// Moves its content slowly up and down, and optionally from side to side, forever. Stands still with "reduce motion" on.
 export function FloatingView({
   children,
   distance = 6,

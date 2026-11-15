@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: fonts.heading,
-    /* textAlign: "center", */
   },
   nav: {
     flexDirection: "row", // menu items side by side

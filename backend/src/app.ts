@@ -7,8 +7,8 @@ app.disable("x-powered-by"); // don't reveal which framework the server uses
 
 app.use(express.json());
 
-// Allow the app's web version (another origin) to read the public endpoints.
-// The data is public, so any origin is allowed. Revisit when admin endpoints with login are added.
+// Allow the web version (another origin) to read the API. The story endpoints are
+// public and read-only, and /cron is protected by CRON_SECRET, so any origin is allowed.
 app.use((_req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();

@@ -42,7 +42,6 @@ function makeSparkles(
 }
 
 // Small stars that twinkle once over the parent, then disappear. Decorative only.
-// Small stars that twinkle once over the parent, then disappear. Decorative only.
 // The colors come from the theme, unless other colors are passed in.
 export function Sparkles({
   count = 8,

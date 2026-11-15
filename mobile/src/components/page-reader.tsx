@@ -86,7 +86,7 @@ export function PageReader({ story }: Props) {
   // After a resize there can be fewer pages than before
   const page = Math.min(currentPage, lastPage);
 
-  // Measure the container itself, not the window: the panel has padding on wide screens
+  // Measure the list area itself, not the window: the panel's padding and the arrows below take some of the space
   const handleLayout = (event: LayoutChangeEvent) => {
     const width = Math.round(event.nativeEvent.layout.width);
     const height = Math.round(event.nativeEvent.layout.height);
@@ -105,7 +105,7 @@ export function PageReader({ story }: Props) {
       <View style={styles.listArea} onLayout={handleLayout}>
         {size.width > 0 && size.height > 0 && (
           <FlatList
-            // A new key re-creates the list when the size changes (e.g. rotating the phone)
+            // A new key re-creates the list when the size changes (e.g. resizing the browser window)
             key={`${size.width}x${size.height}`}
             ref={listRef}
             data={pages}
@@ -215,8 +215,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // No fontFamily on purpose: the system font has the arrow characters on every platform
-  arrowText: {},
   indicator: { fontFamily: fonts.bodyBold },
   // flexGrow lets the content fill the page, so the cover can be centered vertically
   coverPage: { flexGrow: 1, justifyContent: "center" },
