@@ -36,17 +36,17 @@ The source column uses the names from the table above.
 
 ## App images
 
-| File                                                           | Used for         | Source   | Notes                                  |
-| -------------------------------------------------------------- | ---------------- | -------- | -------------------------------------- |
-| `images/icon.png`, `images/android-icon-foreground.png`        | App icon         | AI       | The blue fairy                         |
-| `images/splash-icon.png`                                       | Splash screen    | AI       | The blue fairy, transparent background |
-| `images/favicon.png`                                           | Web browser tab  | ...      |                                        |
-| `images/covers/default-cover.jpg`                              | Default cover    | AI       | Gemini                                 |
-| `images/backgrounds/*.jpg`                                     | Backgrounds      | AI       | Gemini                                 |
-| `images/fairies/*.png`                                         | Start page       | Canva    | Free elements, light and dark versions |
-| `icons/sun-*.png`, `icons/moon-*.png`                          | Day/night switch | Figma AI | Edited by me                           |
-| `icons/star-empty-*.png`, `icons/star-filled-*.png`            | Favorite star    | Figma AI | Edited by me                           |
-| `icons/all-*.png`, `icons/starred-*.png`                       | Library filter   | Figma AI | Edited by me                           |
-| `icons/read-*.png`, `icons/scroll-*.png`                       | Reading mode     | Figma AI | Edited by me                           |
-| `icons/arrow-left-*.png`, `icons/arrow-right-*.png`            | Page arrows      | Figma AI | Edited by me                           |
-| `icons/home-*.png`, `icons/today-*.png`, `icons/library-*.png` | Bottom nav       | Figma AI | Edited by me                           |
+| File                                                           | Used for         | Source   | Notes                                                                   |
+| -------------------------------------------------------------- | ---------------- | -------- | ----------------------------------------------------------------------- |
+| `images/icon.png`, `images/android-icon-foreground.png`        | App icon         | AI       | ChatGPT. Glow added in ibisPaint, starry background generated with code |
+| `images/splash-icon.png`                                       | Splash screen    | AI       | Same image, round with transparent corners                              |
+| `images/favicon.png`                                           | Web browser tab  | AI       | Same image, 192 px                                                      |
+| `images/covers/default-cover.jpg`                              | Default cover    | AI       | Gemini                                                                  |
+| `images/backgrounds/*.jpg`                                     | Backgrounds      | AI       | Gemini                                                                  |
+| `images/fairies/*.png`                                         | Start page       | Canva    | Free elements, light and dark versions                                  |
+| `icons/sun-*.png`, `icons/moon-*.png`                          | Day/night switch | Figma AI | Edited by me                                                            |
+| `icons/star-empty-*.png`, `icons/star-filled-*.png`            | Favorite star    | Figma AI | Edited by me                                                            |
+| `icons/all-*.png`, `icons/starred-*.png`                       | Library filter   | Figma AI | Edited by me                                                            |
+| `icons/read-*.png`, `icons/scroll-*.png`                       | Reading mode     | Figma AI | Edited by me                                                            |
+| `icons/arrow-left-*.png`, `icons/arrow-right-*.png`            | Page arrows      | Figma AI | Edited by me                                                            |
+| `icons/home-*.png`, `icons/today-*.png`, `icons/library-*.png` | Bottom nav       | Figma AI | Edited by me                                                            |
