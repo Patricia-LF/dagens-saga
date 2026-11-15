@@ -27,13 +27,12 @@ The app has no automated UI tests, so this checklist is run by hand on a real ph
 - [ ] The library lists the visible stories, newest first.
 - [ ] Today's story is labelled "I dag", and the others show a date in Swedish (for example "21 oktober").
 - [ ] No drafts or stories with future dates are shown.
-- [ ] Tapping a story opens it, and "Tillbaka till biblioteket" goes back.
+- [ ] Tapping a story opens it, and "Tillbaka" goes back.
 
 ## Look and feel
 
 - [ ] The fonts load (Comic Neue for text, Irish Grover for the title), with no fallback font flashing.
 - [ ] The background image fits the phone held upright, without odd cropping.
-- [ ] <!-- Turning the phone sideways changes the background image and keeps the text readable. -->
 - [ ] Dark mode (switched on in the phone's settings) changes the background, colours and nav icons, and text is easy to read in both modes.
 - [ ] With a larger text size in the phone's settings, text gets bigger and nothing is cut off.
 
@@ -45,9 +44,29 @@ The app has no automated UI tests, so this checklist is run by hand on a real ph
 - [ ] A day without an approved story shows "Ingen saga publicerad idag ännu".
 - [ ] In the browser preview, `/story/999` shows "Den här sagan finns inte" with a button to the library.
 
+## Reading modes, settings and favorites
+
+- [ ] The reading mode buttons switch between page mode and scroll mode, and the choice is kept after restarting the app.
+- [ ] Page mode: swiping and the arrows turn pages, the arrows are hidden on the first and last page, and the page indicator is right.
+- [ ] Scroll mode: the cover fills the first view, and "Scrolla ner för att läsa" fades out when scrolling.
+- [ ] The cover fits without scrolling, also with a title on two lines.
+- [ ] The day/night switch changes the theme, and the choice is kept after restarting the app.
+- [ ] The star adds and removes a favorite, with sparkles when added. Favorites are kept after restarting the app.
+- [ ] The library shows a star next to favorites, and the filter shows only favorites, with a message when there are none.
+
+## Animations
+
+- [ ] The title letters fly in with sparkles, and the cover image and the fairies on the start page float.
+- [ ] With "Remove animations" on in the phone's settings, nothing moves.
+
+## Web version
+
+- [ ] On a wide screen: the top bar with title, menu and day/night switch, and a reading view that fits the window.
+- [ ] Reloading the page on a story keeps the story and the settings.
+
 ## Results
 
-| Date       | Device                             | Sprint | Result | Notes                                                                                                                                                                     |
-| ---------- | ---------------------------------- | ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2026-10-30 | Samsung Galaxy S23, Expo Go SDK 57 | 3      | Pass   | The app does not rotate, because `orientation` is `portrait` in `mobile/app.json`. Decided to keep portrait on phones (see ambiguity.md), and updated the checklist item. |
-|            |                                    |        |        |                                                                                                                                                                           |
+| Date       | Device                                                          | Sprint | Result | Notes                                                                                                                                                                     |
+| ---------- | --------------------------------------------------------------- | ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2026-10-30 | Samsung Galaxy S23, Expo Go SDK 57                              | 3      | Pass   | The app does not rotate, because `orientation` is `portrait` in `mobile/app.json`. Decided to keep portrait on phones (see ambiguity.md), and updated the checklist item. |
+| 2026-11-15 | Samsung Galaxy S23, Expo Go SDK 57; web on localhost and Vercel | 5      | Pass   | Also checked reading modes, theme, favorites, animations and the desktop layout. All 73 automated tests pass, and tsc and lint report no problems.                        |
