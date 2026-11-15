@@ -14,25 +14,31 @@
 
 The source column uses the names from the table above.
 
-| id  | Title                            | Source  | Notes  |
-| --- | -------------------------------- | ------- | ------ |
-| 2   | Molnet Nimbis lilla ljus         | Default |        |
-| 3   | Solis och den pratiga rabatten   | Default |        |
-| 4   | Lovis och hunden av månljus      | AI      | Gemini |
-| 5   | Grodan Vipp och måndammen        | Default |        |
-| 6   | Rutan och den borttappade mössan | Default |        |
-| 7   | Glo och de sjungande näckrosorna | Default |        |
-| 9   | Den lilla snigeln                | Canva   |        |
-| 10  | Borres färgglada middag          | AI      | Gemini |
-| 11  | Diademet i sjögräset             | AI      | Gemini |
-| 12  | Liri och vädrets vilja           | AI      | Gemini |
-| 15  | Spindeln Nellas mjuka nät        | AI      | Gemini |
-| 18  | Rutan som växte                  | AI      | Gemini |
-| 19  | Sirra och molnstegen             | AI      | Gemini |
-| 20  | Sille och de skimrande dropparna | AI      | Gemini |
-| 21  | Nore och den lilla lågan         | Default |        |
-| 22  | Renen Tindra hittar spår         | Default |        |
-| 23  | Nori och pärlbubblorna           | Default |        |
+| id  | Title                               | Source  | Notes  |
+| --- | ----------------------------------- | ------- | ------ |
+| 2   | Molnet Nimbis lilla ljus            | Default |        |
+| 4   | Lovis och hunden av månljus         | AI      | Gemini |
+| 7   | Glo och de sjungande näckrosorna    | Default |        |
+| 9   | Den lilla snigeln                   | Canva   |        |
+| 10  | Borres färgglada middag             | AI      | Gemini |
+| 11  | Diademet i sjögräset                | AI      | Gemini |
+| 12  | Liri och vädrets vilja              | AI      | Gemini |
+| 15  | Spindeln Nellas mjuka nät           | AI      | Gemini |
+| 18  | Rutan som växte                     | AI      | Gemini |
+| 19  | Sirra och molnstegen                | AI      | Gemini |
+| 20  | Sille och de skimrande dropparna    | AI      | Gemini |
+| 24  | Ottos första sväng                  | AI      | Gemini |
+| 25  | Rimmi och vägen runt jorden         | AI      | Gemini |
+| 27  | Glimmer och den lilla lågan         | AI      | Gemini |
+| 28  | Solfröet i gräset                   | Default |        |
+| 29  | Ballongen som lyssnade på sanna ord | Default |        |
+| 30  | Kori och ljuset på marken           | Default |        |
+| 31  | Junis låga flygning                 | Default |        |
+| 32  | Runas lilla utflykt                 | Default |        |
+| 34  | Tamus svalka                        | Default |        |
+| 35  | Nysta och hemknappen                | Default |        |
+| 36  | Hovskon som blev tung               | Default |        |
+| 37  | Pajo och väg-pärlan                 | Default |        |
 
 ## App images
 

@@ -41,7 +41,8 @@ The app shows stories with status `scheduled` or `published` and a date up to to
 - [ ] The lesson is shown through what happens, not stated as a moral at the end.
 - [ ] Clear beginning, middle and end.
 - [ ] Not too many characters (about 3 at most).
-- [ ] No repeated characters or motifs from recent stories (for example fish swimming in the air).
+- [ ] No repeated characters, animal species or motifs from recent stories (for example fish swimming in the air).
+- [ ] The ending shows how the main character feels through what they do, hear or think, not with a simile.
 
 **Language**
 
@@ -148,3 +149,8 @@ _Add things here that come up during reviews, so the prompt or the checklist can
 - The removal left loose ends: frogs that ate seeds (frogs eat insects, which is awkward with a beetle as Glo's friend), and no clear reason why Glo needed to reach the far lily pad. Replaced it with a goal that only Glo couldn't reach: the big lily pad in the middle of the pond where all the frogs watch the sunrise.
 - The title "Glo och de sjungande näckrosorna" has to change, since the lilies no longer sing.
 - Older stories need more editing than the ones made with the new prompt.
+
+**2026-11-15 ("Nysta", the reindeer)**
+
+- replaced the snow hare with an arctic fox, since a hare or rabbit had already been in another story, and adjusted how it moves and where it lives.
+- Rewrote the last sentence, which ended with a simile. Several stories had ended with the same kind of comparison ("som en filt", "som en kudde"), so the prompt rule for endings was changed. Two test stories afterwards had endings without similes.
