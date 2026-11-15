@@ -15,7 +15,7 @@ A mobile app for children that delivers a new, AI-generated fairy tale every day
 - Two reading modes: turn pages like a book, or scroll. The choice is saved on the device
 - Light and dark mode, following the phone's setting until the reader picks one
 - Favorites saved on the device, and a library filter that shows only favorites
-- Animated cover with sparkles and floating fairies, which all stand still when "reduce motion" is on
+- Animations: the title's letters fly in with sparkles on the cover, and fairies float on the start page. Everything stands still when "reduce motion" is on
 - Screen reader labels on all buttons, and tap areas of at least 44 px
 - Runs as an Android app, in Expo Go, and on the web, with a desktop layout for wide screens
 - Every AI-generated story is read, edited and approved by me before it is published
@@ -168,7 +168,7 @@ npm test
 
 After a fresh clone, run `npm run db:generate` once first. The tests import the generated Prisma client, but never connect to the database.
 
-Mobile app (unit tests, type check and lint):
+Mobile app (after `npm install` in `mobile/`, see below):
 
 ```bash
 cd mobile
@@ -293,7 +293,7 @@ The app is published as a second Vercel project from the same repo:
 
 ## AI use
 
-Stories are generated with gpt-5.5 and cost about $0.05 each. Every story is reviewed and edited by hand before it is published, following [docs/review-routine.md](docs/review-routine.md). The development was done with Claude Code and Claude in chat. How AI was used, what it got wrong and what it cost is described in [ai-log.md](ai-log.md).
+Stories are generated with gpt-5.5 and cost about $0.05–0.07 each. Every story is reviewed and edited by hand before it is published, following [docs/review-routine.md](docs/review-routine.md). The development was done with Claude Code and Claude in chat. How AI was used, what it got wrong and what it cost is described in [ai-log.md](ai-log.md).
 
 ## Known issues
 
