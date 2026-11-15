@@ -112,3 +112,39 @@ _Add things here that come up during reviews, so the prompt or the checklist can
 - The story also had several magical things that were never explained and had no clear role in the story.
 - Since it needed a lot of changes, I had it rewritten with Claude in chat. I asked for one clear magic rule, and for the message that practicing can help, but that it's okay not to pronounce everything right (for children who stutter or lisp).
 - Added a rule to the prompt: end with a clear, concrete image a child can picture. The vague ending was a repeated problem from the previous story.
+
+**2026-11-13 ("Nori", the seahorse learning to swim)**
+
+- Too many details that had no role in the story: a stone, a bowl, a basket of seaweed, seaweed bread and a coral gate. Each one is fine on its own, but together they make the story hard to follow for a child.
+- The body parts didn't add up: Nori swam with his "fin", then the text switched to his tail, and Ebba the starfish "blinked" sand off one arm, although a starfish has no eyes to blink with.
+- The pearl bubbles worked well: one magic thing with a clear rule (they only light up when you breathe calmly), tied to the lesson about taking it slow.
+- Fixed by hand: removed the stone, basket, bread and gate, used "ryggfena" for swimming and the tail for holding on, and let Ebba shake the sand off instead.
+- Changes to the generation: new prompt rules (every object must matter for the story, at most one magic thing, animals move as their bodies work and body parts keep the same name), reasoning effort raised from "low" to "medium", and shorter stories (250–350 words). To be compared with the next three stories.
+
+**2026-11-13 (prompt rework after "Otto")**
+
+- Found two contradictions in the prompt: "Korta meningar, helst högst 12 ord" made the language choppy, and "Mycket magi … levande beskrivningar av miljöer" encouraged extra details. Replaced them with "vary sentence length" and "few but clear details".
+- Added rules about introducing the magic thing, where the characters are (water, land, air), consistent body parts, and an ending that shows how the main character feels.
+- Sorted the rules under Innehåll, Figurer and Magi, and merged overlapping ones.
+- Reasoning effort raised from "low" to "medium", and MAX_OUTPUT_TOKENS from 2000 to 6000, since the first test used 2094 tokens. Cost per story went from about $0.023 to about $0.07.
+- The next story was much better.
+
+**2026-11-13 ("Otto", the seahorse who had just learned to swim, first story with the new prompt)**
+
+- Much better than the earlier seahorse story: only three things in the story (the seaweed, the coral arch and the light pearl), and the dorsal fin and the tail were used correctly.
+- Still needed polishing: the light pearl was presented as if the reader already knew it, the dolphin "glided over the sand" and "landed flat", which sounded like being on land, and the end said that Otto "stood straight", although a seahorse floats and is shaped like an S.
+- Edited by hand with help from Claude in chat: explained where the pearl came from, made the bubbles "show the way, like stones to jump between", merged a repeated description and a split line of dialogue, and changed the ending so Otto floats without holding on to anything. This mirrors the beginning, where his tail holds on hard to the seaweed.
+- These problems led to the prompt rework the same evening.
+
+**2026-11-13 ("Rimmi", the bird who wanted to fly around the world, second story with the new prompt)**
+
+- The best story so far: varied sentence length, one magic thing with a clear origin and rule (the blue stone from the beach where the turtle hatched), and an ending that shows how Rimmi feels.
+- Small edits: split the long sentence with the stone's rule into two, and gave Rimmi an answer when Duni asks how it felt ("Stort. Men jag vågade."), which ties the story together.
+- Kept "fågeln" without a species, since a six-year-old listening doesn't need to know bird species, and the cover image shows what Rimmi looks like.
+
+**2026-11-13 ("Glo", the frog who couldn't jump, an older story)**
+
+- Generated before the new rules. It had an extra character who lit dewdrops, and water lilies that sang, against the rule about singing things. I removed both.
+- The removal left loose ends: frogs that ate seeds (frogs eat insects, which is awkward with a beetle as Glo's friend), and no clear reason why Glo needed to reach the far lily pad. Replaced it with a goal that only Glo couldn't reach: the big lily pad in the middle of the pond where all the frogs watch the sunrise.
+- The title "Glo och de sjungande näckrosorna" has to change, since the lilies no longer sing.
+- Older stories need more editing than the ones made with the new prompt.

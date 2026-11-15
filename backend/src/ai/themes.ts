@@ -13,20 +13,20 @@ export const THEMES: StoryTheme[] = [
     lesson: "att det är ok att be om hjälp",
   },
   {
-    theme:
-      "en enhörning som kände sig ensam, men hittade en ny vän, en pegasus",
-    lesson: "att man kan ha kul ihop när man är olika",
+    theme: "en giraffunge som inte nådde upp till grenarna längst upp i träden",
+    lesson:
+      "att man får vänta på att bli vuxen och stor, och ta vara på barndomen",
   },
   {
     theme: "en av tomtens renar som åkt vilse",
     lesson: "att man alltid hittar hem, eller så hittar någon dig",
   },
   {
-    theme: "en orm som inte kunde säga S",
-    lesson: "att man ibland kan öva på att uttala rätt",
+    theme: "ett litet moln som ville lysa som en stjärna",
+    lesson: "att molnets regn också är bra och gör nytta",
   },
   {
-    theme: "en liten sjöhäst som precis lärt sig simma",
-    lesson: "alla måste lära sig första gången man testar en ny sak",
+    theme: "en pojke som råkade släppa sin ballong så den flög iväg",
+    lesson: "att det är bättre att berätta sanningen för sina föräldrar",
   },
 ];

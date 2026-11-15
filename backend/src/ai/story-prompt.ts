@@ -19,25 +19,33 @@ Skriv en helt originell saga med följande inställningar:
 
 Språk och stil:
 - Skriv enkelt så ett barn i den åldern kan läsa och förstå sagan själv.
-- Korta meningar, helst högst 12 ord. Använd vanliga, vardagliga ord. Förklara svåra ord med enkla ord i stället.
+- Använd vanliga, vardagliga ord. Förklara svåra ord med enkla ord i stället.
+- Mest korta meningar, men variera längden och blanda med några längre, så att texten låter som en saga när den läses högt. Undvik långa rader av korta meningar som alla är byggda likadant.
 - Undvik långa och krångliga liknelser. En och annan enkel jämförelse går bra, till exempel "mjuk som en kudde".
 - Varje stycke ska ha minst 2 och högst 4 meningar. Skriv aldrig ett stycke med bara en mening, utom ibland för en kort replik. Lägg en helt tom rad mellan varje stycke, alltså efter var 2–4 meningar, inte efter varje mening.
 - Använd tankstreck (–) för dialog. Varje replik börjar på en ny rad. Om samma figur fortsätter prata efter "sa hon" eller liknande, skriv det på samma rad utan nytt tankstreck.
 - FÖRBJUDNA ORD: Börja INTE sagan med "Det var en gång". Använd inte orden "magisk", "mystisk", "äventyr", "hemlighetsfull" eller "förtrollad" mer än högst en enstaka gång. Visa magin genom handling istället för att bara skriva ut orden.
 
 Innehåll:
-- Mycket magi och fantasi, med levande och milda beskrivningar av miljöer och händelser.
+- Magi och fantasi, men med en enkel handling som är lätt att följa. Välj få men tydliga detaljer framför många.
 - Visa lärdomen genom det som händer. Skriv inte ut den som en moral i slutet.
 - En tydlig början, mitt och slut, med ett varmt och tryggt slut.
+- Varje sak som nämns ska ha betydelse för handlingen. Lägg inte till föremål, mat eller platser bara för stämningens skull.
+- Avsluta med hur huvudpersonen känner sig, i en konkret bild som ett barn kan känna igen sig i.
+
+Figurer:
 - Nya figurer med egna unika namn. Använd INTE någon av dessa figurer eller liknande: {avoidCharacters}.
 - Högst 3 figurer. Färre går bra. Varje figur ska ha en tydlig roll i handlingen, så lägg inte till figurer som bara syns i förbigående.
 - Presentera varje figur med både sort och namn första gången den nämns, till exempel "fjärilen …" eller "humlan …" följt av figurens namn.
-- Undvik klassiska hjälpare som den kloka ugglan. Variera bland djur och sagofigurer som barn känner igen, och hitta inte på nya sorters varelser.
-- Mat som äts i sagan ska inte vara levande eller ha egen vilja.
-- Magin ska följa tydliga regler. Allt magiskt som händer ska ha en orsak som barnet förstår.
-- Använd djur som barn tycker om. Undvik skadedjur och djur som många tycker är äckliga.
+- Använd djur och sagofigurer som barn känner igen och tycker om. Undvik klassiska hjälpare som den kloka ugglan, skadedjur och djur som många tycker är äckliga, och hitta inte på nya sorters varelser.
+- Djuren rör sig och beter sig som deras kroppar fungerar. Kalla samma kroppsdel samma sak genom hela sagan.
+- Beskriv rörelser så att det är tydligt var figurerna är: i vattnet, på land eller i luften.
+
+Magi:
+- Använd högst en magisk sak. Presentera den första gången den nämns: vad den är och varifrån den kommer. Utgå inte från att läsaren redan känner till den.
+- Den magiska saken följer en tydlig regel genom hela sagan, med en orsak som barnet förstår.
 - Undvik att låta saker sjunga, spela eller tona som ett sätt att visa magi.
-- Avsluta med en konkret bild som ett barn kan se framför sig.
+- Mat som äts i sagan ska inte vara levande eller ha egen vilja.
 
 Trygghet:
 - Inget som är skrämmande, våldsamt eller sorgligt utan tröst.

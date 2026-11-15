@@ -11,8 +11,9 @@ const PRICES: Record<string, { input: number; output: number }> = {
 };
 
 // Stops a runaway answer. A 350-word Swedish story is roughly 600 tokens.
-// gpt-5 models also spend tokens on hidden reasoning inside this limit.
-const MAX_OUTPUT_TOKENS = 2000;
+// gpt-5 models also spend tokens on hidden reasoning inside this limit,
+// and medium effort uses more of it, so the limit leaves room for that.
+const MAX_OUTPUT_TOKENS = 6000;
 
 export interface StoryTextResult {
   text: string;
@@ -34,9 +35,10 @@ export async function generateStoryText(
     model,
     input: prompt,
     max_output_tokens: MAX_OUTPUT_TOKENS,
-    // The gpt-5 models are reasoning models. Low effort keeps the hidden thinking (and cost) small.
+    // The gpt-5 models are reasoning models. Medium effort gives the model more time to plan
+    // the story, which gave fewer logic errors than low (see docs/review-routine.md). It costs more.
     ...(model.startsWith("gpt-5")
-      ? { reasoning: { effort: "low" as const } }
+      ? { reasoning: { effort: "medium" as const } }
       : {}),
   });
 
@@ -46,7 +48,8 @@ export async function generateStoryText(
     incompleteReason: response.incomplete_details?.reason ?? null,
     inputTokens: response.usage?.input_tokens ?? 0,
     outputTokens: response.usage?.output_tokens ?? 0,
-    reasoningTokens: response.usage?.output_tokens_details.reasoning_tokens ?? 0,
+    reasoningTokens:
+      response.usage?.output_tokens_details.reasoning_tokens ?? 0,
   };
 }
 
