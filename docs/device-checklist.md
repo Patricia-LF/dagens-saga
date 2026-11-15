@@ -66,6 +66,8 @@ The app has no automated UI tests, so this checklist is run by hand on a real ph
 
 ## Results
 
+Each run goes through the whole list. A "Pass" means every item above was checked and works.
+
 | Date       | Device                                                          | Sprint | Result | Notes                                                                                                                                                                     |
 | ---------- | --------------------------------------------------------------- | ------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 2026-10-30 | Samsung Galaxy S23, Expo Go SDK 57                              | 3      | Pass   | The app does not rotate, because `orientation` is `portrait` in `mobile/app.json`. Decided to keep portrait on phones (see ambiguity.md), and updated the checklist item. |
