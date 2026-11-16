@@ -18,7 +18,7 @@ The source column uses the names from the table above.
 | --- | ----------------------------------- | ------- | ------ |
 | 2   | Molnet Nimbis lilla ljus            | Default |        |
 | 4   | Lovis och hunden av månljus         | AI      | Gemini |
-| 7   | Glo och de sjungande näckrosorna    | Default |        |
+| 7   | Glo och de sjungande näckrosorna    | AI      | Gemini |
 | 9   | Den lilla snigeln                   | Canva   |        |
 | 10  | Borres färgglada middag             | AI      | Gemini |
 | 11  | Diademet i sjögräset                | AI      | Gemini |
@@ -30,15 +30,16 @@ The source column uses the names from the table above.
 | 24  | Ottos första sväng                  | AI      | Gemini |
 | 25  | Rimmi och vägen runt jorden         | AI      | Gemini |
 | 27  | Glimmer och den lilla lågan         | AI      | Gemini |
-| 28  | Solfröet i gräset                   | Default |        |
-| 29  | Ballongen som lyssnade på sanna ord | Default |        |
+| 28  | Solfröet i gräset                   | AI      | Gemini |
+| 29  | Ballongen som lyssnade på sanna ord | AI      | Gemini |
 | 30  | Kori och ljuset på marken           | Default |        |
 | 31  | Junis låga flygning                 | Default |        |
-| 32  | Runas lilla utflykt                 | Default |        |
+| 32  | Runas lilla utflykt                 | AI      | Gemini |
 | 34  | Tamus svalka                        | Default |        |
-| 35  | Nysta och hemknappen                | Default |        |
+| 35  | Nysta och hemknappen                | AI      | Gemini |
 | 36  | Hovskon som blev tung               | Default |        |
 | 37  | Pajo och väg-pärlan                 | Default |        |
+| 39  | Novas ränder                        | AI      | Gemini |
 
 ## App images
 
